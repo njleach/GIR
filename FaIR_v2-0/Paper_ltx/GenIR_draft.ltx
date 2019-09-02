@@ -1,0 +1,308 @@
+\documentclass[12pt]{article}
+\usepackage{extsizes}
+\usepackage[right=0.6in,left=0.6in,top=0.6in,bottom=0.6in]{geometry}
+\usepackage{fancyhdr}
+\usepackage{array,booktabs}
+\usepackage{amsmath,amsthm,amssymb,tabu}
+\usepackage{graphicx}
+\usepackage[hidelinks]{hyperref}
+\usepackage{siunitx}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{textcomp}
+\usepackage[printwatermark]{xwatermark}
+\usepackage{tikz}
+\usepackage[export]{adjustbox}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{multicol}
+\usepackage[acronym,toc]{glossaries}
+\usepackage{float}
+\usepackage{wrapfig}
+\usepackage[round]{natbib}
+% \usepackage[superscript]{cite}
+\usepackage{fnpct}
+\usepackage{setspace}
+\usepackage{arydshln}
+\usepackage[left]{lineno}
+\usepackage{svg}
+\usepackage{textgreek}
+
+\renewcommand{\d}{\mathrm{d}}
+
+\setlength{\baselineskip}{13pt}
+\setlength{\footskip}{18pt}
+
+% \doublespacing
+
+% \captionsetup{font=doublespacing}
+
+\graphicspath{{/home/leachl/Documents/Simple_models/GenIR/UnFaIR/Final_figures/}}
+
+\bibliographystyle{apalike}
+%\bibliographystyle{plainnat}
+
+\title{\vspace{-1cm}FaIR v2.0: a generalised impulse-response model for climate uncertainty and future scenario exploration, integrated assessment, and teaching}
+\author{Nicholas J. Leach$^{1\star}$\\
+        Stuart Jenkins$^{1}$\\
+        John Lynch$^{1}$\\
+        Michelle Cain$^{1}$\\
+        Junichi Tsutsui$^{2}$\\
+        Christopher Smith$^{3}$\\
+        Zebedee Nichols\\
+        Myles R. Allen$^{1,4}$\\}
+\date{\small{%
+    $^1$Department of Physics, Atmospheric Oceanic and Planetary Physics, University of Oxford, United Kingdom.\\%
+    $^2$Environmental Science Laboratory, Central Research Institute of Electric Power Industry, Abiko-shi, Japan.\\%
+    $^3$School of Earth and Environment, University of Leeds, Leeds, UK.\\%
+    $^4$Environmental Change Institute, University of Oxford, Oxford, UK.\\%
+    $^{\star}$contact email: \texttt{Nicholas.leach@stx.ox.ac.uk}
+    }}
+
+% \newsavebox\mybox
+% \savebox\mybox{\tikz[color=black,opacity=0.3]\node{DRAFT};}
+% \newwatermark*[allpages,color=black!25,angle=45,scale=6,xpos=-20,ypos=15]{\usebox\mybox}
+
+\begin{document}
+\maketitle
+\begin{abstract}
+
+\end{abstract}
+\section*{Introduction}
+% To include:
+% - Intro to GCMs and simple models, why they are used
+% - Current state of simple modelling
+% - Aims and philosophy behind FaIR v2.0
+% - Tuned to observations; though enphasize that we have made choices in how we do so and other methods would be equally valid
+% - Tunable to represent complex model behaviour; less need for multiple similar simple models with differing default behaviour
+% - Uses: policy, integrated assessment, teaching, scenario exploration
+
+General Circulation Models (GMCs) are vital tools for providing insight into the drivers behind Earth’s climate system, as well as predicting the impact of future emissions. Large scale multi-model studies, such as the Coupled Model Intercomparison Project (CMIP), have been used in many reports to produce projections of what the future climate may look like depending on a range of different emissions scenarios and associated socio-economic narratives provided by integrated assessment modeling groups. Theoretical experiments within the CMIP framework have been used extensively to try to constrain some of the key properties of the climate system, such as the equilibrium climate sensitivity, of the transient climate response to cumulative carbon emissions. While GCMs are integral to our current understanding of the climate, and provide the current best predictions for what a future world might look like, due to their computationally expensive nature, we are only able to run a highly limited set of experiments during a CMIP. This constraint on the quantity of experiments and scenarios able to be carried out necessitates the use of simpler emulators to provide probabilistic assessments and explore more “interesting” experiments.\\\\
+These emulators are generally referred to as simple climate models (SCMs). These are considerably lighter tools that generally emulate the globally averaged emission $\rightarrow$ concentration $\rightarrow$ radiative forcing $\rightarrow$ temperature response pathways  found within GCMs. Their reduced complexity makes it possible for thousands of model runs to be computed within minutes, allowing for full explorations of parameter space and scenario uncertainty. This ability has made them integral tools of all three Working Groups within the Intergovernmental Panel on Climate Change (IPCC). \\\\
+Several simple climate models are available, including MAGICC, FaIR, HECTOR, BernSCM and WASP. However, while these models are “simple” in the computational sense, they are often still not so simple as to allow new users to quickly and easily understand the equations and processes behind their calculations. This learning curve behind using these simple models reduces their usability, and has meant that particular groups tend to use the model they are most comfortable with. This has led to a number of different simple climate models being used in single reports for similar tasks, reducing the overall consistency of the work. We believe one key step towards a transparent and coherent process is the use of a single simple climate model between the groups. Such a model would be a “lowest common denominator” between groups within these reports.\\\\
+In this paper, we introduce a simple, transparent, and flexible climate model based on FaIR v1.0 that uses four equations to emulate the cycles and radiative forcings of three major greenhouse gases, and a further two to emulate the climate system response to changes in forcing. These equations are simple enough that anyone proficient in a scientifically applicable programming language should be able to recreate the model from this text within in a few hours - and we encourage users to do so. Despite their simplicity, these equations have physical meaning which we outline: the model is therefore not an entirely abstracted emulator with little grounding in the real world. \\\\
+We provide a default parameter set associated with our model that best reproduces the work of other more detailed studies concerning specific components of the model, such as the concentration to radiative forcing step for each gas, or the carbon cycle for the emissions to concentration step. We demonstrate that this parameter set can closely replicate historical observations of the climate system. We compare the model’s response with other widely used simple climate models for the RCP emissions set, all using their respective default parameter sets. We show that the model parameters can be adjusted to emulate the behaviour of other simple climate models, and also the outputs of complex GCMs (from CMIP6), demonstrating that our model could act as a probabilistic emulator for individual GCMs. We do this using methodologies consistent with (ref Tsutsui) for the thermal response model, but in practice it could also be applied to the gas cycle model once suitable CMIP6 output is available.
+
+\section{Emissions to concentrations}
+\subsection*{Model description}
+FaIR v2.0 models the relationship between emissions and atmospheric concentrations of a gas species (the gas cycle) with three equations:
+\begin{align}
+    \frac{\text{d}R_{i}(t)}{\text{d}t} &= a_{i}E(t) - \frac{R_{i}(t)}{\alpha \tau_{i}}, \label{eq:gaspool}\\
+    C(t) &= C_0 + \sum_{i=1}^{n}{R_{i}(t)} \text{~~and~~} \label{eq:conc}\\
+    \alpha(t) &= g_0 \cdot \text{sinh}\Big(\frac{r_0 + r_uG_{u}(t) + r_TT(t) + r_aG_a(t)}{g_1}\Big); \label{eq:alpha}\\
+    \text{~~where~~}g_1 &= \sum_{i=1}^{4}{a_i\tau_i\big[1 - \big(1 + h/\tau_i\big)\text{e}^{-h/\tau_i}\big]} \nonumber\\
+    \text{~~and~~}g_0 &= \Big[ \text{sinh} \Big( \frac{ \sum_{i=0}^{3}{a_i \tau_i [1 - \text{e}^{-h/ \tau_i}]}}{g_1} \Big) \Big] ^{-1}. \nonumber
+\end{align}
+Equations \ref{eq:gaspool} and \ref{eq:conc} describe a gas cycle with an atmospheric burden above the pre-industrial concentration, $C_0$, formed of n pools: each pool corresponds to a different sink from the atmosphere. Each pool, $R_i$, has an uptake fraction $a_i$ and decay timescale $\tau_i$, which is multiplicatively adjusted by a state dependent factor, $\alpha$. At each timestep, time $t$, $\alpha$ is computed, and then the pool concentrations are updated and summed to determine the new atmospheric burden. $\alpha$ provides feedbacks to the gas lifetimes based on the current timestep levels of accumulated gas, temperature, and atmospheric gas burden, encapsulated by the $r$ coefficients. The form of $\alpha$, \ref{eq:alpha}, is an analytic approximation to the numerical solution of the 100-year integrated Impulse Response Function (iIRF100) from equations 7 and 8 in \cite{Millar2016}. We include possible state dependencies on the cumulative carbon uptake mass, $G_u$, the temperature, $T$, and an additional term not in FaIR v1.3 dependent on $G_a(t)$, the atmospheric mass burden, motivated by the sensitivities of the CH$_4$ and N$_2$O lifetimes to their own abundances as predicted by atmospheric chemistry and simulated in chemical transport models (CTMs) \citep{Holmes2013,Prather2015}. $g_0$ and $g_1$ set the value and gradient of our analytic approximation equal to the numerical solution at $\alpha = 1$. We discuss the suitability of this analytic form in the Supplementary Information and compare it to the numerical solution used in FaIR v1.3 \citep{Smith2017}. While we do not include any lifetime feedbacks beyond those described above to avoid having to specify additional exogenous variables, such as NOx feedback on the CH$_4$ lifetime, these could theoretically be incorporated in the same framework by adding $r$ coefficients to the model.
+\subsection*{Observationally consistent parameter selection}
+Here we discuss default parameter choices for the three greenhouse gases (GHGs) that have contributed the most to global warming since pre-industrial times: carbon dioxide (CO$_2$), methane (CH$_4$) and nitrous oxide (N$_2$O). The CO$_2$ gas cycle is highly similar to those in FaIR v1.0 \citep{Millar2016} and FaIR v1.3 \citep{Smith2017}: a four carbon pool cycle with a decay timescale dependence on $G_u$ and $T$. The CH$_4$ gas cycle has a single pool, with lifetime state dependencies on $T$ and $G_a$. While in reality, CH$_4$ has several sinks (tropospheric OH, tropospheric Cl, stratospheric reactions and soil uptake) and a lifetime dependent on many more variables \citep{Holmes2013}, we find that our model is sufficient for reproducing observed emission to concentration pathways. The N$_2$O gas cycle has a single pool and a lifetime dependent only on $G_a$.\\\\
+For CO$_2$ we keep values of $a_i$ and $\tau_i$ identical to those in FaIR v1.0 and v1.3 \citep{Millar2016,Smith2017}, originally from \cite{Myhre2013a}. $r_0$, $r_u$ and $r_T$ are tuned to reproduce present day concentrations -- from the CMIP6 historical concentrations dataset, extended to 2017 with up-to-date measurements from NOAA \citep{Meinshausen2017,Battle1996,Butler1999} -- when the model is spun up from pre-industrial with bottom-up emission estimates from the Global Carbon Project \citep{Quere2018} and run with a prescribed temperature pathway of attributable warming to the present day [calculated as described in \cite{Haustein2017} using best-estimate forcings based on \cite{Forster2013} and the mean of four temperature datasets \citep{Vose2012,Cowtan2014,Lenssen2019,Morice2011}], fixing the ratio of $r_u$ and $r_T$ to the FaIR v1.0 and v1.3 default. Uncertainties in $r_0$, $r_u$ and $r_T$ are taken from \cite{Millar2016}.\\\\
+The CH$_4$ gas cycle only has a single pool, so $a_i$ is zero except for $i=1$. We set $\tau_1$ to the present-day lifetime found in \cite{Holmes2013}. We fit $r_T$ and $r_a$ to the sensitivities of the CH$_4$ lifetime to tropospheric air temperature, tropospheric water vapour and CH$_4$ abundance in \cite{Holmes2013} by linearising FaIR v2.0 and the parametric model in \citeauthor{Holmes2013} about 2010 variable values. We find that a global mean temperature dependence is sufficient to reproduce the sensitivities to both tropospheric air temperature and water vapour due to the close thermodynamic relationship between these quantities. We then fit the specified pre-industrial concentration and $r_0$ in an identical model run to the CO$_2$ parameter fitting procedure, but using bottom-up emission estimates from PRIMAP-histTP \citep{Gutschow2016}. While the parametric model in \citeauthor{Holmes2013} includes lifetime sensitivities to eight other atmospheric variables such as anthropogenic NOx emissions, many of these have a small effect and all are scenario-dependent, requiring additional exogenous variables to be specified. Since we wish each gas cycle model to be independent we do not include any more state dependencies in addition to those described above. Uncertainties in $\tau_1$, $r_T$ and $r_a$ are derived from the uncertainties given in \cite{Holmes2013}. We recommend that when using a Transient Climate Reponse (TCR) thermal parameter value that differs from the central estimate of 1.58K, both the CO$_2$ and CH$_4$ $r_T$ parameter values be scaled to match the ratio of the chosen TCR to the central estimate.\\\\
+The N$_2$O gas cycle only has a single pool, so $a_i$ is zero except for $i=1$. We set $\tau_1$ to the present-day lifetime found in \cite{Prather2015}. We fit $r_a$ to the sensitivity of the N$_2$O lifetime to its own burden found in \cite{Prather2015} by linearising FaIR v2.0 and the parametric model in \citeauthor{Prather2015} about 2010 variable values. We then fit the specified pre-industrial concentration and $r_0$ as for CH$_4$. All other variables that affect the N$_2$O lifetime in \citeauthor{Prather2015} are discarded to keep the gas cycle model independent as with CH$_4$. Uncertainties in $\tau_1$ and $r_a$ are derived from the uncertainties given in \cite{Prather2015}.\\\\
+The resulting tuned default parameters are given below, alongside their values in FaIR v1.0 and v1.3. Note that FaIR v1.3 has effective parameter values of $r_u$, $r_T$, $r_a$ $=0$  and a value of $r_0$ set such that $\alpha=1$, and that FaIR v1.0 does not include CH$_4$ or N$_2$O. We emphasize that many choices have been made in selecting these parameters and different choices would lead to potentially quite different parameter values. One example of this is given in parentheses, in which we fit the CH$_4$ $r_0$ parameter by tuning inverse emissions from FaIR v2.0 to the best-estimate top-down anthropogenic emission estimate in \cite{Saunois}, while setting the pre-industrial concentration to the 1500-1800 mean of 720 ppb from \cite{Meinshausen2017}.
+\begin{table}[H]
+    \centering
+    \caption{Default parameter values for the gas cycle components in different versions of FaIR. Where relevant, uncertainties for FaIR v2.0 are included as the 1-$\sigma$ range and are assumed to be normally distributed.} \label{tab:gasparameters}
+    \begin{adjustbox}{width=1\textwidth}
+        \begin{tabular}{l r r r r r r r r r}
+            \hline
+            Parameter & \multicolumn{3}{l}{FaIR v2.0} & \multicolumn{3}{l}{FaIR v1.3} & \multicolumn{3}{l}{FaIR v1.0}\\
+            & CO$_2$ & CH$_4$ & N$_2$O & CO$_2$ & CH$_4$ & N$_2$O & CO$_2$ & CH$_4$ & N$_2$O\\ \hline \hline
+            $a_1$ & 0.2173 & 1 & 1 & 0.2173 & 1 & 1 & 0.2173 & - & - \\
+            $a_2$ & 0.2240 & 0 & 0 & 0.2240 & 0 & 0 & 0.2240 & - & - \\
+            $a_3$ & 0.2824 & 0 & 0 & 0.2824 & 0 & 0 & 0.2824 & - & - \\
+            $a_4$ & 0.2763 & 0 & 0 & 0.2763 & 0 & 0 & 0.2763 & - & - \\
+            $\tau_1$ & 1000000 & $9.15 \pm 10\%$ & $116 \pm 8\%$ & 1000000 & 9.3 & 121 & 1000000 & - & - \\
+            $\tau_2$ & 394.4 & - & - & 394.4 & - & - & 394.4 & - & - \\
+            $\tau_3$ & 36.54 & - & - & 36.54 & - & - & 36.54 & - & - \\
+            $\tau_4$ & 4.304 & - & - & 4.304 & - & - & 4.304 & - & - \\
+            $r_0$ & $28.63 \pm 8\%$ & 9.079 (8.445) & 67.84 & 35.0 & - & - & 32.4 & - & - \\
+            $r_u$ & $0.01977 \pm 8\%$ & 0 & 0 & 0.019 & - & - & 0.019 & - & - \\
+            $r_T$ & $4.334 \pm 8\%$ & $-0.2872 \pm 15\%$ & 0 & 4.165 & - & - & 4.165 & - & - \\
+            $r_a$ & 0 & $0.0003434 \pm 13\%$ & $-0.0009993 \pm 16\%$ & 0 & - & - & 0 & - & - \\
+            $C_0$ & 278 & 733.8 (720.0) & 271.26 & 278 & - & - & 278 & - & - \\
+            $E2C$ & 0.4690 & 0.3517 & 0.2010 & 0.4690 & 0.3517 & 0.2010 & 0.4690 & - & - \\ \hline
+        \end{tabular}
+    \end{adjustbox}
+\end{table}
+\subsection*{Specification of natural emissions}
+One key difference between FaIR v2.0 and FaIR v1.3 is the treatment of natural emissions of CH$_4$ and N$_2$O. FaIR v1.3 requires a quantity of natural emissions to be specified for these gases, which is also the case for the widely used simple climate model MAGICC \citep{Meinshausen2011}. Figure 2 in \cite{Smith2017} illustrates the time-dependent pathway of natural emissions required to reproduce the historical Representative Concentration Pathway (RCP) concentrations when the corresponding emission timeseries \citep{Meinshausen2011c} are run through FaIR v1.3. These natural emission timeseries vary significantly over the recent past: CH$_4$ drops from 209Mt in 1765 to 139Mt in 1900 then rises to its fixed future (2005 onwards) value of 191Mt, at which it is fixed following; and N$_2$O remains relatively constant around 11Mt before dropping sharply to its fixed future value of 9Mt around 1950. This procedure of ``balancing the emissions budget'' to reproduce observed historical concentrations is also utilised in MAGICC \citep{Meinshausen2011}. However, there is little evidence for the high interdecadal trends of these natural emission pathways, for example \cite{Arora2018} finds the total change in natural CH$_4$ fluxes within CLASS-CTEM between the 1850s and 2000-2008 is +17Mt, and other studies assume that there have been no significant changes \citep{Holmes2013,Prather2012}. Due to the uncertainties associated with natural emissions of CH$_4$ and N$_2$O \citep{Turner2019,Davidson2014}, we choose to effectively fix our natural emissions by specifying a pre-industrial concentration over which anthropogenic emissions sources increase the atmospheric concentration burden, as in the CO$_2$ gas cycle in all FaIR versions. For comparison with FaIR v1.3, Figure 1 in the Supplementary Information shows the residual of emissions required to reproduce the RCP historical concentrations in FaIR v2.0 and the historical RCP emissions dataset. This is closely related to Figure 2 in \cite{Smith2017}, indicating that while FaIR v2.0 and v1.3 take different approaches to natural emissions, the gas cycle models used by each are similar.
+\subsection*{Emission-driven historical simulations}
+Here we run FaIR v2.0 with bottom-up emissions timeseries from the Global Carbon Project for CO$_2$ \citep{Quere2018} and PRIMAP-histTP \citep{Gutschow2016} for CH$_4$ and N$_2$O. All other forcings are best-estimates from \cite{Forster2013}. Figure 1 shows the gas concentrations as simulated in FaIR v2.0 with default parameters and uncertainties as described in both the gas cycle and thermal response parameters, plotted alongside obesrved concentrations from the CMIP6 historical dataset \cite{Meinshausen2017}. Inset axes show the driving emission series used. We see that in general, FaIR v2.0 does well at matching the observed values, with the largest difference occurring for pre-1950 concentrations of N$_2$O. However, rather than this being a fundamental issue with the model, it is clear that the emission timeseries used is not compatible with the observed concentrations, as while concentration observations start increasing pre-1900, emissions only start to increase around 1940. This discrepancy has occurred in other N$_2$O modelling studies using different methods and data sources \citep{Saikawa2014}. Crucially, the model does match the trend in observed concentrations over the recent period, where we would expect the emission estimates to be most accurate. We find that the pre-industrial lifetimes of CH$_4$ and N$_2$O are $9.05 \pm 0.3$ and $119.9 \pm 0.2$ years; pre-industrial natural emissions are $230 \pm 6$MtCH$_4$ and $11.3 \pm 0.2$MtN$_2$O-N$_2$; and present-day (2016) lifetimes are $10.1 \pm 0.5$ and $118.5 \pm 0.2$ years respectively. These quantities are within the assessed ranges found in more specific studies \citep{Prather2012,Prather2015,Holmes2013,Kirschke2013,Davidson2014,Arora2018}.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{"Emission driven historical concentrations".pdf}
+    \caption*{Figure 1: }
+\end{figure}
+\subsection*{Other well-mixed GHGs}
+While here we focus on the three major GHGs, FaIR v2.0 can also be used to simulate gas cycles for the other 40 well-mixed halogenated GHGs found in the CMIP6 historical concentrations \citep{Meinshausen2017}. A figure depicting FaIR v2.0 inverse emissions from these concentrations and inverse emission estimates from a more complex atmospheric chemistry model \citep{Cunnold1994,Rigby2011} is provided in the Supplementary Information alongside parameter values and a description of the tuning process for these gases.
+\section{Concentrations to effective radiative forcing}
+FaIR uses a simple formula to relate atmospheric gas concentrations to effective radiative forcing. This equation, below, includes logarithmic, square-root, and linear terms; motivated by the concentration-forcing relationships in \cite{Myhre2013a} of CO$_2$, CH$_4$ and N$_2$O, and all other well-mixed GHGs respectively.
+\begin{equation}
+    F(t) = f_1 \cdot \text{ln}\Big[\frac{C(t)}{C_0}\Big] + f_2 \cdot [C(t) - C_0] + f_3 \cdot[\sqrt{C(t)} - \sqrt{C_0}] + F_{ext}, \label{eq_forc}\\
+\end{equation}
+where the $f$ coefficients are specified parameters, $C(t)$ is the concentration at time $t$ and $C_0$ is the pre-industrial concentration of the gas species.
+\subsection*{Selecting parameters based on \cite{Etminan2016}}
+FaIR v2.0 is tuned to match the simple formulae for radiative forcing of CO$_2$, CH$_4$ and N$_2$O given in \cite{Etminan2016}. However, while \citeauthor{Etminan2016} includes interactions between the three gases, FaIR v2.0 does not for consistency with our aim to keep the gas species independent of one another. To tune the three $f$ parameters to Etminan, we use the CMIP6 historical concentration dataset \citep{Meinshausen2017}, and first fit them to the simple formula in \citeauthor{Etminan2016} with interaction terms discarded. We then add on the present day value of each interaction term to the relevant $f$ parameter ($f_1$ for CO$_2$ and $f_3$ for CH$_4$ and N$_2$O). Our fit parameters give an effective radiative forcing under a doubling of CO$_2$, $F_{2\times \text{CO}_2}$ of 3.80 Wm$^{-2}$.\\\\
+CH$_4$ concentrations also indirectly affect effective radiative forcing through oxidation to stratospheric water vapour and its effect on atmospheric ozone \citep{Noel2018,Owens1982,Myhre2013a}. As well as the default parameters that do not include these indirect CH$_4$ forcings, we provide an alternative $f_2$ parameter value derived from ordinary least squares regression of atmospheric CH$_4$ burden against best-estimate forcings of tropospheric and stratopsheric ozone, and stratospheric water vapour. The default parameters and alternative CH$_4$ $f_2$ are given below.
+\begin{table}[H]
+    \centering
+    \caption{Default parameter values for the concentration-forcing relationships in FaIR v2.0. An alternative CH$_4$ $f_2$ parameter value including indirect forcing effects is given in parentheses.} \label{tab:forcparameters}
+    \begin{tabular}{l r r r}
+        \hline
+        Parameter & CO$_2$ & CH$_4$ & N$_2$O\\ \hline \hline
+        $f_1$ & 4.991 & -0.06002 & 0.0009852 \\
+        $f_2$ & 0.001801 & -0.0001013 (0.0002873) & 0.00009272 \\
+        $f_3$ & -0.02341 & 0.04944 & 0.1058 \\ \hline
+    \end{tabular}
+\end{table}
+\section{The thermal response model}
+The thermal response model is a simple linear step response model \citep{Good2011}. While previous similar models have tended to use two timescales, here we leave the number of response timescales in FaIR v2.0 general, such that if more are desired, e.g. for a faster response to volcanoes or pulse experiments as in \cite{Tsutsui2017}, the user may specify how many to use. The two equations modelling the thermal response are below.
+\begin{align}
+    \frac{\text{d}S_i(t)}{\text{d}t} &= \frac{q_jF(t) - S_i(t)}{d_i} \label{eq_thermbox}\\
+    \text{~~and~~}T(t) &= \sum_{i}^{N}S_i(t), \label{eq_temp}
+\end{align}
+where $S_i$ represents the temperature anomaly in box $i$ with response timescale $d_i$ at time $t$, $F(t)$ is the effective radiative forcing, and $T(t)$ is the global mean surface temperature anomaly. As in \cite{Millar2016} and \cite{Tsutsui2017}, these equations can be solved analytically to relate $q_i$ and $d_i$ to the Transient Climate Response (TCR) and Equilibrium Climate Sensitivity (ECS)\cite{Collins2013} as follows:
+\begin{align}
+    \text{ECS}&=F_{2\times \text{CO}_2} \sum_i^N q_i \label{eq_ECS}\\
+    \text{TCR}&=F_{2\times \text{CO}_2} \sum_i^N \left\{q_i\left(1-\frac{d_i}{70}\left[1-e^{-\frac{70}{d_i}}\right]\right)\right\}. \label{eq_ECS}
+\end{align}
+When discussing parameters for the two timescale thermal model, we quote TCR and ECS values rather than $q$ parameters since these are the more commonly used quantities.
+\subsection*{Selected default parameters}
+This thermal response model has been previously studied in detail \citep{Geoffroy2013,Geoffroy2013a,Gregory2015,Smith2017}. Here we adopt the same default thermal response timescales as in FaIR v1.0 and v1.3 \citep{Millar2016,Smith2017} from the CMIP5 multi-model-mean found in \cite{Geoffroy2013}. For the TCR and ECS, we adopt the central values from a lognormally distributed TCR with 5-95 percentiles of 1.0 and 2.5 \citep{Collins2013}; and a normally distributed realised warming fraction (the TCR:ECS ratio, RWF) with 5-95 percentiles of 0.45 and 0.75 \citep{Millar2016}. We specify a distribution for the RWF rather than the ECS since the RWF is shown to be more statistically independent of the TCR compared to the ECS \citep{Millar2015}. The central values are TCR = 1.58K and ECS = 2.66K, corresponding to $q_1=0.301$ and $q_2=0.399$ for our default $d_1=239.0$ and $d_2=4.10$ timescales. These distributions as described above are used to generate uncertainty in the thermal response throughout this study.
+\subsection*{Confusion arising from the thermal response of simple models}
+One point of contention within the recent Special Report on 1.5\textdegree C warming \citep[SR15]{IPCC2018} was the difference in apparent response between the two simple models FaIR v1.3 (henceforth FaIR) and MAGICC6 (MAGICC), with the FaIR response significantly below the MAGICC response in the published model outputs from the IAMC scenarios \citep{Huppmann:2018:scenario-data}. Figures 6 and 7 below include the median total forcings and temperature responses in each model to a range of scenarios from the IMAGE 3.0.1 integrated assessment model (IAM). This shows that while the total forcings derived from emissions by each model are relatively similar, with FaIR simulating a slightly wider range (between scenarios) of forcings than MAGICC, the temperature response in FaIR is consistently lower than MAGICC, particularly notable for the high emission SSP5-Baseline scenario. This difference in response is likely due to the default parameter choice in each model, with MAGICC reseponse parameters tuned to output from CMIP3 atmosphere and oceanic general circulation models (AOGCMs)  \citep{Meinshausen2011}, while the response in FaIR (an identical thermal model to that in FaIR v2.0) was tuned to constrain modelled response to the observed temperature changes from \cite{Cowtan2014}. Here we emphasize that the models themselves are not systematically biased either low or high --- it is the parameters used, and how these are selected, that determines the model response. In FaIR v2.0 we have chosen to use accepted values from the literature for our thermal response parameters as above, which will have a lower default response than both MAGICC and the CMIP3, CMIP5 and CMIP6 AOGCM means, but any user can tune parameters based on what they desire FaIR v2.0 to emulate. For example, we provide FaIR v2.0 parameters tuned to a set of CMIP6 models, which should provide a thermal response more similar to MAGICC6 than the default. We argue that the high level of flexibility afforded by the simple thermal response model in FaIR v2.0 reduces the need for multiple simple models, given its surprisingly good ability to emulate a range of more complex models \cite{Tsutsui2017}.
+\subsection*{Emulating CMIP6 models with FaIR v2.0}
+Following \cite{Tsutsui2017}, we tune both the CO$_2$ concentration-forcing relation and the thermal response model to available output from the CMIP6 \citep{Eyring2016} 1pctCO2 and abrupt-4$\times$CO2 experiments. As in \citeauthor{Tsutsui2017}, we tune both two- and three-timescale variants of the thermal response model. We tune our three-term concentration-forcing equation to the variable logarithmic -- quadratic relationship from \citeauthor{Tsutsui2017}, which changes functional form once the CO$_2$ concentration is over twice the pre-industrial value. We find that our equation is sufficient to well represent this variable relationship as shown in SI figure 3. The tuned parameters are given below for the 17 CMIP6 models with the required output available.
+\begin{table}[H]
+    \centering
+    \caption{Default parameter values for the CO$_2$ concentration-forcing parameters and thermal response parameters for emulation of CMIP6 models with FaIR v2.0. The $f$ parameters are the same for both the two- and three-timescale variants.} \label{tab:cmip6parameters}
+    \begin{adjustbox}{width=1\textwidth}
+        \begin{tabular}{l l r r r r r r r r r}
+            \hline
+            & Parameter & $f_1$ & $f_2$ & $f_3$ & $d_1$ & $d_2$ & $d_3$ & $q_1$ & $q_2$ & $q_3$\\ 
+            CMIP6 model & timescales \\ \hline \hline
+            BCC-CSM2-MR & 2 & 6.415 & 0.005 & -0.435 & 157.604 & 3.668 & - & 0.425 & 0.552 & - \\
+            & 3 & - & - & - & 170.678 & 7.421 & 0.707 & 0.379 & 0.331 & 0.23 \\ \hdashline
+        BCC-ESM1 & 2 & 3.278 & 0.002 & -0.001 & 193.231 & 4.188 & - & 0.48 & 0.591 & - \\
+            & 3 & - & - & - & 263.482 & 15.857 & 1.988 & 0.41 & 0.259 & 0.391 \\ \hdashline
+        CESM2 & 2 & 14.385 & 0.027 & -2.14 & 197.239 & 4.033 & - & 0.912 & 0.648 & - \\
+            & 3 & - & - & - & 212.316 & 6.079 & 0.942 & 0.941 & 0.475 & 0.201 \\ \hdashline
+        CESM2-WACCM & 2 & 2.584 & 0.004 & -0.003 & 214.216 & 3.887 & - & 0.801 & 0.611 & - \\
+            & 3 & - & - & - & 219.713 & 4.775 & 0.279 & 0.801 & 0.524 & 0.095 \\ \hdashline
+        CNRM-CM6-1 & 2 & 12.962 & 0.022 & -1.732 & 282.876 & 4.571 & - & 0.685 & 0.707 & - \\
+            & 3 & - & - & - & 454.774 & 17.378 & 1.409 & 0.558 & 0.368 & 0.417 \\ \hdashline
+        CNRM-ESM2-1 & 2 & 2.549 & 0.003 & -0.002 & 338.245 & 5.905 & - & 0.817 & 0.776 & - \\
+            & 3 & - & - & - & 355.29 & 8.676 & 0.34 & 0.727 & 0.584 & 0.189 \\ \hdashline
+        CanESM5 & 2 & 10.095 & 0.014 & -1.081 & 231.427 & 6.235 & - & 0.788 & 0.769 & - \\
+            & 3 & - & - & - & 290.57 & 13.34 & 1.038 & 0.708 & 0.526 & 0.306 \\ \hdashline
+        GFDL-CM4 & 2 & 7.719 & 0.009 & -0.683 & 197.746 & 2.761 & - & 0.591 & 0.613 & - \\
+            & 3 & - & - & - & 223.729 & 6.994 & 0.98 & 0.592 & 0.301 & 0.347 \\ \hdashline
+        GISS-E2-1-G & 2 & 4.913 & 0.0 & -0.0 & 334.568 & 2.561 & - & 0.308 & 0.481 & - \\
+            & 3 & - & - & - & 341.044 & 4.517 & 0.497 & 0.258 & 0.272 & 0.186 \\ \hdashline
+        GISS-E2-1-H & 2 & 4.633 & 0.001 & 0.0 & 181.44 & 3.693 & - & 0.38 & 0.533 & - \\
+            & 3 & - & - & - & 210.002 & 8.513 & 0.725 & 0.333 & 0.308 & 0.241 \\ \hdashline
+        HadGEM3-GC31-LL & 2 & 9.892 & 0.013 & -1.05 & 203.002 & 6.345 & - & 0.779 & 0.739 & - \\
+            & 3 & - & - & - & 388.248 & 23.441 & 2.115 & 0.656 & 0.503 & 0.428 \\ \hdashline
+        IPSL-CM6A-LR & 2 & 13.65 & 0.024 & -1.923 & 175.721 & 5.639 & - & 0.572 & 0.731 & - \\
+            & 3 & - & - & - & 228.387 & 13.099 & 0.868 & 0.481 & 0.48 & 0.31 \\ \hdashline
+        MIROC-ES2L & 2 & 10.883 & 0.015 & -1.232 & 409.739 & 4.421 & - & 0.269 & 0.485 & - \\
+            & 3 & - & - & - & 591.245 & 9.721 & 0.925 & 0.205 & 0.26 & 0.212 \\ \hdashline
+        MIROC6 & 2 & 3.884 & 0.002 & 0.0 & 315.851 & 3.121 & - & 0.282 & 0.48 & - \\
+            & 3 & - & - & - & 495.06 & 12.253 & 1.37 & 0.23 & 0.18 & 0.315 \\ \hdashline
+        MRI-ESM2-0 & 2 & 10.552 & 0.016 & -1.277 & 200.946 & 3.072 & - & 0.472 & 0.488 & - \\
+            & 3 & - & - & - & 202.58 & 4.503 & 0.385 & 0.447 & 0.346 & 0.14 \\ \hdashline
+        SAM0-UNICON & 2 & 5.201 & 0.0 & 0.0 & 260.591 & 3.396 & - & 0.478 & 0.57 & - \\
+            & 3 & - & - & - & 261.811 & 4.005 & 0.353 & 0.465 & 0.487 & 0.081 \\ \hdashline
+        UKESM1-0-LL & 2 & 5.283 & -0.0 & 0.0 & 212.814 & 5.46 & - & 0.74 & 0.729 & - \\
+            & 3 & - & - & - & 323.251 & 17.44 & 1.265 & 0.634 & 0.461 & 0.381 \\ \hline
+        \end{tabular}
+    \end{adjustbox}
+\end{table}
+At the time of writing, the required Earth System Model (ESM) output from CMIP6 for tuning the gas cycles is not available, however, this is something we aim to complete in the future, such as to be able to fully emulate the CMIP6 ESM ensemble for CO$_2$, CH$_4$ and N$_2$O. 
+\section{FaIR v2.0: RCP and SSP simulations}
+In this section we run several standard ``benchmark'' tests that have been carried out by previous simple modelling groups. These include simple pulse experiments such as in \cite{Joos2013}, running both the standard RCP concentrations backwards and the corresponding but not fully compatible due to their parallel development \citep{Moss2010} emission scenarios forwards through FaIR v2.0, and comparing simulations of the more recent SSPs \citep{Riahi2017} from other simple models used in SR15 \citep{Huppmann:2018:scenario-data,IPCC2018} with that from FaIR v2.0.
+\subsection*{Idealised Experiments}
+First, we run a series of standard pulse experiments. the model is spun up to present-day (2019) with inverse emissions derived from historical concentrations \citep{Meinshausen2017}, then concentrations of CO$_2$, CH$_4$ and N$_2$O are fixed at 407.9 ppm, 1867 ppb and 330.8 ppb respectively; updating and approximately replicating the experimental protocol of \cite{Joos2013}. All other forcings are fixed at the 2019 value. One run is carried out with no additional emissions, and the other three have an emission pulse of 1Mt of one of the gases added in 2019. A 1Mt pulse is used as unlike in the majority of models in \cite{Joos2013}, FaIR v2.0 has no internal variability, so we do not require a pulse as large as 100Gt to obatin enough signal; regardless, the results obtained are independent of the pulse size (at least until the equations begin to break down in ways such as the CH$_4$ lifetime becoming negative, which occurs if a 1000Gt pulse is used). We derive four metrics for each gas: the instantaneous airbourne fraction and integrated Impulse Response Function after 100 years (iIRF$_{100}$); the Absolute Global Warming Potential (AGWP) and Global Warming Potential (GWP) after 20 and 100 years; and the initial pulse-adjustment timescale (IPT) \citep{Ricke2014}. Both CH$_4$ and N$_2$O also contribute indirectly to radiative forcing through their atmospheric chemistry, hence GWP values for direct-only forcings and full forcings, scaled as described in \cite{Myhre2013a}, are given. We find values comparable to the current literature. The full CH$_4$ GWP is higher than previous studies \citep{Myhre2013a,Holmes2013,Etminan2016}, since we have included both a longer CH$_4$ lifetime as in \cite{Holmes2013} and the upwards-revised radiative forcing from \cite{Etminan2016}.
+\begin{table}[H]
+    \centering
+    \caption{Gas metric values from present-day pulse experiments.} \label{tab:metricresults}
+    \begin{tabular}{l r r r}
+        \hline
+        Metric & CO$_2$ & CH$_4$ & N$_2$O\\ \hline \hline
+        iIRF$_{100}$ (yr) & $49.0 \pm 2.5$ & $11.7 \pm 0.8$ & $67.6 \pm 0.1$ \\
+        Airborne fraction after 100 years (\%) & $42.8 \pm 2.2$ & $0.0 \pm 0.0$ & $42.4 \pm 0.02$ \\
+        AGWP$_{100}$ ($10^{-13}$ W m$^{-2}$ yr kg$^{-1}$) & $0.842 \pm 0.033$ & $18.1 \pm 0.9$ & $259.9 \pm 0.4$ \\ 
+        GWP$_{100}$ (direct-only) & $1.0 \pm 0.0$ & $21.8 \pm 1.5$ & $309 \pm 12$ \\
+        GWP$_{100}$ (full) & $1.0 \pm 0.0$ & $36.0 \pm 2.8$ & $287 \pm 11$ \\
+        AGWP$_{20}$ ($10^{-13}$ W m$^{-2}$ yr kg$^{-1}$) & $0.225 \pm 0.007$ & $15.1 \pm 0.4$ & $73.9 \pm 0.0$ \\ 
+        GWP$_{20}$ (direct-only) & $1.0 \pm 0.0$ & $67.4 \pm 3.0$ & $329 \pm 10$ \\
+        GWP$_{20}$ (full) & $1.0 \pm 0.0$ & $111.2 \pm 4.9$ & $305 \pm 10$ \\
+        IPT (years) & 11.3 [10.8 , 12.1] & 6.8 [6.6 , 7.1] & 16.4 [15.6 , 18.4] \\ \hline
+    \end{tabular}
+\end{table}
+We also diagnose the Transient Response to Cumulative Carbon Emissions (TCRE) within FaIR v2.0. This is the emergent linear relationship between global temperature anomalies and cumulative CO$_2$ emissions, attributed to a balance between the increasing airborne CO$_2$ fraction as atmospheric concentrations are raised and the approximately logarithmic concentration-forcing relationship for CO$_2$. Here it is calculated in two ways: once following the method used in \cite{Smith2017}, in which the temperature anomaly at 1000GtC was calculated when RCP8.5 was run through FaIR v1.3 (here we carry out this method using RCP4.5, 6 and 8.5, running FaIR v2.0 with concentrations and diagnosing both inverse CO$_2$ emissions and temperature anomalies). This method allows both the CO$_2$-only TCRE and effective-TCRE (when all forcing agents are included in the temperature response) to be determine. The effective-TCRE is not a strict relationship (unlike the CO$_2$-only TCRE), and depends considerably on the non-CO$_2$ forcing pathway taken. For this reason, the effective-TCRE varies considerably between RCPs. The second method used to diagnose the TCRE (CO$_2$-only) follows \cite{Gillett2013}, in which we prescribe a 1\% per year increase in CO$_2$ concentrations starting from pre-industrial levels, and determine the ratio of global-mean warming to cumulative CO$_2$ emissions at the point of CO$_2$ concentration doubling. The results are summarised in the table below. The result using the RCP 8.5 scenario is almost identical to FaIR v1.3, though with a larger spread more consistent with the assessed range from AR5 \citep{Collins2013}. The 1\% experiment result of is consistent with a recent study \citep{Millar20160449} that used the historic record rather than models, though our result lowers the upper end of the TCRE distribution.
+\begin{table}[H]
+    \centering
+    \caption{Diagnosed TCRE in FaIR v2.0.} \label{tab:metricresults}
+    \begin{tabular}{l r}
+        \hline
+        Method & Result\\ \hline \hline
+        Effective-TCRE & \\
+        RCP8.5 & 2.06 [1.27 , 3.87]\\
+        RCP6 & 1.92 [1.16 , 3.58]\\
+        RCP4.5 & 1.96 [1.19 , 3.70]\\ \hline
+        CO$_2$-only TCRE & \\
+        RCP8.5 & 1.39 [0.89 , 2.51]\\
+        RCP6 & 1.41 [0.89 , 2.54]\\
+        RCP4.5 & 1.42 [0.90 , 2.58]\\ \hline
+        1\% experiment & 1.33 [0.85 , 2.16]\\ \hline
+    \end{tabular}
+\end{table}
+\subsection*{RCP simulations}
+Since the RCPs themselves are \emph{concentration} pathways, here we focus on the results of running FaIR v2.0 with concentrations from the RCP database, as was done in the GCMs in CMIP5. We include emissions-driven runs in the Supplementary Information, but these are not comparable due to the lack of full integration between RCP concentrations and emissions as was planned in \cite{Moss2010}. Figure 2 shows diagnosed emissions that are compatible with the RCP concentration series in FaIRv2.0, run with default parameters plus uncertainties as described above. Here we see the large discrepancies between FaIR v2.0 compatible emissions and the RCP database emissions for CH$_4$ and N$_2$O, while FaIRv2.0 diagnosed emissions agree well with bottom-up emission estimates to the present-day as expected, since FaIR v2.0 is tuned against a very similar historical concentration series.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{"RCP concentration driven emissions".png}
+    \caption*{Figure 2: }
+\end{figure}
+Figure 3 shows the corresponding radiative forcings compared to those from the RCP database. The updated simple RF formulae described in \cite{Etminan2016} increase the RF of CH$_4$ and CO$_2$, while marginally decreasing the N$_2$O RF.\\\\
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{"RCP concentration driven RF".png}
+    \caption*{Figure 3: }
+\end{figure}
+Figure 4 shows historical and future global mean surface temperature ranges (GMST) under the RCP scenarios diagnosed by FaIR v2.0. Also shown is the 5-year moving average of 4 observational GMST datasets \citep{Vose2012,Cowtan2014,Lenssen2019,Morice2011}, and the CMIP5 2081:2100 gaussian mean and 5-95\% ranges for RCP3PD and RCP85 \citep{Collins2013}. We see that the FaIR v2.0 diagnosed temperatures closely resemble the observed GMST series, but are lower than the CMIP5 ranges. This is due to the default climate response parameter selection as described above and is discussed fully in \cite{Richardson2016}. If instead we use CMIP5 multi-model-mean two-timescale parameters (TCR, ECS, $d_1$ and $d_2$, and $F_{2\times}$) from \cite{Tsutsui2017}, we find that the resulting FaIR v2.0 temperatures much more closely resemble the CMIP5 ranges as seen in SI Figure 5, but still do not capture the full model spread for low forcing scenarios such as RCP3PD.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\textwidth]{"RCP concentration driven temperatures".png}
+    \caption*{Figure 4: }
+\end{figure}
+\subsection*{SSP simulations and SR15 SCM comparison}
+Although we include RCP simulations with FaIR v2.0 to allow comparison with the majority of the literature used, they have now been superceeded by the SSP scenarios used in SR15 \citep{Riahi2017,IPCC2018}. Here we explore emission-driven simulations of three of the SSPs from the IMAGE 3.0.1 integrated assessment model: SSP1-19, SSP2-45 and SSP5-Baseline. These three pathways span the range of possible future emissions and corresponding climates. Since the emissions series provided in the IAMC 1.5C database \citep{Huppmann:2018:scenario-data} only begin in 2005, we must harmonize these to historical series to spin up the model. We do this by diagnosing historical emissions for CO$_2$, CH$_4$ and N$_2$O from the CMIP6 historical concentrations \citep{Meinshausen2017} between 1750 and 2015 in FaIR v2.0, then joining these to each SSP scenario in 2015, multiplying the SSP scenario by a linearly time dependent scaling factor -- such that the SSP scenario emissions are equal to the diagnosed emissions in 2015 -- that reaches a value of 1 by 2025. All other SSP forcings are harmonized identically, using best-estimate historical forcings from \cite{Forster2013}. While this harmonization procedure does not exactly match the one used in the database scenarios, present-day CO$_2$ concentrations and total forcing is similar, and this hsould therefore be a representative comparison. The FaIR v2.0 simulated concentrations are shown in figure 5. Concentration data from other SCMs (FaIR v1.3 and MAGICC6) is only available for CO$_2$. We see that FaIR v2.0 simulates slightly lower CO$_2$ concentrations that the other SCMs, but that they generally lie within the 5-95\% ranges. The small N$_2$O 5-95\% range is due to its long lifetime and single atmospheric sink as modelled in FaIR v2.0.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{"FaIRv2 v13 MAGICC comparison harmonized SSP default gas concentrations".png}
+    \caption*{Figure 5: }
+\end{figure}
+Median radiative forcing for each gas is available for both FaIR v1.3 and MAGICC6 in the IAMC database, so here we may do a more complete comparison between the three SCMs. Figure 6 shows that FaIR v2.0 has very similar CO$_2$ forcing to the other SCMs over the 21st century, lying between them for SSP5-Baseline and SSP1-19, and slightly below for SSP2-45. The other two SCMs lie within the FaIR v2.0 5-95\% ranges for all time. The CH$_4$ forcing highlights the difference in the CH$_4$ concentration-forcing relationship between the models. Both FaIR v2.0 and FaIR v1.3 are based on the more recent study by \cite{Etminan2016}, which revised present-day CH$_4$ forcing upwards by 25\%, while MAGICC6 is based on \cite{Myhre2013a}. The difference between FaIR v2.0 and v1.3 is largely due to the different gas cycles: FaIR v2.0 has an interactive CH$_4$ lifetime which is longer at the present-day by default, while FaIR v1.3 keeps the CH$_4$ lifetime constant at 9.3 years throughout \citep{Smith2017}. FaIR v2.0 displays very similar N$_2$O forcing to MAGICC6, while FaIR v1.3 lies somewhat below. This discrepancy lies with the N$_2$O gas cycle in FaIR v1.3, since the concentration-forcing relations in FaIR v1.3 and v2.0 are extremely similar, and is likely due to its relatively low estimate of natural N$_2$O emissions at the present-day of 9.1 MtN$_2$O-N$_2$ (the value at which future natural emissions are fixed at). This value is taken from \cite{Prather2012}, but a constant lifetime of 121 years is used, rather than the present-day lifetime estimate from that study of 131 years. This combination of low lifetime and natural emission estimate is likely the cause of the lowered future concentrations and corresponding forcing. The evolution of total forcing in each scenario is highly comparable between the models, with FaIR v2.0 lying marginally above the other two for the SSP5-Baseline scenario -- due to its higher CH$_4$ forcing -- and in between for the two lower emission scenarios.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{"FaIRv2 v13 MAGICC comparison harmonized SSP default gas forcing response".png}
+    \caption*{Figure 6: }
+\end{figure}
+Finally, we compare the probabilistic temperature anomaly in each model. Figure 7 shows the median and 5-95\% temperature response (min/max for CMIP6 FaIR v2.0, default FaIR v2.0 also includes the 1-\textsigma range) in default FaIR v2.0, FaIR v1.3, MAGICC6, and FaIR v2.0 tuned to 17 CMIP6 models (two-timescale thermal response, parameters in table \ref{tab:cmip6parameters}). Both FaIR v2.0 responses are relative to an anomaly of 0.61K in 1986:2005 \citep{Kirtman2013}, and the FaIR v1.3 and MAGICC6 responses are taken directly from the database (median 2010 anomalies are 0.95, 0.86, 0.89 and 1.09 in FaIR v2.0, v1.3, MAGICC6 and CMIP6 FaIR v2.0 respectively). We see that the default FaIR v2.0 response is very similar, if marginally higher than the response of FaIR v1.3. Both versions of FaIR under default parameters have a significantly lower median response than MAGICC6, as well as a lower 5-95\% spread for all scenarios. The CMIP6-tuned FaIR v2.0 has a higher response and lower spread than MAGICC6 for all scenarios, demonstrating the importance of thermal parameter choice in SCMs, since this is fundamentally the same model as default FaIR v2.0, but has a very different response.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{"FaIRv2 v13 MAGICC comparison harmonized SSP default probabilistic temperature response".png}
+    \caption*{Figure 7: }
+\end{figure}
+\section{Use of FaIR v2.0}
+We envisage that FaIR v2.0 will largely be used for similar assessments to the current SCMs, such as providing probabilistic projections of atmospheric concentrations, radiative forcings and temperature anomalies for wide ranges of scenarios, such as was carried out to provide the SR15 scenario explorer \citep{Huppmann:2018:scenario-data}. FaIR v2.0 could also easily be coupled to integrated assessment models (IAMs) to explore impacts of climate policy options. One advantage that FaIR v2.0 has over the other SCMs discussed here, MAGICC6 (which is already used in several IAMs) and FaIR v1.3, is its relative computational efficiency and simple equation set. Due to its parallel treatment of all the gas species, when written in a programming language designed for array operations (such as Fortran, MATLAB, or the NumPy Python module), FaIR v2.0 is extremely quick to run. For example, using its current Python code, FaIR v2.0 can compute a full emission $\rightarrow$ concentration $\rightarrow$ radiative forcing $\rightarrow$ temperature pathways for 23 $\times$ 350 year scenarios $\times$ 3 gases (plus external forcings) $\times$ 100 gas cycle parameter sets $\times$ 100 thermal response parameter sets in just over 90 seconds\footnote{on a laptop with 31GB RAM and an Intel(R) Core(TM) i7-8750H@2.2GHz} -- around 1 million years of earth-system emulation per second. This speed provides significant advantages when computing large probabilistic ensembles, or when optimizing parameters dependent on the climate system as is done in IAMs.\\\\
+The six simple equations used by FaIR also provide advantages for integration into IAMs, as rather than having to integrate the original SCM code into an existing architecture, the FaIR equations set could be written up using a language and format consistent with the IAM codebase with limited effort. Their simplicity also means that the model can be run in programs for analysis of tabular data, including (but not limited to) Excel. This opens up climate system exploration to a large group of potential new users who are familiar with spreadsheets, but not formal scientific programming languages. Finally, their simplicity adds considerably to the overall transparency of the model; if the model display unexpected behaviour, it is easy to determine where exactly this behaviour originates and explain it.\\\\
+We suggest that the speed, simplicity and transparency of FaIR v2.0 lends it to use in undergraduate and high-school education in addition to scientific research. It can be used to explain (and demonstrate) various aspects of both the carbon (or methane / nitrous oxide) cycle and Earth's thermal response to radiative forcing, and is simple enough to use that students could themselves carry out experiments (such as a CO$_2$ doubling) easily without prior experience and only basic computing skills.\\\\
+The final potential use case that these authors can think of is to use FaIR v2.0 to explain differences between ESMs more simply through tuning FaIR v2.0 to emulate the ESMs and comparing differences between the tuned parameter sets to identify which aspects of the models differ most. The ability to tune FaIR v2.0 \citep{Tsutsui2017,Joos2013,Millar2016} to more complex models also allows estimation of complex model response to a particular scenario or experiment without having to expend computer power to run the model itself; which itself could allow climate system uncertainties to be introduced more fully into integrated assessment studies by emulating the full CMIP6 ensemble within IAMs.\\\\
+\section{Conclusions}
+Here we present the next generation of FaIR, v2.0. 
+\bibliography{GenIR_refs}
+\end{document}

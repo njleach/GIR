@@ -1,0 +1,50 @@
+This is BibTeX, Version 0.99d (TeX Live 2017/Debian)
+Capacity: max_strings=100000, hash_size=100000, hash_prime=85009
+The top-level auxiliary file: GenIR_draft.aux
+The style file: apalike.bst
+Database file #1: GenIR_refs.bib
+Warning--can't use both author and editor fields in IPCC2018
+Warning--empty publisher in IPCC2018
+Warning--there's a number but no volume in Smith2017
+You've used 48 entries,
+            1935 wiz_defined-function locations,
+            793 strings with 24314 characters,
+and the built_in function-call counts, 36489 in all, are:
+= -- 3036
+> -- 3488
+< -- 13
++ -- 1332
+- -- 1330
+* -- 3924
+:= -- 6639
+add.period$ -- 145
+call.type$ -- 48
+change.case$ -- 889
+chr.to.int$ -- 46
+cite$ -- 51
+duplicate$ -- 724
+empty$ -- 1404
+format.name$ -- 1386
+if$ -- 6559
+int.to.chr$ -- 3
+int.to.str$ -- 0
+missing$ -- 47
+newline$ -- 241
+num.names$ -- 150
+pop$ -- 818
+preamble$ -- 1
+purify$ -- 890
+quote$ -- 0
+skip$ -- 554
+stack$ -- 0
+substring$ -- 1581
+swap$ -- 104
+text.length$ -- 7
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 286
+warning$ -- 3
+while$ -- 169
+width$ -- 0
+write$ -- 621
+(There were 3 warnings)
