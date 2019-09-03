@@ -1,5 +1,12 @@
 \begin{thebibliography}{}
 
+\bibitem[Allen et~al., 2009]{Allen2009}
+Allen, M.~R., Frame, D.~J., Huntingford, C., Jones, C.~D., Lowe, J.~A.,
+  Meinshausen, M., and Meinshausen, N. (2009).
+\newblock {Warming caused by cumulative carbon emissions towards the trillionth
+  tonne}.
+\newblock {\em Nature}, 458(7242):1163--1166.
+
 \bibitem[Arora et~al., 2018]{Arora2018}
 Arora, V.~K., Melton, J.~R., and Plummer, D. (2018).
 \newblock {An assessment of natural methane fluxes simulated by the CLASS-CTEM
@@ -382,6 +389,16 @@ Smith, C.~J., Forster, P.~M., Allen, M., Leach, N., Millar, R.~J., Passerello,
   cycle model}.
 \newblock {\em Geoscientific Model Development Discussions}, (December):1--45.
 
+\bibitem[Tian et~al., 2018]{Tian2018}
+Tian, H., Yang, J., Lu, C., Xu, R., Canadell, J.~G., Jackson, R.~B., Arneth,
+  A., Chang, J., Chen, G., Ciais, P., Gerber, S., Ito, A., Huang, Y., Joos, F.,
+  Lienert, S., Messina, P., Olin, S., Pan, S., Peng, C., Saikawa, E., Thompson,
+  R.~L., Vuichard, N., Winiwarter, W., Zaehle, S., Zhang, B., Zhang, K., and
+  Zhu, Q. (2018).
+\newblock {The global N2O model intercomparison project}.
+\newblock {\em Bulletin of the American Meteorological Society},
+  99(6):1231--1251.
+
 \bibitem[Tsutsui, 2017]{Tsutsui2017}
 Tsutsui, J. (2017).
 \newblock {Quantification of temperature response to CO2 forcing in
@@ -403,5 +420,10 @@ Vose, R.~S., Arndt, D., Banzon, V.~F., Easterling, D.~R., Gleason, B., Huang,
 \newblock {NOAA's Merged Land–Ocean Surface Temperature Analysis}.
 \newblock {\em Bulletin of the American Meteorological Society},
   93(11):1677--1685.
+
+\bibitem[Zickfeld and Herrington, 2015]{Zickfeld2015}
+Zickfeld, K. and Herrington, T. (2015).
+\newblock {The time lag between a carbon dioxide emission and maximum warming
+  increases with the size of the emission}.
 
 \end{thebibliography}

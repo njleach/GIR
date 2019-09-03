@@ -378,7 +378,7 @@ def run_UnFaIR( emissions_in = False , \
 	gas_names = list(gas_parameters.columns.levels[1])
 	n_year = time_index.size
 	
-	timestep = np.append(np.diff(time_index)[-1],np.diff(time_index))
+	timestep = np.append(np.diff(time_index)[0],np.diff(time_index))
 
 	# Reformat inputs into the right shape
 
@@ -581,7 +581,7 @@ def prescribed_temps_gas_cycle(emissions_in , \
 	
 	emissions = input_to_numpy(emissions_in)[:,np.newaxis,...]
 	
-	timestep = np.append(np.diff(emissions_in.index),np.diff(emissions_in.index)[-1])
+	timestep = np.append(np.diff(emissions_in.index)[0],np.diff(emissions_in.index))
 	
 	T = T[np.newaxis,np.newaxis,:]
 	

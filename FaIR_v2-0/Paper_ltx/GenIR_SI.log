@@ -1,10 +1,10 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2019.7.4)  2 SEP 2019 08:30
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2019.7.4)  3 SEP 2019 12:32
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
  %&-line parsing enabled.
-**/home/leachl/Documents/Simple_models/GenIR/UnFaIR/Paper_ltx/GenIR_SI.ltx
-(/home/leachl/Documents/Simple_models/GenIR/UnFaIR/Paper_ltx/GenIR_SI.ltx
+**/home/leachl/Documents/Simple_models/FaIR_v2-0/FaIR_v2-0/Paper_ltx/GenIR_SI.ltx
+(/home/leachl/Documents/Simple_models/FaIR_v2-0/FaIR_v2-0/Paper_ltx/GenIR_SI.ltx
 LaTeX2e <2017-04-15>
 Babel <3.18> and hyphenation patterns for 84 language(s) loaded.
 (/usr/share/texlive/texmf-dist/tex/latex/base/article.cls
@@ -780,7 +780,7 @@ Package: framed 2011/10/22 v 0.96: framed or shaded text with page breaks
 \xwm@boxb=\box60
 \xwm@cnta=\count312
 \xwm@wrt=\write3
- (/home/leachl/Documents/Simple_models/GenIR/UnFaIR/Paper_ltx/GenIR_SI.xwm)
+ (/home/leachl/Documents/Simple_models/FaIR_v2-0/FaIR_v2-0/Paper_ltx/GenIR_SI.xwm)
 \openout3 = `GenIR_SI.xwm'.
 
 ) (/usr/share/texlive/texmf-dist/tex/latex/pgf/frontendlayer/tikz.sty (/usr/share/texlive/texmf-dist/tex/latex/pgf/basiclayer/pgf.sty (/usr/share/texlive/texmf-dist/tex/latex/pgf/utilities/pgfrcs.sty (/usr/share/texlive/texmf-dist/tex/generic/pgf/utilities/pgfutil-common.tex
@@ -1374,7 +1374,7 @@ File: greek-fontenc.def 2015/08/04 v0.13 Common Greek font encoding definitions
 Package textgreek Info: Loaded fontmap: {eur/*/*}{U/eur/*/*} {phv/*/*}{U/psy/*/*}. on input line 69.
 )
 Package translations Info: No language package found. I am going to use `english' as default language. on input line 66.
- (/home/leachl/Documents/Simple_models/GenIR/UnFaIR/Paper_ltx/GenIR_SI.aux)
+ (/home/leachl/Documents/Simple_models/FaIR_v2-0/FaIR_v2-0/Paper_ltx/GenIR_SI.aux)
 \openout1 = `GenIR_SI.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 66.
@@ -1470,7 +1470,7 @@ Package: gettitlestring 2016/05/16 v1.5 Cleanup title references (HO)
 LaTeX Info: Redefining \ref on input line 66.
 LaTeX Info: Redefining \pageref on input line 66.
 LaTeX Info: Redefining \nameref on input line 66.
- (/home/leachl/Documents/Simple_models/GenIR/UnFaIR/Paper_ltx/GenIR_SI.out) (/home/leachl/Documents/Simple_models/GenIR/UnFaIR/Paper_ltx/GenIR_SI.out)
+ (/home/leachl/Documents/Simple_models/FaIR_v2-0/FaIR_v2-0/Paper_ltx/GenIR_SI.out) (/home/leachl/Documents/Simple_models/FaIR_v2-0/FaIR_v2-0/Paper_ltx/GenIR_SI.out)
 \@outlinefile=\write5
 \openout5 = `GenIR_SI.out'.
 
@@ -1559,13 +1559,17 @@ File: /home/leachl/Documents/Simple_models/GenIR/UnFaIR/Final_figures/"RCP conce
 <use /home/leachl/Documents/Simple_models/GenIR/UnFaIR/Final_figures/"RCP concentration driven temperatures alternate TCR".png>
 Package pdftex.def Info: /home/leachl/Documents/Simple_models/GenIR/UnFaIR/Final_figures/"RCP concentration driven temperatures alternate TCR".png  used on input line 95.
 (pdftex.def)             Requested size: 527.57014pt x 422.06212pt.
- (/home/leachl/Documents/Simple_models/GenIR/UnFaIR/Paper_ltx/GenIR_SI.bbl [4 </home/leachl/Documents/Simple_models/GenIR/UnFaIR/Final_figures/Other WMGHG inverse cumulative emissions.pdf> </home/leachl/Documents/Simple_models/GenIR/UnFaIR/Final_figures/RCP emission driven concentrations.pdf
+ (/home/leachl/Documents/Simple_models/FaIR_v2-0/FaIR_v2-0/Paper_ltx/GenIR_SI.bbl [4 </home/leachl/Documents/Simple_models/GenIR/UnFaIR/Final_figures/Other WMGHG inverse cumulative emissions.pdf> </home/leachl/Documents/Simple_models/GenIR/UnFaIR/Final_figures/RCP emission driven concentrations.pdf
 
 pdfTeX warning: pdflatex (file /home/leachl/Documents/Simple_models/GenIR/UnFaIR/Final_figures/RCP emission driven concentrations.pdf): PDF inclusion: multiple pdfs with page group included in a single page
->] [5 </home/leachl/Documents/Simple_models/GenIR/UnFaIR/Final_figures/RCP concentration driven temperatures alternate TCR.png>]) [6]
+>] [5 </home/leachl/Documents/Simple_models/GenIR/UnFaIR/Final_figures/RCP concentration driven temperatures alternate TCR.png>]
+Missing character: There is no â in font cmr12!
+Missing character: There is no € in font cmr12!
+Missing character: There is no “ in font cmr12!
+) [6]
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 99.
 Package atveryend Info: Executing hook `AfterLastShipout' on input line 99.
- (/home/leachl/Documents/Simple_models/GenIR/UnFaIR/Paper_ltx/GenIR_SI.xwm) (/home/leachl/Documents/Simple_models/GenIR/UnFaIR/Paper_ltx/GenIR_SI.aux)
+ (/home/leachl/Documents/Simple_models/FaIR_v2-0/FaIR_v2-0/Paper_ltx/GenIR_SI.xwm) (/home/leachl/Documents/Simple_models/FaIR_v2-0/FaIR_v2-0/Paper_ltx/GenIR_SI.aux)
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 99.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 99.
 Package rerunfilecheck Info: File `GenIR_SI.out' has not changed.
@@ -1573,18 +1577,18 @@ Package rerunfilecheck Info: File `GenIR_SI.out' has not changed.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 99.
  ) 
 Here is how much of TeX's memory you used:
- 44832 strings out of 492982
- 894992 string characters out of 6134897
- 993799 words of memory out of 5000000
- 47766 multiletter control sequences out of 15000+600000
+ 44836 strings out of 492982
+ 895198 string characters out of 6134897
+ 993825 words of memory out of 5000000
+ 47769 multiletter control sequences out of 15000+600000
  543618 words of font info for 75 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 53i,9n,96p,10440b,824s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 53i,9n,96p,10447b,824s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
-Output written on /home/leachl/Documents/Simple_models/GenIR/UnFaIR/Paper_ltx/GenIR_SI.pdf (6 pages, 521567 bytes).
+Output written on /home/leachl/Documents/Simple_models/FaIR_v2-0/FaIR_v2-0/Paper_ltx/GenIR_SI.pdf (6 pages, 522259 bytes).
 PDF statistics:
- 392 PDF objects out of 1000 (max. 8388607)
- 125 compressed objects within 2 object streams
- 19 named destinations out of 1000 (max. 500000)
+ 397 PDF objects out of 1000 (max. 8388607)
+ 128 compressed objects within 2 object streams
+ 20 named destinations out of 1000 (max. 500000)
  43 words of extra memory for PDF output out of 10000 (max. 10000000)
 

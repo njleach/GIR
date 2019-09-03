@@ -1,10 +1,10 @@
-PWD /home/leachl/Documents/Simple_models/GenIR/UnFaIR/Paper_ltx
+PWD /home/leachl/Documents/Simple_models/FaIR_v2-0/FaIR_v2-0/Paper_ltx
 INPUT /etc/texmf/web2c/texmf.cnf
 INPUT /usr/share/texmf/web2c/texmf.cnf
 INPUT /usr/share/texlive/texmf-dist/web2c/texmf.cnf
 INPUT /var/lib/texmf/web2c/pdftex/pdflatex.fmt
-INPUT /home/leachl/Documents/Simple_models/GenIR/UnFaIR/Paper_ltx/GenIR_SI.ltx
-OUTPUT /home/leachl/Documents/Simple_models/GenIR/UnFaIR/Paper_ltx/GenIR_SI.log
+INPUT /home/leachl/Documents/Simple_models/FaIR_v2-0/FaIR_v2-0/Paper_ltx/GenIR_SI.ltx
+OUTPUT /home/leachl/Documents/Simple_models/FaIR_v2-0/FaIR_v2-0/Paper_ltx/GenIR_SI.log
 INPUT /usr/share/texlive/texmf-dist/tex/latex/base/article.cls
 INPUT /usr/share/texlive/texmf-dist/tex/latex/base/article.cls
 INPUT /usr/share/texlive/texmf-dist/tex/latex/base/size12.clo
@@ -136,9 +136,9 @@ INPUT /usr/share/texlive/texmf-dist/tex/latex/ltxkeys/ltxkeys.sty
 INPUT /usr/share/texlive/texmf-dist/tex/latex/ltxkeys/ltxkeys.sty
 INPUT /usr/share/texlive/texmf-dist/tex/latex/framed/framed.sty
 INPUT /usr/share/texlive/texmf-dist/tex/latex/framed/framed.sty
-INPUT /home/leachl/Documents/Simple_models/GenIR/UnFaIR/Paper_ltx/GenIR_SI.xwm
-INPUT /home/leachl/Documents/Simple_models/GenIR/UnFaIR/Paper_ltx/GenIR_SI.xwm
-OUTPUT /home/leachl/Documents/Simple_models/GenIR/UnFaIR/Paper_ltx/GenIR_SI.xwm
+INPUT /home/leachl/Documents/Simple_models/FaIR_v2-0/FaIR_v2-0/Paper_ltx/GenIR_SI.xwm
+INPUT /home/leachl/Documents/Simple_models/FaIR_v2-0/FaIR_v2-0/Paper_ltx/GenIR_SI.xwm
+OUTPUT /home/leachl/Documents/Simple_models/FaIR_v2-0/FaIR_v2-0/Paper_ltx/GenIR_SI.xwm
 INPUT /usr/share/texlive/texmf-dist/tex/latex/pgf/frontendlayer/tikz.sty
 INPUT /usr/share/texlive/texmf-dist/tex/latex/pgf/frontendlayer/tikz.sty
 INPUT /usr/share/texlive/texmf-dist/tex/latex/pgf/basiclayer/pgf.sty
@@ -350,9 +350,9 @@ INPUT /usr/share/texlive/texmf-dist/tex/latex/greek-fontenc/lgrenc.def
 INPUT /usr/share/texlive/texmf-dist/tex/latex/greek-fontenc/lgrenc.def
 INPUT /usr/share/texlive/texmf-dist/tex/latex/greek-fontenc/greek-fontenc.def
 INPUT /usr/share/texlive/texmf-dist/tex/latex/greek-fontenc/greek-fontenc.def
-INPUT /home/leachl/Documents/Simple_models/GenIR/UnFaIR/Paper_ltx/GenIR_SI.aux
-INPUT /home/leachl/Documents/Simple_models/GenIR/UnFaIR/Paper_ltx/GenIR_SI.aux
-OUTPUT /home/leachl/Documents/Simple_models/GenIR/UnFaIR/Paper_ltx/GenIR_SI.aux
+INPUT /home/leachl/Documents/Simple_models/FaIR_v2-0/FaIR_v2-0/Paper_ltx/GenIR_SI.aux
+INPUT /home/leachl/Documents/Simple_models/FaIR_v2-0/FaIR_v2-0/Paper_ltx/GenIR_SI.aux
+OUTPUT /home/leachl/Documents/Simple_models/FaIR_v2-0/FaIR_v2-0/Paper_ltx/GenIR_SI.aux
 INPUT /usr/share/texlive/texmf-dist/tex/latex/cbfonts-fd/lgrcmr.fd
 INPUT /usr/share/texlive/texmf-dist/tex/latex/cbfonts-fd/lgrcmr.fd
 INPUT /usr/share/texlive/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
@@ -367,14 +367,14 @@ INPUT /usr/share/texlive/texmf-dist/tex/latex/hyperref/nameref.sty
 INPUT /usr/share/texlive/texmf-dist/tex/latex/hyperref/nameref.sty
 INPUT /usr/share/texlive/texmf-dist/tex/generic/oberdiek/gettitlestring.sty
 INPUT /usr/share/texlive/texmf-dist/tex/generic/oberdiek/gettitlestring.sty
-INPUT /home/leachl/Documents/Simple_models/GenIR/UnFaIR/Paper_ltx/GenIR_SI.out
-INPUT /home/leachl/Documents/Simple_models/GenIR/UnFaIR/Paper_ltx/GenIR_SI.out
-INPUT /home/leachl/Documents/Simple_models/GenIR/UnFaIR/Paper_ltx/GenIR_SI.out
-INPUT /home/leachl/Documents/Simple_models/GenIR/UnFaIR/Paper_ltx/GenIR_SI.out
-INPUT /home/leachl/Documents/Simple_models/GenIR/UnFaIR/Paper_ltx/GenIR_SI.out
-INPUT /home/leachl/Documents/Simple_models/GenIR/UnFaIR/Paper_ltx/GenIR_SI.out
-OUTPUT /home/leachl/Documents/Simple_models/GenIR/UnFaIR/Paper_ltx/GenIR_SI.out
-OUTPUT /home/leachl/Documents/Simple_models/GenIR/UnFaIR/Paper_ltx/GenIR_SI.pdf
+INPUT /home/leachl/Documents/Simple_models/FaIR_v2-0/FaIR_v2-0/Paper_ltx/GenIR_SI.out
+INPUT /home/leachl/Documents/Simple_models/FaIR_v2-0/FaIR_v2-0/Paper_ltx/GenIR_SI.out
+INPUT /home/leachl/Documents/Simple_models/FaIR_v2-0/FaIR_v2-0/Paper_ltx/GenIR_SI.out
+INPUT /home/leachl/Documents/Simple_models/FaIR_v2-0/FaIR_v2-0/Paper_ltx/GenIR_SI.out
+INPUT /home/leachl/Documents/Simple_models/FaIR_v2-0/FaIR_v2-0/Paper_ltx/GenIR_SI.out
+INPUT /home/leachl/Documents/Simple_models/FaIR_v2-0/FaIR_v2-0/Paper_ltx/GenIR_SI.out
+OUTPUT /home/leachl/Documents/Simple_models/FaIR_v2-0/FaIR_v2-0/Paper_ltx/GenIR_SI.out
+OUTPUT /home/leachl/Documents/Simple_models/FaIR_v2-0/FaIR_v2-0/Paper_ltx/GenIR_SI.pdf
 INPUT /usr/share/texlive/texmf-dist/tex/latex/translator/translator-basic-dictionary-English.dict
 INPUT /usr/share/texlive/texmf-dist/tex/latex/translator/translator-basic-dictionary-English.dict
 INPUT /usr/share/texlive/texmf-dist/tex/latex/siunitx/siunitx-abbreviations.cfg
@@ -455,16 +455,16 @@ INPUT /home/leachl/Documents/Simple_models/GenIR/UnFaIR/Final_figures/RCP emissi
 INPUT /home/leachl/Documents/Simple_models/GenIR/UnFaIR/Final_figures/RCP concentration driven temperatures alternate TCR.png
 INPUT /home/leachl/Documents/Simple_models/GenIR/UnFaIR/Final_figures/RCP concentration driven temperatures alternate TCR.png
 INPUT /home/leachl/Documents/Simple_models/GenIR/UnFaIR/Final_figures/RCP concentration driven temperatures alternate TCR.png
-INPUT /home/leachl/Documents/Simple_models/GenIR/UnFaIR/Paper_ltx/GenIR_SI.bbl
-INPUT /home/leachl/Documents/Simple_models/GenIR/UnFaIR/Paper_ltx/GenIR_SI.bbl
+INPUT /home/leachl/Documents/Simple_models/FaIR_v2-0/FaIR_v2-0/Paper_ltx/GenIR_SI.bbl
+INPUT /home/leachl/Documents/Simple_models/FaIR_v2-0/FaIR_v2-0/Paper_ltx/GenIR_SI.bbl
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmr17.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmbx12.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmti12.tfm
-INPUT /home/leachl/Documents/Simple_models/GenIR/UnFaIR/Paper_ltx/GenIR_SI.xwm
-INPUT /home/leachl/Documents/Simple_models/GenIR/UnFaIR/Paper_ltx/GenIR_SI.xwm
-INPUT /home/leachl/Documents/Simple_models/GenIR/UnFaIR/Paper_ltx/GenIR_SI.aux
-INPUT /home/leachl/Documents/Simple_models/GenIR/UnFaIR/Paper_ltx/GenIR_SI.out
-INPUT /home/leachl/Documents/Simple_models/GenIR/UnFaIR/Paper_ltx/GenIR_SI.out
+INPUT /home/leachl/Documents/Simple_models/FaIR_v2-0/FaIR_v2-0/Paper_ltx/GenIR_SI.xwm
+INPUT /home/leachl/Documents/Simple_models/FaIR_v2-0/FaIR_v2-0/Paper_ltx/GenIR_SI.xwm
+INPUT /home/leachl/Documents/Simple_models/FaIR_v2-0/FaIR_v2-0/Paper_ltx/GenIR_SI.aux
+INPUT /home/leachl/Documents/Simple_models/FaIR_v2-0/FaIR_v2-0/Paper_ltx/GenIR_SI.out
+INPUT /home/leachl/Documents/Simple_models/FaIR_v2-0/FaIR_v2-0/Paper_ltx/GenIR_SI.out
 INPUT /usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb
 INPUT /usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb
 INPUT /usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb

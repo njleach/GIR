@@ -1,10 +1,10 @@
-PWD /home/leachl/Documents/Simple_models/GenIR/UnFaIR/Paper_ltx
+PWD /home/leachl/Documents/Simple_models/FaIR_v2-0/FaIR_v2-0/Paper_ltx
 INPUT /etc/texmf/web2c/texmf.cnf
 INPUT /usr/share/texmf/web2c/texmf.cnf
 INPUT /usr/share/texlive/texmf-dist/web2c/texmf.cnf
 INPUT /var/lib/texmf/web2c/pdftex/pdflatex.fmt
-INPUT /home/leachl/Documents/Simple_models/GenIR/UnFaIR/Paper_ltx/GenIR_draft.ltx
-OUTPUT /home/leachl/Documents/Simple_models/GenIR/UnFaIR/Paper_ltx/GenIR_draft.log
+INPUT /home/leachl/Documents/Simple_models/FaIR_v2-0/FaIR_v2-0/Paper_ltx/GenIR_draft.ltx
+OUTPUT /home/leachl/Documents/Simple_models/FaIR_v2-0/FaIR_v2-0/Paper_ltx/GenIR_draft.log
 INPUT /usr/share/texlive/texmf-dist/tex/latex/base/article.cls
 INPUT /usr/share/texlive/texmf-dist/tex/latex/base/article.cls
 INPUT /usr/share/texlive/texmf-dist/tex/latex/base/size12.clo
@@ -136,9 +136,9 @@ INPUT /usr/share/texlive/texmf-dist/tex/latex/ltxkeys/ltxkeys.sty
 INPUT /usr/share/texlive/texmf-dist/tex/latex/ltxkeys/ltxkeys.sty
 INPUT /usr/share/texlive/texmf-dist/tex/latex/framed/framed.sty
 INPUT /usr/share/texlive/texmf-dist/tex/latex/framed/framed.sty
-INPUT /home/leachl/Documents/Simple_models/GenIR/UnFaIR/Paper_ltx/GenIR_draft.xwm
-INPUT /home/leachl/Documents/Simple_models/GenIR/UnFaIR/Paper_ltx/GenIR_draft.xwm
-OUTPUT /home/leachl/Documents/Simple_models/GenIR/UnFaIR/Paper_ltx/GenIR_draft.xwm
+INPUT /home/leachl/Documents/Simple_models/FaIR_v2-0/FaIR_v2-0/Paper_ltx/GenIR_draft.xwm
+INPUT /home/leachl/Documents/Simple_models/FaIR_v2-0/FaIR_v2-0/Paper_ltx/GenIR_draft.xwm
+OUTPUT /home/leachl/Documents/Simple_models/FaIR_v2-0/FaIR_v2-0/Paper_ltx/GenIR_draft.xwm
 INPUT /usr/share/texlive/texmf-dist/tex/latex/pgf/frontendlayer/tikz.sty
 INPUT /usr/share/texlive/texmf-dist/tex/latex/pgf/frontendlayer/tikz.sty
 INPUT /usr/share/texlive/texmf-dist/tex/latex/pgf/basiclayer/pgf.sty
@@ -350,9 +350,9 @@ INPUT /usr/share/texlive/texmf-dist/tex/latex/greek-fontenc/lgrenc.def
 INPUT /usr/share/texlive/texmf-dist/tex/latex/greek-fontenc/lgrenc.def
 INPUT /usr/share/texlive/texmf-dist/tex/latex/greek-fontenc/greek-fontenc.def
 INPUT /usr/share/texlive/texmf-dist/tex/latex/greek-fontenc/greek-fontenc.def
-INPUT /home/leachl/Documents/Simple_models/GenIR/UnFaIR/Paper_ltx/GenIR_draft.aux
-INPUT /home/leachl/Documents/Simple_models/GenIR/UnFaIR/Paper_ltx/GenIR_draft.aux
-OUTPUT /home/leachl/Documents/Simple_models/GenIR/UnFaIR/Paper_ltx/GenIR_draft.aux
+INPUT /home/leachl/Documents/Simple_models/FaIR_v2-0/FaIR_v2-0/Paper_ltx/GenIR_draft.aux
+INPUT /home/leachl/Documents/Simple_models/FaIR_v2-0/FaIR_v2-0/Paper_ltx/GenIR_draft.aux
+OUTPUT /home/leachl/Documents/Simple_models/FaIR_v2-0/FaIR_v2-0/Paper_ltx/GenIR_draft.aux
 INPUT /usr/share/texlive/texmf-dist/tex/latex/cbfonts-fd/lgrcmr.fd
 INPUT /usr/share/texlive/texmf-dist/tex/latex/cbfonts-fd/lgrcmr.fd
 INPUT /usr/share/texlive/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
@@ -367,14 +367,14 @@ INPUT /usr/share/texlive/texmf-dist/tex/latex/hyperref/nameref.sty
 INPUT /usr/share/texlive/texmf-dist/tex/latex/hyperref/nameref.sty
 INPUT /usr/share/texlive/texmf-dist/tex/generic/oberdiek/gettitlestring.sty
 INPUT /usr/share/texlive/texmf-dist/tex/generic/oberdiek/gettitlestring.sty
-INPUT /home/leachl/Documents/Simple_models/GenIR/UnFaIR/Paper_ltx/GenIR_draft.out
-INPUT /home/leachl/Documents/Simple_models/GenIR/UnFaIR/Paper_ltx/GenIR_draft.out
-INPUT /home/leachl/Documents/Simple_models/GenIR/UnFaIR/Paper_ltx/GenIR_draft.out
-INPUT /home/leachl/Documents/Simple_models/GenIR/UnFaIR/Paper_ltx/GenIR_draft.out
-OUTPUT /home/leachl/Documents/Simple_models/GenIR/UnFaIR/Paper_ltx/GenIR_draft.pdf
-INPUT /home/leachl/Documents/Simple_models/GenIR/UnFaIR/Paper_ltx/GenIR_draft.out
-INPUT /home/leachl/Documents/Simple_models/GenIR/UnFaIR/Paper_ltx/GenIR_draft.out
-OUTPUT /home/leachl/Documents/Simple_models/GenIR/UnFaIR/Paper_ltx/GenIR_draft.out
+INPUT /home/leachl/Documents/Simple_models/FaIR_v2-0/FaIR_v2-0/Paper_ltx/GenIR_draft.out
+INPUT /home/leachl/Documents/Simple_models/FaIR_v2-0/FaIR_v2-0/Paper_ltx/GenIR_draft.out
+INPUT /home/leachl/Documents/Simple_models/FaIR_v2-0/FaIR_v2-0/Paper_ltx/GenIR_draft.out
+INPUT /home/leachl/Documents/Simple_models/FaIR_v2-0/FaIR_v2-0/Paper_ltx/GenIR_draft.out
+OUTPUT /home/leachl/Documents/Simple_models/FaIR_v2-0/FaIR_v2-0/Paper_ltx/GenIR_draft.pdf
+INPUT /home/leachl/Documents/Simple_models/FaIR_v2-0/FaIR_v2-0/Paper_ltx/GenIR_draft.out
+INPUT /home/leachl/Documents/Simple_models/FaIR_v2-0/FaIR_v2-0/Paper_ltx/GenIR_draft.out
+OUTPUT /home/leachl/Documents/Simple_models/FaIR_v2-0/FaIR_v2-0/Paper_ltx/GenIR_draft.out
 INPUT /usr/share/texlive/texmf-dist/tex/latex/translator/translator-basic-dictionary-English.dict
 INPUT /usr/share/texlive/texmf-dist/tex/latex/translator/translator-basic-dictionary-English.dict
 INPUT /usr/share/texlive/texmf-dist/tex/latex/siunitx/siunitx-abbreviations.cfg
@@ -439,46 +439,49 @@ INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/amsfonts/symbols/msbm10.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmbx10.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmr17.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmbx12.tfm
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/jknappen/ec/tcrm1200.tfm
+INPUT /home/leachl/Documents/Simple_models/FaIR_v2-0/FaIR_v2-0/Final_figures/FaIR_schematic.png
+INPUT /home/leachl/Documents/Simple_models/FaIR_v2-0/FaIR_v2-0/Final_figures/FaIR_schematic.png
+INPUT /home/leachl/Documents/Simple_models/FaIR_v2-0/FaIR_v2-0/Final_figures/FaIR_schematic.png
 INPUT /var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmbx12.tfm
-INPUT /home/leachl/Documents/Simple_models/GenIR/UnFaIR/Final_figures/Emission driven historical concentrations.pdf
-INPUT /home/leachl/Documents/Simple_models/GenIR/UnFaIR/Final_figures/Emission driven historical concentrations.pdf
-INPUT /home/leachl/Documents/Simple_models/GenIR/UnFaIR/Final_figures/Emission driven historical concentrations.pdf
-INPUT /usr/share/texlive/texmf-dist/fonts/tfm/jknappen/ec/tcrm1200.tfm
+INPUT /home/leachl/Documents/Simple_models/FaIR_v2-0/FaIR_v2-0/Final_figures/Emission driven historical concentrations.pdf
+INPUT /home/leachl/Documents/Simple_models/FaIR_v2-0/FaIR_v2-0/Final_figures/Emission driven historical concentrations.pdf
+INPUT /home/leachl/Documents/Simple_models/FaIR_v2-0/FaIR_v2-0/Final_figures/Emission driven historical concentrations.pdf
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmti12.tfm
-INPUT /home/leachl/Documents/Simple_models/GenIR/UnFaIR/Final_figures/RCP concentration driven emissions.png
-INPUT /home/leachl/Documents/Simple_models/GenIR/UnFaIR/Final_figures/RCP concentration driven emissions.png
-INPUT /home/leachl/Documents/Simple_models/GenIR/UnFaIR/Final_figures/RCP concentration driven emissions.png
-INPUT /home/leachl/Documents/Simple_models/GenIR/UnFaIR/Final_figures/RCP concentration driven RF.png
-INPUT /home/leachl/Documents/Simple_models/GenIR/UnFaIR/Final_figures/RCP concentration driven RF.png
-INPUT /home/leachl/Documents/Simple_models/GenIR/UnFaIR/Final_figures/RCP concentration driven RF.png
-INPUT /home/leachl/Documents/Simple_models/GenIR/UnFaIR/Final_figures/RCP concentration driven temperatures.png
-INPUT /home/leachl/Documents/Simple_models/GenIR/UnFaIR/Final_figures/RCP concentration driven temperatures.png
-INPUT /home/leachl/Documents/Simple_models/GenIR/UnFaIR/Final_figures/RCP concentration driven temperatures.png
-INPUT /home/leachl/Documents/Simple_models/GenIR/UnFaIR/Final_figures/FaIRv2 v13 MAGICC comparison harmonized SSP default gas concentrations.png
-INPUT /home/leachl/Documents/Simple_models/GenIR/UnFaIR/Final_figures/FaIRv2 v13 MAGICC comparison harmonized SSP default gas concentrations.png
-INPUT /home/leachl/Documents/Simple_models/GenIR/UnFaIR/Final_figures/FaIRv2 v13 MAGICC comparison harmonized SSP default gas concentrations.png
-INPUT /home/leachl/Documents/Simple_models/GenIR/UnFaIR/Final_figures/FaIRv2 v13 MAGICC comparison harmonized SSP default gas forcing response.png
-INPUT /home/leachl/Documents/Simple_models/GenIR/UnFaIR/Final_figures/FaIRv2 v13 MAGICC comparison harmonized SSP default gas forcing response.png
-INPUT /home/leachl/Documents/Simple_models/GenIR/UnFaIR/Final_figures/FaIRv2 v13 MAGICC comparison harmonized SSP default gas forcing response.png
+INPUT /home/leachl/Documents/Simple_models/FaIR_v2-0/FaIR_v2-0/Final_figures/RCP concentration driven emissions.png
+INPUT /home/leachl/Documents/Simple_models/FaIR_v2-0/FaIR_v2-0/Final_figures/RCP concentration driven emissions.png
+INPUT /home/leachl/Documents/Simple_models/FaIR_v2-0/FaIR_v2-0/Final_figures/RCP concentration driven emissions.png
+INPUT /home/leachl/Documents/Simple_models/FaIR_v2-0/FaIR_v2-0/Final_figures/RCP concentration driven RF.png
+INPUT /home/leachl/Documents/Simple_models/FaIR_v2-0/FaIR_v2-0/Final_figures/RCP concentration driven RF.png
+INPUT /home/leachl/Documents/Simple_models/FaIR_v2-0/FaIR_v2-0/Final_figures/RCP concentration driven RF.png
+INPUT /home/leachl/Documents/Simple_models/FaIR_v2-0/FaIR_v2-0/Final_figures/RCP concentration driven temperatures.png
+INPUT /home/leachl/Documents/Simple_models/FaIR_v2-0/FaIR_v2-0/Final_figures/RCP concentration driven temperatures.png
+INPUT /home/leachl/Documents/Simple_models/FaIR_v2-0/FaIR_v2-0/Final_figures/RCP concentration driven temperatures.png
+INPUT /home/leachl/Documents/Simple_models/FaIR_v2-0/FaIR_v2-0/Final_figures/FaIRv2 v13 MAGICC comparison harmonized SSP default gas concentrations.png
+INPUT /home/leachl/Documents/Simple_models/FaIR_v2-0/FaIR_v2-0/Final_figures/FaIRv2 v13 MAGICC comparison harmonized SSP default gas concentrations.png
+INPUT /home/leachl/Documents/Simple_models/FaIR_v2-0/FaIR_v2-0/Final_figures/FaIRv2 v13 MAGICC comparison harmonized SSP default gas concentrations.png
+INPUT /home/leachl/Documents/Simple_models/FaIR_v2-0/FaIR_v2-0/Final_figures/FaIRv2 v13 MAGICC comparison harmonized SSP default gas forcing response.png
+INPUT /home/leachl/Documents/Simple_models/FaIR_v2-0/FaIR_v2-0/Final_figures/FaIRv2 v13 MAGICC comparison harmonized SSP default gas forcing response.png
+INPUT /home/leachl/Documents/Simple_models/FaIR_v2-0/FaIR_v2-0/Final_figures/FaIRv2 v13 MAGICC comparison harmonized SSP default gas forcing response.png
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/cbfonts/grmn1200.tfm
-INPUT /home/leachl/Documents/Simple_models/GenIR/UnFaIR/Final_figures/FaIRv2 v13 MAGICC comparison harmonized SSP default probabilistic temperature response.png
-INPUT /home/leachl/Documents/Simple_models/GenIR/UnFaIR/Final_figures/FaIRv2 v13 MAGICC comparison harmonized SSP default probabilistic temperature response.png
-INPUT /home/leachl/Documents/Simple_models/GenIR/UnFaIR/Final_figures/FaIRv2 v13 MAGICC comparison harmonized SSP default probabilistic temperature response.png
+INPUT /home/leachl/Documents/Simple_models/FaIR_v2-0/FaIR_v2-0/Final_figures/FaIRv2 v13 MAGICC comparison harmonized SSP default probabilistic temperature response.png
+INPUT /home/leachl/Documents/Simple_models/FaIR_v2-0/FaIR_v2-0/Final_figures/FaIRv2 v13 MAGICC comparison harmonized SSP default probabilistic temperature response.png
+INPUT /home/leachl/Documents/Simple_models/FaIR_v2-0/FaIR_v2-0/Final_figures/FaIRv2 v13 MAGICC comparison harmonized SSP default probabilistic temperature response.png
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmss8.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmtt8.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/amsfonts/symbols/msam5.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/amsfonts/symbols/msbm5.tfm
-INPUT /home/leachl/Documents/Simple_models/GenIR/UnFaIR/Paper_ltx/GenIR_draft.bbl
-INPUT /home/leachl/Documents/Simple_models/GenIR/UnFaIR/Paper_ltx/GenIR_draft.bbl
+INPUT /home/leachl/Documents/Simple_models/FaIR_v2-0/FaIR_v2-0/Paper_ltx/GenIR_draft.bbl
+INPUT /home/leachl/Documents/Simple_models/FaIR_v2-0/FaIR_v2-0/Paper_ltx/GenIR_draft.bbl
 INPUT /usr/share/texlive/texmf-dist/tex/latex/base/omlcmr.fd
 INPUT /usr/share/texlive/texmf-dist/tex/latex/base/omlcmr.fd
-INPUT /home/leachl/Documents/Simple_models/GenIR/UnFaIR/Paper_ltx/GenIR_draft.xwm
-INPUT /home/leachl/Documents/Simple_models/GenIR/UnFaIR/Paper_ltx/GenIR_draft.xwm
-INPUT /home/leachl/Documents/Simple_models/GenIR/UnFaIR/Paper_ltx/GenIR_draft.aux
-INPUT /home/leachl/Documents/Simple_models/GenIR/UnFaIR/Paper_ltx/GenIR_draft.out
-INPUT /home/leachl/Documents/Simple_models/GenIR/UnFaIR/Paper_ltx/GenIR_draft.out
+INPUT /home/leachl/Documents/Simple_models/FaIR_v2-0/FaIR_v2-0/Paper_ltx/GenIR_draft.xwm
+INPUT /home/leachl/Documents/Simple_models/FaIR_v2-0/FaIR_v2-0/Paper_ltx/GenIR_draft.xwm
+INPUT /home/leachl/Documents/Simple_models/FaIR_v2-0/FaIR_v2-0/Paper_ltx/GenIR_draft.aux
+INPUT /home/leachl/Documents/Simple_models/FaIR_v2-0/FaIR_v2-0/Paper_ltx/GenIR_draft.out
+INPUT /home/leachl/Documents/Simple_models/FaIR_v2-0/FaIR_v2-0/Paper_ltx/GenIR_draft.out
 INPUT /usr/share/texmf/fonts/enc/dvips/cm-super/cm-super-ts1.enc
 INPUT /usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb
 INPUT /usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb
