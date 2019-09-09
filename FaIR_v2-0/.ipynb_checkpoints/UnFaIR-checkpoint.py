@@ -108,7 +108,7 @@ def default_gas_forcing_params():
 	gas_cycle_parameters.loc['r0':'rA'] = np.array([[28.6273,0.019773,4.334433,0],[9.078874,0,-0.287247,0.000343],[67.843356,0,0,-0.000999]]).T
 	gas_cycle_parameters.loc['PI_conc'] = np.array([278.0,733.822081,271.23849])
 	gas_cycle_parameters.loc['emis2conc'] = 1/(5.148*10**18/1e18*np.array([12.,16.,28.])/28.97)
-	gas_cycle_parameters.loc['f1':'f3'] = np.array([[4.991069, 0.001801, -0.023410],[-0.060017, -0.000101, 0.049442],[0.000985, 0.000093, 0.105796]]).T
+	gas_cycle_parameters.loc['f1':'f3'] = np.array([[4.927859, 0.001693, -0.012433],[-0.033227, -0.000079, 0.046295],[0.053189, 0.000554, 0.083955]]).T
 	
 	####### NOTES ########
 	

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2019.7.4)  3 SEP 2019 12:32
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2019.7.4)  9 SEP 2019 09:21
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1373,32 +1373,32 @@ File: greek-fontenc.def 2015/08/04 v0.13 Common Greek font encoding definitions
 ))
 Package textgreek Info: Loaded fontmap: {eur/*/*}{U/eur/*/*} {phv/*/*}{U/psy/*/*}. on input line 69.
 )
-Package translations Info: No language package found. I am going to use `english' as default language. on input line 66.
+Package translations Info: No language package found. I am going to use `english' as default language. on input line 68.
  (/home/leachl/Documents/Simple_models/FaIR_v2-0/FaIR_v2-0/Paper_ltx/GenIR_SI.aux)
 \openout1 = `GenIR_SI.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 66.
-LaTeX Font Info:    ... okay on input line 66.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 66.
-LaTeX Font Info:    ... okay on input line 66.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 66.
-LaTeX Font Info:    ... okay on input line 66.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 66.
-LaTeX Font Info:    ... okay on input line 66.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 66.
-LaTeX Font Info:    ... okay on input line 66.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 66.
-LaTeX Font Info:    ... okay on input line 66.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 66.
-LaTeX Font Info:    ... okay on input line 66.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 66.
-LaTeX Font Info:    ... okay on input line 66.
-LaTeX Font Info:    Checking defaults for LGR/cmr/m/n on input line 66.
-LaTeX Font Info:    Try loading font information for LGR+cmr on input line 66.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 68.
+LaTeX Font Info:    ... okay on input line 68.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 68.
+LaTeX Font Info:    ... okay on input line 68.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 68.
+LaTeX Font Info:    ... okay on input line 68.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 68.
+LaTeX Font Info:    ... okay on input line 68.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 68.
+LaTeX Font Info:    ... okay on input line 68.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 68.
+LaTeX Font Info:    ... okay on input line 68.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 68.
+LaTeX Font Info:    ... okay on input line 68.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 68.
+LaTeX Font Info:    ... okay on input line 68.
+LaTeX Font Info:    Checking defaults for LGR/cmr/m/n on input line 68.
+LaTeX Font Info:    Try loading font information for LGR+cmr on input line 68.
  (/usr/share/texlive/texmf-dist/tex/latex/cbfonts-fd/lgrcmr.fd
 File: lgrcmr.fd 2017/07/29 v1.2 Greek European Computer Regular
 )
-LaTeX Font Info:    ... okay on input line 66.
+LaTeX Font Info:    ... okay on input line 68.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -1459,7 +1459,7 @@ Package grfext Info: Graphics extension search list:
  (/usr/share/texlive/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Live
 ))
-Package hyperref Info: Link coloring OFF on input line 66.
+Package hyperref Info: Link coloring OFF on input line 68.
  (/usr/share/texlive/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2016/05/21 v2.44 Cross-referencing by name of section
  (/usr/share/texlive/texmf-dist/tex/generic/oberdiek/gettitlestring.sty
@@ -1467,9 +1467,9 @@ Package: gettitlestring 2016/05/16 v1.5 Cleanup title references (HO)
 )
 \c@section@level=\count403
 )
-LaTeX Info: Redefining \ref on input line 66.
-LaTeX Info: Redefining \pageref on input line 66.
-LaTeX Info: Redefining \nameref on input line 66.
+LaTeX Info: Redefining \ref on input line 68.
+LaTeX Info: Redefining \pageref on input line 68.
+LaTeX Info: Redefining \nameref on input line 68.
  (/home/leachl/Documents/Simple_models/FaIR_v2-0/FaIR_v2-0/Paper_ltx/GenIR_SI.out) (/home/leachl/Documents/Simple_models/FaIR_v2-0/FaIR_v2-0/Paper_ltx/GenIR_SI.out)
 \@outlinefile=\write5
 \openout5 = `GenIR_SI.out'.
@@ -1493,102 +1493,110 @@ Package caption Info: End \AtBeginDocument code.
 .................................................
 . LaTeX info: "xparse/define-command"
 . 
-. Defining command \multfootnote with sig. 's+m' on line 66.
+. Defining command \multfootnote with sig. 's+m' on line 68.
 .................................................
 .................................................
 . LaTeX info: "xparse/redefine-command"
 . 
-. Redefining command \footnote with sig. 'so+m' on line 66.
+. Redefining command \footnote with sig. 'so+m' on line 68.
 .................................................
 .................................................
 . LaTeX info: "xparse/redefine-command"
 . 
-. Redefining command \footnotemark with sig. 'so' on line 66.
+. Redefining command \footnotemark with sig. 'so' on line 68.
 .................................................
 .................................................
 . LaTeX info: "xparse/define-command"
 . 
-. Defining command \innernote with sig. 'so+m' on line 66.
+. Defining command \innernote with sig. 'so+m' on line 68.
 .................................................
  (/usr/share/texlive/texmf-dist/tex/latex/translations/translations-basic-dictionary-english.trsl
 File: translations-basic-dictionary-english.trsl (english translation file `translations-basic-dictionary')
 )
-Package translations Info: loading dictionary `translations-basic-dictionary' for `english'. on input line 66.
+Package translations Info: loading dictionary `translations-basic-dictionary' for `english'. on input line 68.
 \c__siunitx_mathsf_int=\count405
-LaTeX Font Info:    Try loading font information for U+msa on input line 66.
+LaTeX Font Info:    Try loading font information for U+msa on input line 68.
  (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 66.
+LaTeX Font Info:    Try loading font information for U+msb on input line 68.
  (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
 \c__siunitx_mathtt_int=\count406
-</home/leachl/Documents/Simple_models/GenIR/UnFaIR/Final_figures/iIRF100_numeric_analytic.png, id=7, 395.076pt x 263.384pt>
-File: /home/leachl/Documents/Simple_models/GenIR/UnFaIR/Final_figures/iIRF100_numeric_analytic.png Graphic file (type png)
-<use /home/leachl/Documents/Simple_models/GenIR/UnFaIR/Final_figures/iIRF100_numeric_analytic.png>
-Package pdftex.def Info: /home/leachl/Documents/Simple_models/GenIR/UnFaIR/Final_figures/iIRF100_numeric_analytic.png  used on input line 70.
+</home/leachl/Documents/Simple_models/FaIR_v2-0/FaIR_v2-0/Final_figures/iIRF100_numeric_analytic.png, id=7, 395.076pt x 263.384pt>
+File: /home/leachl/Documents/Simple_models/FaIR_v2-0/FaIR_v2-0/Final_figures/iIRF100_numeric_analytic.png Graphic file (type png)
+<use /home/leachl/Documents/Simple_models/FaIR_v2-0/FaIR_v2-0/Final_figures/iIRF100_numeric_analytic.png>
+Package pdftex.def Info: /home/leachl/Documents/Simple_models/FaIR_v2-0/FaIR_v2-0/Final_figures/iIRF100_numeric_analytic.png  used on input line 72.
 (pdftex.def)             Requested size: 263.78506pt x 175.8595pt.
-</home/leachl/Documents/Simple_models/GenIR/UnFaIR/Final_figures/"RCP concetration driven residual emissions".pdf, id=17, 867.24pt x 361.35pt>
-File: /home/leachl/Documents/Simple_models/GenIR/UnFaIR/Final_figures/"RCP concetration driven residual emissions".pdf Graphic file (type pdf)
-<use /home/leachl/Documents/Simple_models/GenIR/UnFaIR/Final_figures/"RCP concetration driven residual emissions".pdf>
-Package pdftex.def Info: /home/leachl/Documents/Simple_models/GenIR/UnFaIR/Final_figures/"RCP concetration driven residual emissions".pdf  used on input line 75.
+</home/leachl/Documents/Simple_models/FaIR_v2-0/FaIR_v2-0/Final_figures/"RCP concetration driven residual emissions".pdf, id=17, 867.24pt x 361.35pt>
+File: /home/leachl/Documents/Simple_models/FaIR_v2-0/FaIR_v2-0/Final_figures/"RCP concetration driven residual emissions".pdf Graphic file (type pdf)
+<use /home/leachl/Documents/Simple_models/FaIR_v2-0/FaIR_v2-0/Final_figures/"RCP concetration driven residual emissions".pdf>
+Package pdftex.def Info: /home/leachl/Documents/Simple_models/FaIR_v2-0/FaIR_v2-0/Final_figures/"RCP concetration driven residual emissions".pdf  used on input line 77.
 (pdftex.def)             Requested size: 527.57014pt x 219.8332pt.
-</home/leachl/Documents/Simple_models/GenIR/UnFaIR/Final_figures/"Other WMGHG inverse annual emissions".pdf, id=22, 1445.4pt x 1084.05pt>
-File: /home/leachl/Documents/Simple_models/GenIR/UnFaIR/Final_figures/"Other WMGHG inverse annual emissions".pdf Graphic file (type pdf)
-<use /home/leachl/Documents/Simple_models/GenIR/UnFaIR/Final_figures/"Other WMGHG inverse annual emissions".pdf>
-Package pdftex.def Info: /home/leachl/Documents/Simple_models/GenIR/UnFaIR/Final_figures/"Other WMGHG inverse annual emissions".pdf  used on input line 80.
+</home/leachl/Documents/Simple_models/FaIR_v2-0/FaIR_v2-0/Final_figures/"Other WMGHG inverse annual emissions".pdf, id=22, 1445.4pt x 1084.05pt>
+File: /home/leachl/Documents/Simple_models/FaIR_v2-0/FaIR_v2-0/Final_figures/"Other WMGHG inverse annual emissions".pdf Graphic file (type pdf)
+<use /home/leachl/Documents/Simple_models/FaIR_v2-0/FaIR_v2-0/Final_figures/"Other WMGHG inverse annual emissions".pdf>
+Package pdftex.def Info: /home/leachl/Documents/Simple_models/FaIR_v2-0/FaIR_v2-0/Final_figures/"Other WMGHG inverse annual emissions".pdf  used on input line 82.
 (pdftex.def)             Requested size: 527.57014pt x 395.68323pt.
  [1
 
-{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map} </home/leachl/Documents/Simple_models/GenIR/UnFaIR/Final_figures/iIRF100_numeric_analytic.png>]
-</home/leachl/Documents/Simple_models/GenIR/UnFaIR/Final_figures/"Other WMGHG inverse cumulative emissions".pdf, id=52, 1445.4pt x 1084.05pt>
-File: /home/leachl/Documents/Simple_models/GenIR/UnFaIR/Final_figures/"Other WMGHG inverse cumulative emissions".pdf Graphic file (type pdf)
-<use /home/leachl/Documents/Simple_models/GenIR/UnFaIR/Final_figures/"Other WMGHG inverse cumulative emissions".pdf>
-Package pdftex.def Info: /home/leachl/Documents/Simple_models/GenIR/UnFaIR/Final_figures/"Other WMGHG inverse cumulative emissions".pdf  used on input line 85.
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map} </home/leachl/Documents/Simple_models/FaIR_v2-0/FaIR_v2-0/Final_figures/iIRF100_numeric_analytic.png>]
+</home/leachl/Documents/Simple_models/FaIR_v2-0/FaIR_v2-0/Final_figures/"Other WMGHG inverse cumulative emissions".pdf, id=52, 1445.4pt x 1084.05pt>
+File: /home/leachl/Documents/Simple_models/FaIR_v2-0/FaIR_v2-0/Final_figures/"Other WMGHG inverse cumulative emissions".pdf Graphic file (type pdf)
+<use /home/leachl/Documents/Simple_models/FaIR_v2-0/FaIR_v2-0/Final_figures/"Other WMGHG inverse cumulative emissions".pdf>
+Package pdftex.def Info: /home/leachl/Documents/Simple_models/FaIR_v2-0/FaIR_v2-0/Final_figures/"Other WMGHG inverse cumulative emissions".pdf  used on input line 87.
 (pdftex.def)             Requested size: 527.57014pt x 395.68323pt.
- [2 </home/leachl/Documents/Simple_models/GenIR/UnFaIR/Final_figures/RCP concetration driven residual emissions.pdf>]
-</home/leachl/Documents/Simple_models/GenIR/UnFaIR/Final_figures/"RCP emission driven concentrations".pdf, id=95, 1156.32pt x 361.35pt>
-File: /home/leachl/Documents/Simple_models/GenIR/UnFaIR/Final_figures/"RCP emission driven concentrations".pdf Graphic file (type pdf)
-<use /home/leachl/Documents/Simple_models/GenIR/UnFaIR/Final_figures/"RCP emission driven concentrations".pdf>
-Package pdftex.def Info: /home/leachl/Documents/Simple_models/GenIR/UnFaIR/Final_figures/"RCP emission driven concentrations".pdf  used on input line 90.
+ [2 </home/leachl/Documents/Simple_models/FaIR_v2-0/FaIR_v2-0/Final_figures/RCP concetration driven residual emissions.pdf>]
+</home/leachl/Documents/Simple_models/FaIR_v2-0/FaIR_v2-0/Final_figures/"Etminan verification over RCPs".png, id=95, 1156.32pt x 361.35pt>
+File: /home/leachl/Documents/Simple_models/FaIR_v2-0/FaIR_v2-0/Final_figures/"Etminan verification over RCPs".png Graphic file (type png)
+<use /home/leachl/Documents/Simple_models/FaIR_v2-0/FaIR_v2-0/Final_figures/"Etminan verification over RCPs".png>
+Package pdftex.def Info: /home/leachl/Documents/Simple_models/FaIR_v2-0/FaIR_v2-0/Final_figures/"Etminan verification over RCPs".png  used on input line 92.
 (pdftex.def)             Requested size: 527.57014pt x 164.86111pt.
- [3 </home/leachl/Documents/Simple_models/GenIR/UnFaIR/Final_figures/Other WMGHG inverse annual emissions.pdf>]
-</home/leachl/Documents/Simple_models/GenIR/UnFaIR/Final_figures/"RCP concentration driven temperatures alternate TCR".png, id=198, 722.7pt x 578.16pt>
-File: /home/leachl/Documents/Simple_models/GenIR/UnFaIR/Final_figures/"RCP concentration driven temperatures alternate TCR".png Graphic file (type png)
-<use /home/leachl/Documents/Simple_models/GenIR/UnFaIR/Final_figures/"RCP concentration driven temperatures alternate TCR".png>
-Package pdftex.def Info: /home/leachl/Documents/Simple_models/GenIR/UnFaIR/Final_figures/"RCP concentration driven temperatures alternate TCR".png  used on input line 95.
+ [3 </home/leachl/Documents/Simple_models/FaIR_v2-0/FaIR_v2-0/Final_figures/Other WMGHG inverse annual emissions.pdf>]
+</home/leachl/Documents/Simple_models/FaIR_v2-0/FaIR_v2-0/Final_figures/"RF deviation versus Etminan over RCPs".png, id=202, 1156.32pt x 361.35pt>
+File: /home/leachl/Documents/Simple_models/FaIR_v2-0/FaIR_v2-0/Final_figures/"RF deviation versus Etminan over RCPs".png Graphic file (type png)
+<use /home/leachl/Documents/Simple_models/FaIR_v2-0/FaIR_v2-0/Final_figures/"RF deviation versus Etminan over RCPs".png>
+Package pdftex.def Info: /home/leachl/Documents/Simple_models/FaIR_v2-0/FaIR_v2-0/Final_figures/"RF deviation versus Etminan over RCPs".png  used on input line 97.
+(pdftex.def)             Requested size: 527.57014pt x 164.86111pt.
+</home/leachl/Documents/Simple_models/FaIR_v2-0/FaIR_v2-0/Final_figures/"RCP emission driven concentrations".pdf, id=203, 1156.32pt x 361.35pt>
+File: /home/leachl/Documents/Simple_models/FaIR_v2-0/FaIR_v2-0/Final_figures/"RCP emission driven concentrations".pdf Graphic file (type pdf)
+<use /home/leachl/Documents/Simple_models/FaIR_v2-0/FaIR_v2-0/Final_figures/"RCP emission driven concentrations".pdf>
+Package pdftex.def Info: /home/leachl/Documents/Simple_models/FaIR_v2-0/FaIR_v2-0/Final_figures/"RCP emission driven concentrations".pdf  used on input line 102.
+(pdftex.def)             Requested size: 527.57014pt x 164.86111pt.
+ [4 </home/leachl/Documents/Simple_models/FaIR_v2-0/FaIR_v2-0/Final_figures/Other WMGHG inverse cumulative emissions.pdf> </home/leachl/Documents/Simple_models/FaIR_v2-0/FaIR_v2-0/Final_figures/Etminan verification over RCPs.png>]
+</home/leachl/Documents/Simple_models/FaIR_v2-0/FaIR_v2-0/Final_figures/"RCP concentration driven temperatures alternate TCR".png, id=306, 722.7pt x 578.16pt>
+File: /home/leachl/Documents/Simple_models/FaIR_v2-0/FaIR_v2-0/Final_figures/"RCP concentration driven temperatures alternate TCR".png Graphic file (type png)
+<use /home/leachl/Documents/Simple_models/FaIR_v2-0/FaIR_v2-0/Final_figures/"RCP concentration driven temperatures alternate TCR".png>
+Package pdftex.def Info: /home/leachl/Documents/Simple_models/FaIR_v2-0/FaIR_v2-0/Final_figures/"RCP concentration driven temperatures alternate TCR".png  used on input line 107.
 (pdftex.def)             Requested size: 527.57014pt x 422.06212pt.
- (/home/leachl/Documents/Simple_models/FaIR_v2-0/FaIR_v2-0/Paper_ltx/GenIR_SI.bbl [4 </home/leachl/Documents/Simple_models/GenIR/UnFaIR/Final_figures/Other WMGHG inverse cumulative emissions.pdf> </home/leachl/Documents/Simple_models/GenIR/UnFaIR/Final_figures/RCP emission driven concentrations.pdf
-
-pdfTeX warning: pdflatex (file /home/leachl/Documents/Simple_models/GenIR/UnFaIR/Final_figures/RCP emission driven concentrations.pdf): PDF inclusion: multiple pdfs with page group included in a single page
->] [5 </home/leachl/Documents/Simple_models/GenIR/UnFaIR/Final_figures/RCP concentration driven temperatures alternate TCR.png>]
+ (/home/leachl/Documents/Simple_models/FaIR_v2-0/FaIR_v2-0/Paper_ltx/GenIR_SI.bbl [5 </home/leachl/Documents/Simple_models/FaIR_v2-0/FaIR_v2-0/Final_figures/RF deviation versus Etminan over RCPs.png> </home/leachl/Documents/Simple_models/FaIR_v2-0/FaIR_v2-0/Final_figures/RCP emission driven concentrations.pdf>] [6 </home/leachl/Documents/Simple_models/FaIR_v2-0/FaIR_v2-0/Final_figures/RCP concentration driven temperatures alternate TCR.png>]
 Missing character: There is no â in font cmr12!
 Missing character: There is no € in font cmr12!
 Missing character: There is no “ in font cmr12!
-) [6]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 99.
-Package atveryend Info: Executing hook `AfterLastShipout' on input line 99.
+) [7]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 111.
+Package atveryend Info: Executing hook `AfterLastShipout' on input line 111.
  (/home/leachl/Documents/Simple_models/FaIR_v2-0/FaIR_v2-0/Paper_ltx/GenIR_SI.xwm) (/home/leachl/Documents/Simple_models/FaIR_v2-0/FaIR_v2-0/Paper_ltx/GenIR_SI.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 99.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 99.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 111.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 111.
 Package rerunfilecheck Info: File `GenIR_SI.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 99.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 111.
  ) 
 Here is how much of TeX's memory you used:
- 44836 strings out of 492982
- 895198 string characters out of 6134897
- 993825 words of memory out of 5000000
- 47769 multiletter control sequences out of 15000+600000
+ 44853 strings out of 492982
+ 896485 string characters out of 6134897
+ 993968 words of memory out of 5000000
+ 47780 multiletter control sequences out of 15000+600000
  543618 words of font info for 75 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  53i,9n,96p,10447b,824s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
-Output written on /home/leachl/Documents/Simple_models/FaIR_v2-0/FaIR_v2-0/Paper_ltx/GenIR_SI.pdf (6 pages, 522259 bytes).
+Output written on /home/leachl/Documents/Simple_models/FaIR_v2-0/FaIR_v2-0/Paper_ltx/GenIR_SI.pdf (7 pages, 669664 bytes).
 PDF statistics:
- 397 PDF objects out of 1000 (max. 8388607)
- 128 compressed objects within 2 object streams
- 20 named destinations out of 1000 (max. 500000)
- 43 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 414 PDF objects out of 1000 (max. 8388607)
+ 139 compressed objects within 2 object streams
+ 24 named destinations out of 1000 (max. 500000)
+ 53 words of extra memory for PDF output out of 10000 (max. 10000000)
 

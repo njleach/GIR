@@ -6,45 +6,45 @@ Database file #1: GenIR_refs.bib
 Warning--can't use both author and editor fields in IPCC2018
 Warning--empty publisher in IPCC2018
 Warning--there's a number but no volume in Smith2017
-You've used 51 entries,
+You've used 52 entries,
             1935 wiz_defined-function locations,
-            810 strings with 25330 characters,
-and the built_in function-call counts, 38528 in all, are:
-= -- 3210
-> -- 3677
+            816 strings with 25693 characters,
+and the built_in function-call counts, 38997 in all, are:
+= -- 3250
+> -- 3715
 < -- 14
-+ -- 1404
-- -- 1402
-* -- 4143
-:= -- 7012
-add.period$ -- 153
-call.type$ -- 51
-change.case$ -- 940
-chr.to.int$ -- 49
-cite$ -- 54
-duplicate$ -- 762
-empty$ -- 1483
-format.name$ -- 1463
-if$ -- 6922
++ -- 1418
+- -- 1416
+* -- 4190
+:= -- 7101
+add.period$ -- 156
+call.type$ -- 52
+change.case$ -- 952
+chr.to.int$ -- 50
+cite$ -- 55
+duplicate$ -- 775
+empty$ -- 1504
+format.name$ -- 1478
+if$ -- 7006
 int.to.chr$ -- 3
 int.to.str$ -- 0
-missing$ -- 49
-newline$ -- 255
-num.names$ -- 159
-pop$ -- 863
+missing$ -- 50
+newline$ -- 260
+num.names$ -- 162
+pop$ -- 873
 preamble$ -- 1
-purify$ -- 941
+purify$ -- 953
 quote$ -- 0
-skip$ -- 583
+skip$ -- 594
 stack$ -- 0
-substring$ -- 1679
-swap$ -- 106
+substring$ -- 1691
+swap$ -- 107
 text.length$ -- 7
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 304
+type$ -- 310
 warning$ -- 3
-while$ -- 179
+while$ -- 181
 width$ -- 0
-write$ -- 657
+write$ -- 670
 (There were 3 warnings)
