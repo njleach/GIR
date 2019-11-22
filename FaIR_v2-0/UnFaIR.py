@@ -101,14 +101,14 @@ def default_gas_forcing_params():
 
 	gas_parameter_list = ['a1','a2','a3','a4','tau1','tau2','tau3','tau4','r0','rC','rT','rA','PI_conc','emis2conc','f1','f2','f3']
 
-	gas_cycle_parameters = pd.DataFrame(columns=['CO2','CH4','N2O'],index=gas_parameter_list)
+	gas_cycle_parameters = pd.DataFrame(columns=['CO2','CH4','N2O'],index=gas_parameter_list).apply(pd.to_numeric)
 
 	gas_cycle_parameters.loc['a1':'a4'] = np.array([[0.2173,0.2240,0.2824,0.2763],[1,0,0,0],[1,0,0,0]]).T
 	gas_cycle_parameters.loc['tau1':'tau4'] = np.array([[1000000,394.4,36.54,4.304],[9.15,1,1,1],[116.,1,1,1]]).T
 	gas_cycle_parameters.loc['r0':'rA'] = np.array([[28.6273,0.019773,4.334433,0],[9.078874,0,-0.287247,0.000343],[67.843356,0,0,-0.000999]]).T
 	gas_cycle_parameters.loc['PI_conc'] = np.array([278.0,733.822081,271.23849])
 	gas_cycle_parameters.loc['emis2conc'] = 1/(5.148*10**18/1e18*np.array([12.,16.,28.])/28.97)
-	gas_cycle_parameters.loc['f1':'f3'] = np.array([[4.927859, 0.001693, -0.012433],[-0.033227, -0.000079, 0.046295],[0.053189, 0.000554, 0.083955]]).T
+	gas_cycle_parameters.loc['f1':'f3'] = np.array([[5.754e+00, 1.215e-03, -6.96e-02],[6.17e-02, -4.94e-05, 3.84e-02],[-0.0544, 0.000157, 0.106]]).T
 	
 	####### NOTES ########
 	
@@ -119,6 +119,8 @@ def default_gas_forcing_params():
 	## np.array([[5.78188211,0,0],[0,0,0.03895942],[0,0,0.11082109]]).T
     
     ## "added" values to f parameters are interaction effect at present day
+    
+	gas_cycle_parameters.loc['F_2x'] = step_forcing(2*gas_cycle_parameters.loc['PI_conc'].values,gas_cycle_parameters.loc['PI_conc'].values,gas_cycle_parameters.loc['f1':'f3'].T.values)
 
 	gas_cycle_parameters = pd.concat([gas_cycle_parameters], keys = ['default'], axis = 1)
 
@@ -142,6 +144,7 @@ def default_gas_forcing_param_uncertainty():
 	gas_parameter_uncertainty.loc['PI_conc'] = np.array([0,0,0])
 	gas_parameter_uncertainty.loc['emis2conc'] = np.array([0,0,0])
 	gas_parameter_uncertainty.loc['f1':'f3'] = np.array([[0,0,0],[0,0,0],[0,0,0]]).T
+	gas_parameter_uncertainty.loc['F_2x'] = np.array([0,0,0])
 
 	gas_parameter_uncertainty = pd.concat([gas_parameter_uncertainty], keys = ['normal'], axis = 1)
 
@@ -684,7 +687,7 @@ def unstep_forcing(forcing_in,gas_parameters=default_gas_forcing_params(),therma
     
     f = input_to_numpy(gas_parameters.loc['f1':'f3'])[np.newaxis,:,np.newaxis,...]
     
-    forcing_in = return_empty_emissions(forcing_in) + forcing_in.values
+    forcing_in = return_empty_emissions(forcing_in,gases_in=forcing_in.columns.levels[1]) + forcing_in.values
     
     forcing = input_to_numpy(forcing_in)[:,np.newaxis,np.newaxis,...]
     
@@ -694,6 +697,7 @@ def unstep_forcing(forcing_in,gas_parameters=default_gas_forcing_params(),therma
     scen_names = list(forcing_in.columns.levels[0])
     dim_gas_param = gas_parameters.columns.levels[0].size
     gas_set_names = list(gas_parameters.columns.levels[0])
+    gas_names = list(gas_parameters.columns.levels[1])
     dim_thermal_param = thermal_params.columns.get_level_values(0).unique().size
     thermal_set_names = list(thermal_params.columns.get_level_values(0).unique())
     n_gas = forcing_in.columns.levels[1].size
@@ -726,6 +730,6 @@ def unstep_forcing(forcing_in,gas_parameters=default_gas_forcing_params(),therma
                                                                                                   f[0,gas_param,0,gas,:],\
                                                                                                   forcing[scenario,gas_param,thermal_param,gas,:])).x.squeeze()
 
-    C_out = pd.DataFrame(concentrations.T.swapaxes(1,-1).swapaxes(2,-2).reshape(n_year,n_gas*dim_scenario*dim_gas_param*dim_thermal_param),index = time_index,columns=pd.MultiIndex.from_product([scen_names,gas_set_names,thermal_set_names,['CO2','CH4','N2O']],names=['Scenario','Gas cycle set','Thermal set','Gas name']))
+    C_out = pd.DataFrame(concentrations.T.swapaxes(1,-1).swapaxes(2,-2).reshape(n_year,n_gas*dim_scenario*dim_gas_param*dim_thermal_param),index = time_index,columns=pd.MultiIndex.from_product([scen_names,gas_set_names,thermal_set_names,gas_names],names=['Scenario','Gas cycle set','Thermal set','Gas name']))
     
     return C_out
