@@ -1,0 +1,46 @@
+This is BibTeX, Version 0.99d (TeX Live 2017/Debian)
+Capacity: max_strings=100000, hash_size=100000, hash_prime=85009
+The top-level auxiliary file: LEACH_GMD_SI.aux
+The style file: copernicus.bst
+Database file #1: GIR_bib.bib.bib
+You've used 14 entries,
+            2811 wiz_defined-function locations,
+            1125 strings with 16030 characters,
+and the built_in function-call counts, 23618 in all, are:
+= -- 2109
+> -- 1900
+< -- 5
++ -- 702
+- -- 619
+* -- 1871
+:= -- 2805
+add.period$ -- 14
+call.type$ -- 14
+change.case$ -- 231
+chr.to.int$ -- 14
+cite$ -- 42
+duplicate$ -- 1796
+empty$ -- 919
+format.name$ -- 664
+if$ -- 4607
+int.to.chr$ -- 1
+int.to.str$ -- 1
+missing$ -- 307
+newline$ -- 51
+num.names$ -- 57
+pop$ -- 1014
+preamble$ -- 1
+purify$ -- 231
+quote$ -- 0
+skip$ -- 1045
+stack$ -- 0
+substring$ -- 621
+swap$ -- 1587
+text.length$ -- 4
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 126
+warning$ -- 0
+while$ -- 75
+width$ -- 0
+write$ -- 185

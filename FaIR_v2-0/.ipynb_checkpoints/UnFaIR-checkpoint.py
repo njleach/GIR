@@ -95,40 +95,80 @@ def input_to_numpy(input_df):
 
 	return input_df.values.T.reshape(input_df.columns.levels[0].size, input_df.columns.levels[1].size, input_df.index.size)
 
-def default_gas_forcing_params():
+# def default_gas_forcing_params():
 
-	# returns a dataframe of default parameters in the format UnFaIR requires (pd.concat -> additional sets)
+# 	# returns a dataframe of default parameters in the format UnFaIR requires (pd.concat -> additional sets)
 
-	gas_parameter_list = ['a1','a2','a3','a4','tau1','tau2','tau3','tau4','r0','rC','rT','rA','PI_conc','emis2conc','f1','f2','f3']
+# 	gas_parameter_list = ['a1','a2','a3','a4','tau1','tau2','tau3','tau4','r0','rC','rT','rA','PI_conc','emis2conc','f1','f2','f3']
 
-	gas_cycle_parameters = pd.DataFrame(columns=['CO2','CH4','N2O'],index=gas_parameter_list).apply(pd.to_numeric)
+# 	gas_cycle_parameters = pd.DataFrame(columns=['CO2','CH4','N2O'],index=gas_parameter_list).apply(pd.to_numeric)
 
-	gas_cycle_parameters.loc['a1':'a4'] = np.array([[0.2173,0.2240,0.2824,0.2763],[1,0,0,0],[1,0,0,0]]).T
-	gas_cycle_parameters.loc['tau1':'tau4'] = np.array([[1000000,394.4,36.54,4.304],[9.15,1,1,1],[116.,1,1,1]]).T
-	gas_cycle_parameters.loc['r0':'rA'] = np.array([[28.6273,0.019773,4.334433,0],[9.078874,0,-0.287247,0.000343],[67.843356,0,0,-0.000999]]).T
-	gas_cycle_parameters.loc['PI_conc'] = np.array([278.0,733.822081,271.23849])
-	gas_cycle_parameters.loc['emis2conc'] = 1/(5.148*10**18/1e18*np.array([12.,16.,28.])/28.97)
-	gas_cycle_parameters.loc['f1':'f3'] = np.array([[5.754e+00, 1.215e-03, -6.96e-02],[6.17e-02, -4.94e-05, 3.84e-02],[-0.0544, 0.000157, 0.106]]).T
+# 	gas_cycle_parameters.loc['a1':'a4'] = np.array([[0.2173,0.2240,0.2824,0.2763],[1,0,0,0],[1,0,0,0]]).T
+# 	gas_cycle_parameters.loc['tau1':'tau4'] = np.array([[1000000,394.4,36.54,4.304],[9.15,1,1,1],[116.,1,1,1]]).T
+# 	gas_cycle_parameters.loc['r0':'rA'] = np.array([[28.6273,0.019773,4.334433,0],[9.078874,0,-0.287247,0.000343],[67.843356,0,0,-0.000999]]).T
+# 	gas_cycle_parameters.loc['PI_conc'] = np.array([278.0,733.822081,271.23849])
+# 	gas_cycle_parameters.loc['emis2conc'] = 1/(5.148*10**18/1e18*np.array([12.,16.,28.])/28.97)
+# 	gas_cycle_parameters.loc['f1':'f3'] = np.array([[5.754e+00, 1.215e-03, -6.96e-02],[6.17e-02, -4.94e-05, 3.84e-02],[-0.0544, 0.000157, 0.106]]).T
 	
-	####### NOTES ########
+# 	####### NOTES ########
 	
-	## with no feedbacks on CH4 and N2O (rT,rA = 0), set r0 = 9.96,63.3 for CH4,N2O respectively
+# 	## with no feedbacks on CH4 and N2O (rT,rA = 0), set r0 = 9.96,63.3 for CH4,N2O respectively
 	
-	## Old f parameters:
-    ## gas_cycle_parameters.loc['f1':'f3'] = np.array([[3.172-0.063, -2.205e-03, 3.271e-01],[-0.06009, -0.0001022, 0.05197-0.00246],[1.044e-03, 8.725e-05, 1.151e-01-0.009]]).T
-	## np.array([[5.78188211,0,0],[0,0,0.03895942],[0,0,0.11082109]]).T
+# 	## Old f parameters:
+#     ## gas_cycle_parameters.loc['f1':'f3'] = np.array([[3.172-0.063, -2.205e-03, 3.271e-01],[-0.06009, -0.0001022, 0.05197-0.00246],[1.044e-03, 8.725e-05, 1.151e-01-0.009]]).T
+# 	## np.array([[5.78188211,0,0],[0,0,0.03895942],[0,0,0.11082109]]).T
     
-    ## "added" values to f parameters are interaction effect at present day
+#     ## "added" values to f parameters are interaction effect at present day
     
-	gas_cycle_parameters.loc['F_2x'] = step_forcing(2*gas_cycle_parameters.loc['PI_conc'].values,gas_cycle_parameters.loc['PI_conc'].values,gas_cycle_parameters.loc['f1':'f3'].T.values)
+# 	gas_cycle_parameters.loc['F_2x'] = step_forcing(2*gas_cycle_parameters.loc['PI_conc'].values,gas_cycle_parameters.loc['PI_conc'].values,gas_cycle_parameters.loc['f1':'f3'].T.values)
 
-	gas_cycle_parameters = pd.concat([gas_cycle_parameters], keys = ['default'], axis = 1)
+# 	gas_cycle_parameters = pd.concat([gas_cycle_parameters], keys = ['default'], axis = 1)
 
-	gas_cycle_parameters.index = gas_cycle_parameters.index.rename('param_name')
+# 	gas_cycle_parameters.index = gas_cycle_parameters.index.rename('param_name')
 
-	gas_cycle_parameters.columns = gas_cycle_parameters.columns.rename(['Gas_cycle_set','Gas'])
+# 	gas_cycle_parameters.columns = gas_cycle_parameters.columns.rename(['Gas_cycle_set','Gas'])
 
-	return gas_cycle_parameters.apply(pd.to_numeric)
+# 	return gas_cycle_parameters.apply(pd.to_numeric)
+
+
+def get_gas_parameter_defaults(choose_gases=['CO2','CH4','N2O'],CH4_forc_feedbacks=False, help=False):
+    
+    ALL_params = pd.read_pickle('./Parameter_Sets/Complete_parameter_set.p')
+
+    param_set_name = ALL_params.columns.levels[0][0]
+
+    CHOOSE_params = pd.concat([ALL_params[param_set_name][choose_gases]],keys=[param_set_name],axis=1)
+    
+    if CH4_forc_feedbacks:
+        
+        CHOOSE_params.loc['f2',(param_set_name,'CH4')] += 0.00036563925360562344 - 4.6156263279198264e-05 + 6.911472824420556e-05
+        
+    if help:
+        
+        print('This function returns the SEAFaIR default parameter set for a gas set of your choice. You can choose from the following gas species:')
+        print()
+        print(list(ALL_params.columns.levels[-1]))
+        
+    else:
+        
+        return CHOOSE_params
+    
+def get_thermal_parameter_defaults():
+    
+    thermal_parameter_list = ['d','q']
+
+    thermal_parameters = pd.DataFrame(columns=[1,2,3],index=thermal_parameter_list)
+    thermal_parameters.loc['d'] = np.array([283,9.88,0.85])
+    thermal_parameters.loc['q'] = np.array([0.328,0.175,0.242])
+
+    thermal_parameters = pd.concat([thermal_parameters], keys = ['default'], axis = 1)
+
+    thermal_parameters.index = thermal_parameters.index.rename('param_name')
+
+    thermal_parameters.columns = thermal_parameters.columns.rename(['Thermal_param_set','Box'])
+
+    return thermal_parameters.apply(pd.to_numeric)
+
 
 def default_gas_forcing_param_uncertainty():
 
@@ -140,11 +180,10 @@ def default_gas_forcing_param_uncertainty():
 
 	gas_parameter_uncertainty.loc['a1':'a4'] = np.array([[0,0,0,0],[0,0,0,0],[0,0,0,0]]).T
 	gas_parameter_uncertainty.loc['tau1':'tau4'] = np.array([[0,0,0,0],[0.1,0,0,0],[0.08,0,0,0]]).T
-	gas_parameter_uncertainty.loc['r0':'rA'] = np.array([[0.788,0.788,0.788,0],[0,0,0.15,0.13],[0,0,0,0.16]]).T
+	gas_parameter_uncertainty.loc['r0':'rA'] = np.array([[0.0788,0.0788,0.0788,0],[0,0,0.15,0.13],[0,0,0,0.16]]).T
 	gas_parameter_uncertainty.loc['PI_conc'] = np.array([0,0,0])
 	gas_parameter_uncertainty.loc['emis2conc'] = np.array([0,0,0])
 	gas_parameter_uncertainty.loc['f1':'f3'] = np.array([[0,0,0],[0,0,0],[0,0,0]]).T
-	gas_parameter_uncertainty.loc['F_2x'] = np.array([0,0,0])
 
 	gas_parameter_uncertainty = pd.concat([gas_parameter_uncertainty], keys = ['normal'], axis = 1)
 
@@ -154,23 +193,6 @@ def default_gas_forcing_param_uncertainty():
 
 	return gas_parameter_uncertainty.apply(pd.to_numeric)
 
-def default_thermal_params():
-
-	# returns a dataframe of default parameters in the format UnFaIR requires (pd.concat -> additional sets)
-
-	thermal_parameter_list = ['d','tcr_ecs']
-
-	thermal_parameters = pd.DataFrame(columns=[1,2],index=thermal_parameter_list)
-	thermal_parameters.loc['d'] = np.array([239.0,4.1])
-	thermal_parameters.loc['tcr_ecs'] = np.array([1.58,2.66])
-
-	thermal_parameters = pd.concat([thermal_parameters], keys = ['default'], axis = 1)
-
-	thermal_parameters.index = thermal_parameters.index.rename('param_name')
-
-	thermal_parameters.columns = thermal_parameters.columns.rename(['Thermal_param_set','Box'])
-
-	return thermal_parameters.apply(pd.to_numeric)
 
 def default_thermal_param_uncertainty():
 
@@ -237,7 +259,7 @@ def draw_monte_carlo_param_set(N , input_parameters , input_uncertainties , type
 
 		return param_set
 
-def tcr_ecs_to_q(input_parameters=True , F_2x=3.79866 , help=False):
+def tcr_ecs_to_q(input_parameters=True , F_2x=3.84 , help=False):
 
 	# converts a tcr / ecs / d dataframe into a d / q dataframe for use in UnFaIRv2
 	# F2x is the FaIR v2.0 default forcing parameter value
@@ -260,7 +282,7 @@ def tcr_ecs_to_q(input_parameters=True , F_2x=3.79866 , help=False):
 
 		return output_params.loc[['d','q']]
 
-def q_to_tcr_ecs(input_parameters=True , F_2x=3.79866 , help=False):
+def q_to_tcr_ecs(input_parameters=True , F_2x=3.84 , help=False):
 
 	# converts a tcr / ecs / d dataframe into a d / q dataframe for use in UnFaIRv2
 
@@ -342,8 +364,8 @@ def step_temperature(S,F,q,d,dt=1):
 def run_UnFaIR( emissions_in = False , \
 			    concentrations_in = False , \
 				forcing_in = 0.0 , \
-				gas_parameters = default_gas_forcing_params() , \
-				thermal_parameters = tcr_ecs_to_q(default_thermal_params()) , \
+				gas_parameters = get_gas_parameter_defaults() , \
+				thermal_parameters = get_thermal_parameter_defaults() , \
 				show_run_info = True ):
 
 	# Determine the number of scenario runs , parameter sets , gases , integration period, timesteps
@@ -565,7 +587,7 @@ def run_UnFaIR( emissions_in = False , \
 	return out_dict
 
 
-############################### Dev Tools ###############################
+############################### Researcher Tools ###############################
 
 
 def prescribed_temps_gas_cycle(emissions_in , \
@@ -683,7 +705,7 @@ def unstep_concentration(C, T, a, tau, r, PI_conc, emis2conc, timestep, concentr
 	return emissions, R, G, G_A[...,-1]
 
 
-def unstep_forcing(forcing_in,gas_parameters=default_gas_forcing_params(),thermal_params=default_thermal_params()):
+def unstep_forcing(forcing_in,gas_parameters=get_gas_parameter_defaults(),thermal_params=get_thermal_parameter_defaults()):
     
     f = input_to_numpy(gas_parameters.loc['f1':'f3'])[np.newaxis,:,np.newaxis,...]
     
@@ -733,3 +755,92 @@ def unstep_forcing(forcing_in,gas_parameters=default_gas_forcing_params(),therma
     C_out = pd.DataFrame(concentrations.T.swapaxes(1,-1).swapaxes(2,-2).reshape(n_year,n_gas*dim_scenario*dim_gas_param*dim_thermal_param),index = time_index,columns=pd.MultiIndex.from_product([scen_names,gas_set_names,thermal_set_names,gas_names],names=['Scenario','Gas cycle set','Thermal set','Gas name']))
     
     return C_out
+
+
+def get_cmip6_thermal_params():
+    
+    JT_params = pd.read_csv('./J_Tsutsui_params/2019-09-20_1417/parms_cmip6_20190920.csv')
+
+    JT_params = JT_params.loc[(JT_params.iloc[:,1] == 'tas')&((JT_params.iloc[:,2] == 'irm-2')|(JT_params.iloc[:,2] == 'irm-3'))]
+
+    JT_UnFaIR_params = pd.DataFrame(columns=[1,2,3],index=['d','q'])
+
+    JT_UnFaIR_params.index = JT_UnFaIR_params.index.rename('param_name')
+
+    JT_UnFaIR_params.columns = JT_UnFaIR_params.columns.rename('Box')
+
+    param_list = []
+
+    for i in JT_params.index:
+
+        curr_params = JT_UnFaIR_params.copy()
+
+        curr_params.loc['d'] = (JT_params.loc[i,'tau0':'tau2']).values
+
+        curr_params.loc['q'] = (JT_params.loc[i,'a0':'a2'] / JT_params.loc[i,'lambda']).values
+
+        param_list += [curr_params]
+
+    JT_UnFaIR_params = pd.concat(param_list, keys = JT_params.iloc[:,0]+'_'+JT_params.iloc[:,2], axis = 1)
+
+    JT_UnFaIR_params.columns = JT_UnFaIR_params.columns.rename(['CMIP6-model_IR(n)','Box'])
+
+    JT_UnFaIR_params = JT_UnFaIR_params.apply(pd.to_numeric)
+
+    JT_UnFaIR_params.loc['d',([x for x in JT_UnFaIR_params.columns.levels[0] if 'irm-2' in x],3)] = 1.
+    JT_UnFaIR_params.loc['q',([x for x in JT_UnFaIR_params.columns.levels[0] if 'irm-2' in x],3)] = 0
+    
+    return JT_UnFaIR_params
+
+
+def get_more_thermal_params(N=100,F_2x=3.84):
+    
+    from copulas.multivariate import GaussianMultivariate
+    
+    d1_d2_q1_copula = GaussianMultivariate.load('./Parameter_Sets/d1_d2_q1_CMIP6_copula.pkl')
+
+    d1_d2_q1_df = d1_d2_q1_copula.sample(10*N)
+
+    while (d1_d2_q1_df<0).any(axis=1).sum() != 0:
+        d1_d2_q1_df.loc[(d1_d2_q1_df<0).any(axis=1)] = d1_d2_q1_copula.sample((d1_d2_q1_df<0).any(axis=1).sum()).values
+
+    d2_samples = d1_d2_q1_df['d2'].values
+    d3_samples = d1_d2_q1_df['d1'].values
+    q3_samples = d1_d2_q1_df['q1'].values
+
+    d1_samples = sp.stats.truncnorm(-2,2,loc=283,scale=116).rvs(10*N)
+
+    TCR_samples = np.random.lognormal(np.log(2.5)/2,np.log(2.5)/(2*1.645),10*N)
+    RWF_samples = sp.stats.truncnorm(-2.75,2.75,loc=0.582,scale=0.06).rvs(10*N)
+    ECS_samples = TCR_samples/RWF_samples
+
+    d = np.array([d1_samples,d2_samples,d3_samples])
+
+    k = 1-(d/70)*(1-np.exp(-70/d))
+
+    q = ((TCR_samples/F_2x - k[2]*q3_samples)[np.newaxis,:] - np.roll(k[:2],axis=0,shift=1)*(ECS_samples/F_2x - q3_samples)[np.newaxis,:])/(k[:2] - np.roll(k[:2],axis=0,shift=1))
+
+    sample_df = pd.DataFrame(index=['d','q'],columns = [1,2,3]).apply(pd.to_numeric)
+    df_list = []
+
+    i=0
+    j=0
+
+    while j<N:
+
+        curr_df = sample_df.copy()
+        curr_df.loc['d'] = d[:,i]
+        curr_df.loc['q',3] = q3_samples[i]
+        curr_df.loc['q',[1,2]] = q[:,i]
+
+        if curr_df.loc['q',2]<=0:
+            i+=1
+            continue
+
+        df_list += [curr_df]
+        j+=1
+        i+=1
+
+    thermal_params = pd.concat(df_list,axis=1,keys=np.arange(N))
+    
+    return thermal_params

@@ -1,0 +1,51 @@
+This is BibTeX, Version 0.99d (TeX Live 2017/Debian)
+Capacity: max_strings=100000, hash_size=100000, hash_prime=85009
+The top-level auxiliary file: template.aux
+The style file: copernicus.bst
+Database file #1: GIR_bib.bib.bib
+Warning--I didn't find a database entry for "Nicholls2019"
+Warning--empty journal in Etminan
+Warning--can't use both author and editor fields in IPCC2018
+Warning--missing publisher in IPCC2018
+You've used 61 entries,
+            2811 wiz_defined-function locations,
+            1471 strings with 37522 characters,
+and the built_in function-call counts, 95962 in all, are:
+= -- 8588
+> -- 7675
+< -- 18
++ -- 2850
+- -- 2499
+* -- 7631
+:= -- 11442
+add.period$ -- 61
+call.type$ -- 61
+change.case$ -- 945
+chr.to.int$ -- 59
+cite$ -- 186
+duplicate$ -- 7321
+empty$ -- 3770
+format.name$ -- 2689
+if$ -- 18614
+int.to.chr$ -- 3
+int.to.str$ -- 1
+missing$ -- 1253
+newline$ -- 192
+num.names$ -- 247
+pop$ -- 4203
+preamble$ -- 1
+purify$ -- 945
+quote$ -- 0
+skip$ -- 4134
+stack$ -- 0
+substring$ -- 2514
+swap$ -- 6429
+text.length$ -- 8
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 546
+warning$ -- 3
+while$ -- 310
+width$ -- 0
+write$ -- 764
+(There were 4 warnings)
