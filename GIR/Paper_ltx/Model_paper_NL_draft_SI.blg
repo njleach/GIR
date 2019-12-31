@@ -1,0 +1,49 @@
+This is BibTeX, Version 0.99d (TeX Live 2017/Debian)
+Capacity: max_strings=100000, hash_size=100000, hash_prime=85009
+The top-level auxiliary file: Model_paper_NL_draft_SI.aux
+The style file: apalike.bst
+Database file #1: GenIR_refs.bib
+Warning--empty journal in Etminan
+Warning--there's a number but no volume in Smith2017
+You've used 7 entries,
+            1935 wiz_defined-function locations,
+            523 strings with 5747 characters,
+and the built_in function-call counts, 3637 in all, are:
+= -- 324
+> -- 255
+< -- 1
++ -- 94
+- -- 94
+* -- 364
+:= -- 660
+add.period$ -- 20
+call.type$ -- 7
+change.case$ -- 82
+chr.to.int$ -- 7
+cite$ -- 9
+duplicate$ -- 96
+empty$ -- 193
+format.name$ -- 101
+if$ -- 664
+int.to.chr$ -- 1
+int.to.str$ -- 0
+missing$ -- 7
+newline$ -- 37
+num.names$ -- 21
+pop$ -- 74
+preamble$ -- 1
+purify$ -- 82
+quote$ -- 0
+skip$ -- 70
+stack$ -- 0
+substring$ -- 211
+swap$ -- 6
+text.length$ -- 0
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 42
+warning$ -- 2
+while$ -- 23
+width$ -- 0
+write$ -- 89
+(There were 2 warnings)

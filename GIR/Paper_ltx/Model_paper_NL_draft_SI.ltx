@@ -1,0 +1,116 @@
+\documentclass[12pt]{article}
+\usepackage{extsizes}
+\usepackage[right=0.6in,left=0.6in,top=0.6in,bottom=0.6in]{geometry}
+\usepackage{fancyhdr}
+\usepackage{array,booktabs}
+\usepackage{amsmath,amsthm,amssymb,tabu}
+\usepackage{graphicx}
+\usepackage[hidelinks]{hyperref}
+\usepackage{siunitx}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{textcomp}
+\usepackage[printwatermark]{xwatermark}
+\usepackage{tikz}
+\usepackage[export]{adjustbox}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{multicol}
+\usepackage[acronym,toc]{glossaries}
+\usepackage{float}
+\usepackage{wrapfig}
+\usepackage[round]{natbib}
+% \usepackage[superscript]{cite}
+\usepackage{fnpct}
+\usepackage{setspace}
+\usepackage{arydshln}
+\usepackage[left]{lineno}
+\usepackage{svg}
+\usepackage{textgreek}
+
+\renewcommand{\d}{\mathrm{d}}
+
+\setlength{\baselineskip}{13pt}
+\setlength{\footskip}{18pt}
+
+\doublespacing
+
+\captionsetup{font=doublespacing}
+
+\graphicspath{{/home/leachl/Documents/Simple_models/FaIR_v2-0/FaIR_v2-0/Final_figures/}}
+
+\bibliographystyle{apalike}
+%\bibliographystyle{plainnat}
+
+\title{\vspace{-1cm}FaIR v2.0: a generalised impulse-response model for climate uncertainty and future scenario exploration, integrated assessment, and teaching}
+\author{Nicholas J. Leach$^{1\star}$\\
+        Stuart Jenkins$^{1}$\\
+        John Lynch$^{1}$\\
+        Michelle Cain$^{1,2}$\\
+        Junichi Tsutsui$^{3}$\\
+        Christopher Smith$^{4}$\\
+        Zebedee Nicholls$^{5}$\\
+        Myles R. Allen$^{1,2}$\\}
+\date{\small{%
+    $^1$Department of Physics, Atmospheric Oceanic and Planetary Physics, University of Oxford, United Kingdom.\\%
+    $^2$Environmental Change Institute, University of Oxford, Oxford, UK.\\%
+    $^3$Environmental Science Laboratory, Central Research Institute of Electric Power Industry, Abiko-shi, Japan.\\%
+    $^4$School of Earth and Environment, University of Leeds, Leeds, UK.\\%
+    $^5$Australian--German Climate and Energy College, University of Melbourne, Australia
+    \\%
+    $^{\star}$contact email: \texttt{Nicholas.leach@stx.ox.ac.uk}
+    }}
+
+% \newsavebox\mybox
+% \savebox\mybox{\tikz[color=black,opacity=0.3]\node{DRAFT};}
+% \newwatermark*[allpages,color=black!25,angle=45,scale=6,xpos=-20,ypos=15]{\usebox\mybox}
+
+\begin{document}
+\maketitle
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\textwidth]{iIRF100_numeric_analytic}
+    \caption{Numerical solution for $\alpha$ in FaIR v1.3 versus analytic solution in FaIR v2.0. This highlights the reason for the lowered $r_0$ parameter in FaIR v2.0 compared to FaIR v1.3 \citep{Smith2017} or v1.0 \citep{Millar2016}, as we see that for pre-industrial $\alpha$ values (0.12 in v1.0 or 0.16 in v1.3), the analytic solution requires a lower iIRF$_{100}$ than the numeric. Since both solutions are near identical once iIRF$_{100}$ values reach 45 (close to the present-day value), this could lead to FaIR v2.0 systematically simulating lower CO$_2$ concentrations through a lower $\alpha$ than FaIR v1.3 or v1.0. However, this will be compensated to a certain degree by the slight increase in default $r_T$ and $r_u$ parameters.}
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{"RCP concetration driven residual emissions".pdf}
+    \caption{Differences between historical diagnosed emissions in FaIR v2.0 and the RCP database emissions for CH$_4$ and N$_2$O. This displays high similarity to Figure 2 from \cite{Smith2017}, demonstrating that FaIR v2.0 and v1.3 are not systematically very different, but have simply been approached differently.}
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{"Other WMGHG inverse annual emissions".pdf}
+    \caption{Best-estimate annual emissions from a more complex atmospheric model inversion \cite{Rigby2014}, FaIR v2.0 inverse emissions and RCP database emissions from inversion of the MAGICC6 SCM. Open black circles show inverse emissions from a 12-box model \cite{Cunnold1994}; solid green lines show inverse emissions from FaIR v2.0 with tuned parameters; dotted green lines show inverse emissions from FaIR v2.0 with lifetimes taken from \cite{Etminan}, and solid pink lines show emissions from the RCP database. Inset text shows the tuned species lifetime.}
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{"Other WMGHG inverse cumulative emissions".pdf}
+    \caption{As Figure 3, but for cumulative emissions which are more relevant for the long lived ($\tau>50$ years) species. These are baselined relative to the starting year of the observed top-down  estimate emission data.}
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{"Etminan verification over RCPs".png}
+    \caption{Comparison of the effective radiative forcings equation used in FaIR v2.0 versus the simple formulae derived from spectral measurements given in \cite{Etminan2016}.}
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{"RF deviation versus Etminan over RCPs".png}
+    \caption{Associated deviations of FaIR v2.0 from Etminan over the RCPs. These are plotted as \% deviations against gas concentration, illustrating the impact of the interaction terms which causes the separation of these deviations at the present-day concentration values.}
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{"Tsutsui RF formula tuning".png}
+    \caption{Tuning the three term equation in our model to the functional form in \citeauthor{Tsutsui2017} over a set of CMIP6 models. In all cases, the lines overlap considerably, demonstrating that the equation we use is flexible enough to emulate the wide range of responses in the CMIP6 ensemble.}
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{"RCP emission driven concentrations".png}
+    \caption{Simulated concentrations when RCP database emissions and other forcings drive FaIR v2.0.}
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{"RCP concentration driven temperatures CMIP5 ensemble".png}
+    \caption{FaIR v2.0 temperature response to RCP emissions, when CMIP5 multi-model mean parameters from \cite{Tsutsui2017} are used.}
+\end{figure}
+\bibliography{GenIR_refs}
+\end{document}
