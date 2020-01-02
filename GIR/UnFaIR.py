@@ -139,9 +139,13 @@ def get_gas_parameter_defaults(choose_gases=['CO2','CH4','N2O'],CH4_forc_feedbac
 
     CHOOSE_params = pd.concat([ALL_params[param_set_name][choose_gases]],keys=[param_set_name],axis=1)
     
-    if CH4_forc_feedbacks:
+    if CH4_forc_feedbacks=='indirect':
         
-        CHOOSE_params.loc['f2',(param_set_name,'CH4')] += 0.000182 + 5.4e-05
+        CHOOSE_params.loc['f2',(param_set_name,'CH4')] += 0.000182 + 5.4e-05 # add on the indirect forcings
+        
+    elif CH4_forc_feedbacks=='ozone_parameterisation':
+        
+        CHOOSE_params.loc['f2',(param_set_name,'CH4')] += 3.7e-04 + 6.9e-05 - 4.6e-05 # add on the indirect forcings
         
     if help:
         
@@ -170,94 +174,117 @@ def get_thermal_parameter_defaults():
     return thermal_parameters.apply(pd.to_numeric)
 
 
-def default_gas_forcing_param_uncertainty():
+def get_more_gas_cycle_params(N,choose_gases=['CO2','CH4','N2O'],CH4_forc_feedbacks=False, help=False):
+    
+    param_defaults = get_gas_parameter_defaults(choose_gases=choose_gases,CH4_forc_feedbacks=CH4_forc_feedbacks)
 
-	# returns a dataframe of default parameters in the format UnFaIR requires (pd.concat -> additional sets)
+    param_uncert = pd.read_pickle('./Parameter_Sets/Complete_parameter_uncertainty.p')
 
-	gas_parameter_list = ['a1','a2','a3','a4','tau1','tau2','tau3','tau4','r0','rC','rT','rA','PI_conc','emis2conc','f1','f2','f3']
+    param_ensemble = pd.concat(N*[param_defaults['default']],keys=np.arange(N),axis=1)
 
-	gas_parameter_uncertainty = pd.DataFrame(columns=['CO2','CH4','N2O'],index=gas_parameter_list)
+    for gas in choose_gases:
 
-	gas_parameter_uncertainty.loc['a1':'a4'] = np.array([[0,0,0,0],[0,0,0,0],[0,0,0,0]]).T
-	gas_parameter_uncertainty.loc['tau1':'tau4'] = np.array([[0,0,0,0],[0.1,0,0,0],[0.08,0,0,0]]).T
-	gas_parameter_uncertainty.loc['r0':'rA'] = np.array([[0.0788,0.0788,0.0788,0],[0,0,0.15,0.13],[0,0,0,0.16]]).T
-	gas_parameter_uncertainty.loc['PI_conc'] = np.array([0,0,0])
-	gas_parameter_uncertainty.loc['emis2conc'] = np.array([0,0,0])
-	gas_parameter_uncertainty.loc['f1':'f3'] = np.array([[0,0,0],[0,0,0],[0,0,0]]).T
+        for param in param_defaults.index:
 
-	gas_parameter_uncertainty = pd.concat([gas_parameter_uncertainty], keys = ['normal'], axis = 1)
+            select_param = param_uncert.loc[param,('default',gas)]
 
-	gas_parameter_uncertainty.index = gas_parameter_uncertainty.index.rename('param_name')
+            if select_param:
 
-	gas_parameter_uncertainty.columns = gas_parameter_uncertainty.columns.rename(['Distribution','Gas'])
+                param_sample = select_param[0].rvs(*select_param[1],N)
 
-	return gas_parameter_uncertainty.apply(pd.to_numeric)
+                param_ensemble.loc[param,(slice(None),gas)] = param_sample
+                
+    return param_ensemble
 
 
-def default_thermal_param_uncertainty():
+# def default_gas_forcing_param_uncertainty():
 
-	# returns a dataframe of default parameters in the format UnFaIR requires (pd.concat -> additional sets)
+# 	# returns a dataframe of default parameters in the format UnFaIR requires (pd.concat -> additional sets)
 
-	thermal_parameter_list = ['d','tcr_ecs']
+# 	gas_parameter_list = ['a1','a2','a3','a4','tau1','tau2','tau3','tau4','r0','rC','rT','rA','PI_conc','emis2conc','f1','f2','f3']
 
-	thermal_parameter_uncertainty = pd.DataFrame(columns=[1,2],index=thermal_parameter_list)
-	thermal_parameter_uncertainty = pd.concat([thermal_parameter_uncertainty]*2,keys=[5,95],axis=1)
-	thermal_parameter_uncertainty.loc['d'] = [239,1.6,239,8.4]
-	thermal_parameter_uncertainty.loc['tcr_ecs'] = [1,1.6,2.5,4.5]
+# 	gas_parameter_uncertainty = pd.DataFrame(columns=['CO2','CH4','N2O'],index=gas_parameter_list)
 
-	thermal_parameter_uncertainty.index = thermal_parameter_uncertainty.index.rename('param_name')
+# 	gas_parameter_uncertainty.loc['a1':'a4'] = np.array([[0,0,0,0],[0,0,0,0],[0,0,0,0]]).T
+# 	gas_parameter_uncertainty.loc['tau1':'tau4'] = np.array([[0,0,0,0],[0.1,0,0,0],[0.08,0,0,0]]).T
+# 	gas_parameter_uncertainty.loc['r0':'rA'] = np.array([[0.0788,0.0788,0.0788,0],[0,0,0.15,0.13],[0,0,0,0.16]]).T
+# 	gas_parameter_uncertainty.loc['PI_conc'] = np.array([0,0,0])
+# 	gas_parameter_uncertainty.loc['emis2conc'] = np.array([0,0,0])
+# 	gas_parameter_uncertainty.loc['f1':'f3'] = np.array([[0,0,0],[0,0,0],[0,0,0]]).T
 
-	thermal_parameter_uncertainty.columns = thermal_parameter_uncertainty.columns.rename(['Percentile','Box'])
+# 	gas_parameter_uncertainty = pd.concat([gas_parameter_uncertainty], keys = ['normal'], axis = 1)
 
-	return thermal_parameter_uncertainty.apply(pd.to_numeric)
+# 	gas_parameter_uncertainty.index = gas_parameter_uncertainty.index.rename('param_name')
 
-def draw_monte_carlo_param_set(N , input_parameters , input_uncertainties , type = 'normal'):
+# 	gas_parameter_uncertainty.columns = gas_parameter_uncertainty.columns.rename(['Distribution','Gas'])
 
-	# function that takes a single set of parameter medians and corresponding % uncertainty dataframe, and creates a
-	# new dataframe with N samples of the parameter set.
+# 	return gas_parameter_uncertainty.apply(pd.to_numeric)
 
-	if type == 'normal':
 
-		param_set = [input_parameters[input_parameters.columns.levels[0][0]]]
+# def default_thermal_param_uncertainty():
 
-		for i in np.arange(N):
+# 	# returns a dataframe of default parameters in the format UnFaIR requires (pd.concat -> additional sets)
 
-			param_set += [param_set[0] * np.random.normal(np.ones(input_parameters.shape),input_uncertainties)]
+# 	thermal_parameter_list = ['d','tcr_ecs']
 
-		param_set = pd.concat(param_set, keys = ['median']+[x + type for x in [str(i) for i in np.arange(N-1)]], axis = 1)
+# 	thermal_parameter_uncertainty = pd.DataFrame(columns=[1,2],index=thermal_parameter_list)
+# 	thermal_parameter_uncertainty = pd.concat([thermal_parameter_uncertainty]*2,keys=[5,95],axis=1)
+# 	thermal_parameter_uncertainty.loc['d'] = [239,1.6,239,8.4]
+# 	thermal_parameter_uncertainty.loc['tcr_ecs'] = [1,1.6,2.5,4.5]
 
-		return param_set
+# 	thermal_parameter_uncertainty.index = thermal_parameter_uncertainty.index.rename('param_name')
 
-	if type == 'lognormal':
+# 	thermal_parameter_uncertainty.columns = thermal_parameter_uncertainty.columns.rename(['Percentile','Box'])
 
-		param_set = input_parameters[input_parameters.columns.levels[0][0]]
+# 	return thermal_parameter_uncertainty.apply(pd.to_numeric)
 
-		loc = ((param_set**2 - input_uncertainties[5]*input_uncertainties[95]) / (input_uncertainties[5]+input_uncertainties[95]-2*param_set)).fillna(0)
-		mu = np.log(param_set+loc)
-		scale = ( np.log(input_uncertainties[95]+loc) - mu ) / 1.645
+# def draw_monte_carlo_param_set(N , input_parameters , input_uncertainties , type = 'normal'):
 
-		# Constrain to be within +/- 3 sigma
-		constrain_high = param_set.copy()
-		constrain_low = param_set.copy()
-		constrain_low.loc[:] = sp.stats.lognorm.ppf(0.003,scale.fillna(0),-loc.fillna(0),np.exp(mu.fillna(0)))
-		constrain_high.loc[:] = sp.stats.lognorm.ppf(0.973,scale.fillna(0),-loc.fillna(0),np.exp(mu.fillna(0)))
-		constrain_low,constrain_high = constrain_low.fillna(-10**10),constrain_high.fillna(10**10)
+# 	# function that takes a single set of parameter medians and corresponding % uncertainty dataframe, and creates a
+# 	# new dataframe with N samples of the parameter set.
 
-		param_set = [param_set]
+# 	if type == 'normal':
 
-		for i in np.arange(N):
-		    while True:
-		        new_param_set = np.random.lognormal(mu.fillna(0),scale.fillna(0))-loc.fillna(0)
+# 		param_set = [input_parameters[input_parameters.columns.levels[0][0]]]
 
-		        if all(new_param_set<constrain_high) and all(new_param_set>constrain_low):
+# 		for i in np.arange(N):
 
-		            break
+# 			param_set += [param_set[0] * np.random.normal(np.ones(input_parameters.shape),input_uncertainties)]
 
-		    param_set += [new_param_set]
+# 		param_set = pd.concat(param_set, keys = ['median']+[x + type for x in [str(i) for i in np.arange(N-1)]], axis = 1)
 
-		param_set = pd.concat(param_set, keys = ['median']+[x + 'lognorm' for x in [str(i) for i in np.arange(N-1)]], axis = 1)
+# 		return param_set
 
-		return param_set
+# 	if type == 'lognormal':
+
+# 		param_set = input_parameters[input_parameters.columns.levels[0][0]]
+
+# 		loc = ((param_set**2 - input_uncertainties[5]*input_uncertainties[95]) / (input_uncertainties[5]+input_uncertainties[95]-2*param_set)).fillna(0)
+# 		mu = np.log(param_set+loc)
+# 		scale = ( np.log(input_uncertainties[95]+loc) - mu ) / 1.645
+
+# 		# Constrain to be within +/- 3 sigma
+# 		constrain_high = param_set.copy()
+# 		constrain_low = param_set.copy()
+# 		constrain_low.loc[:] = sp.stats.lognorm.ppf(0.003,scale.fillna(0),-loc.fillna(0),np.exp(mu.fillna(0)))
+# 		constrain_high.loc[:] = sp.stats.lognorm.ppf(0.973,scale.fillna(0),-loc.fillna(0),np.exp(mu.fillna(0)))
+# 		constrain_low,constrain_high = constrain_low.fillna(-10**10),constrain_high.fillna(10**10)
+
+# 		param_set = [param_set]
+
+# 		for i in np.arange(N):
+# 		    while True:
+# 		        new_param_set = np.random.lognormal(mu.fillna(0),scale.fillna(0))-loc.fillna(0)
+
+# 		        if all(new_param_set<constrain_high) and all(new_param_set>constrain_low):
+
+# 		            break
+
+# 		    param_set += [new_param_set]
+
+# 		param_set = pd.concat(param_set, keys = ['median']+[x + 'lognorm' for x in [str(i) for i in np.arange(N-1)]], axis = 1)
+
+# 		return param_set
 
 def tcr_ecs_to_q(input_parameters=True , F_2x=3.84 , help=False):
 
@@ -362,7 +389,7 @@ def step_temperature(S,F,q,d,dt=1):
 	#
 
 def run_UnFaIR( emissions_in = False , \
-			    concentrations_in = False , \
+				concentrations_in = False , \
 				forcing_in = 0.0 , \
 				gas_parameters = get_gas_parameter_defaults() , \
 				thermal_parameters = get_thermal_parameter_defaults() , \
@@ -375,7 +402,7 @@ def run_UnFaIR( emissions_in = False , \
 	# The model differentiates between these as follows (it assumes you input them in the correct format of multiindex df, and scenarios that match for the case of emissions_concentrations_switch:
 	
 	if not concentrations_in is False: # check if concentration driven
-		concentration_driven = True		
+		concentration_driven = True
 		if emissions_in is False: # make sure pure concentration driven
 			emissions_in = return_empty_emissions(concentrations_in,gases_in=concentrations_in.columns.levels[1])
 			emissions_concentration_switch = False
@@ -402,7 +429,7 @@ def run_UnFaIR( emissions_in = False , \
 	n_gas = emissions_in.columns.levels[1].size
 	gas_names = list(gas_parameters.columns.levels[1])
 	n_year = time_index.size
-	
+
 	timestep = np.append(np.diff(time_index)[0],np.diff(time_index))
 
 	# Reformat inputs into the right shape
@@ -453,7 +480,7 @@ def run_UnFaIR( emissions_in = False , \
 	r = input_to_numpy(gas_parameters.loc['r0':'rA'])[np.newaxis,:,np.newaxis,...]
 	emis2conc = gas_parameters.loc['emis2conc'].values.reshape(gas_parameters.loc['emis2conc'].index.levels[0].size,gas_parameters.loc['emis2conc'].index.levels[1].size)[np.newaxis,:,np.newaxis,...]
 	PI_conc = gas_parameters.loc['PI_conc'].values.reshape(gas_parameters.loc['PI_conc'].index.levels[0].size,gas_parameters.loc['PI_conc'].index.levels[1].size)[np.newaxis,:,np.newaxis,...]
-	
+
 
 	f = input_to_numpy(gas_parameters.loc['f1':'f3'])[np.newaxis,:,np.newaxis,...]
 
@@ -462,7 +489,7 @@ def run_UnFaIR( emissions_in = False , \
 
 
 	# Create appropriate shape variable arrays / calculate RF if concentration driven
-	
+
 	C = np.zeros((dim_scenario,dim_gas_param,dim_thermal_param,n_gas,n_year))
 	RF = np.zeros((dim_scenario,dim_gas_param,dim_thermal_param,n_gas,n_year))
 	if concentration_driven:
@@ -515,18 +542,8 @@ def run_UnFaIR( emissions_in = False , \
 			RF[...,0] = step_forcing(C=C[...,0],PI_conc=PI_conc,f=f)
 			S,T[...,0] = step_temperature(S=np.zeros(d.shape),F=np.sum(RF[...,0],axis=-1)[...,np.newaxis]+ext_forcing[...,0],q=q,d=d,dt=timestep[0])
 
-# 			adjust_time = t+1 # we need to add on all the time passed in concentration mode for this to work...
-# 			adjust_emission_time = 1 # since emissions starts from index 0, not end of concentrations
-
-# 	else:
-
-# 		adjust_time = 0
-# 		adjust_emission_time = 0
-		
-			
 	if not concentration_driven:
 
-# 		for t in np.arange(1-adjust_emission_time,emissions.shape[-1]) + adjust_time:
 		for t in np.arange(1,emissions.shape[-1]):
 
 			alpha[...,t] = calculate_alpha(G=G[...,t-1],G_A=G_A,T=T[...,t-1,np.newaxis],r=r,g0=g0,g1=g1)
