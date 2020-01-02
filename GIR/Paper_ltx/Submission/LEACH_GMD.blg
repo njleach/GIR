@@ -8,45 +8,45 @@ Warning--can't use both author and editor fields in IPCC2018
 Warning--missing publisher in IPCC2018
 Warning--empty journal in Nicholls2019
 Warning--empty year in Nicholls2019
-You've used 63 entries,
+You've used 65 entries,
             2811 wiz_defined-function locations,
-            1479 strings with 38413 characters,
-and the built_in function-call counts, 98152 in all, are:
-= -- 8713
-> -- 7924
+            1492 strings with 39005 characters,
+and the built_in function-call counts, 99952 in all, are:
+= -- 8891
+> -- 8020
 < -- 18
-+ -- 2933
-- -- 2580
-* -- 7851
-:= -- 11767
-add.period$ -- 63
-call.type$ -- 63
-change.case$ -- 976
-chr.to.int$ -- 61
-cite$ -- 194
-duplicate$ -- 7437
-empty$ -- 3857
-format.name$ -- 2776
-if$ -- 19025
++ -- 2971
+- -- 2610
+* -- 7990
+:= -- 11971
+add.period$ -- 65
+call.type$ -- 65
+change.case$ -- 990
+chr.to.int$ -- 63
+cite$ -- 200
+duplicate$ -- 7600
+empty$ -- 3951
+format.name$ -- 2812
+if$ -- 19377
 int.to.chr$ -- 3
 int.to.str$ -- 1
-missing$ -- 1290
-newline$ -- 198
-num.names$ -- 255
-pop$ -- 4313
+missing$ -- 1312
+newline$ -- 204
+num.names$ -- 263
+pop$ -- 4399
 preamble$ -- 1
-purify$ -- 976
+purify$ -- 990
 quote$ -- 0
-skip$ -- 4179
+skip$ -- 4252
 stack$ -- 0
-substring$ -- 2520
-swap$ -- 6501
+substring$ -- 2575
+swap$ -- 6629
 text.length$ -- 8
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 564
+type$ -- 582
 warning$ -- 5
-while$ -- 316
+while$ -- 325
 width$ -- 0
-write$ -- 784
+write$ -- 809
 (There were 5 warnings)

@@ -1,4 +1,4 @@
-\begin{thebibliography}{63}
+\begin{thebibliography}{65}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{{\tt #1}}
 \providecommand{\urlprefix}{URL }
@@ -229,6 +229,13 @@ Ivy, D.~J., Rigby, M., Baasandorj, M., Burkholder, J.~B., and Prinn, R.~G.:
   Chem. Phys, 12, 7635--7645, \doi{10.5194/acp-12-7635-2012},
   \urlprefix\url{www.atmos-chem-phys.net/12/7635/2012/}, 2012.
 
+\bibitem[{Jenkins et~al.(2018)Jenkins, Millar, Leach, and Allen}]{Jenkins2018}
+Jenkins, S., Millar, R.~J., Leach, N., and Allen, M.~R.: {Framing Climate Goals
+  in Terms of Cumulative CO2-Forcing-Equivalent Emissions}, Geophysical
+  Research Letters, \doi{10.1002/2017GL076173},
+  \urlprefix\url{http://www.mendeley.com/research/framing-climate-goals-terms-cumulative-co2forcingequivalent-emissions},
+  2018.
+
 \bibitem[{Joos et~al.(2013)Joos, Roth, Fuglestvedt, Peters, Enting, {Von Bloh},
   Brovkin, Burke, Eby, Edwards, Friedrich, Fr{\"{o}}licher, Halloran, Holden,
   Jones, Kleinen, Mackenzie, Matsumoto, Meinshausen, Plattner, Reisinger,
@@ -285,6 +292,14 @@ Kirtman, B., Power, S.~B., Adedoyin, J.~A., Boer, G.~J., Bojariu, R.,
   Press, Cambridge, United Kingdom and New York, NY, USA,
   \doi{10.1017/CBO9781107415324.023},
   \urlprefix\url{http://www.climatechange2013.org}, 2013.
+
+\bibitem[{Leach et~al.(2018)Leach, Millar, Haustein, Jenkins, Graham, and
+  Allen}]{Leach2018}
+Leach, N.~J., Millar, R.~J., Haustein, K., Jenkins, S., Graham, E., and Allen,
+  M.~R.: {Current level and rate of warming determine emissions budgets under
+  ambitious mitigation}, Nature Geoscience, 11, 574--579,
+  \doi{10.1038/s41561-018-0156-y},
+  \urlprefix\url{http://www.nature.com/articles/s41561-018-0156-y}, 2018.
 
 \bibitem[{Lenssen et~al.(2019)Lenssen, Schmidt, Hansen, Menne, Persin, Ruedy,
   and Zyss}]{Lenssen2019}
