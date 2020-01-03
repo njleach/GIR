@@ -7,7 +7,7 @@ from pathlib import Path
 
 def return_empty_emissions(df_to_copy=False, start_year=1765, end_year=2500, timestep=1, scen_names=[0], gases_in = ['CO2','CH4','N2O']):
 
-	# Returns an emissions dataframe of the correct format for use in UnFaIR with the given scenario names
+	# Returns an emissions dataframe of the correct format for use in GIR with the given scenario names
     
     # Note that this is inclusive of the full end year
     
@@ -92,7 +92,7 @@ def get_gas_parameter_defaults(choose_gases=['CO2','CH4','N2O'],CH4_forc_feedbac
         
     if help:
         
-        print('This function returns the SEAFaIR default parameter set for a gas set of your choice. You can choose from the following gas species:')
+        print('This function returns the GIR default parameter set for a gas set of your choice. You can choose from the following gas species:')
         print()
         print(list(pd.read_pickle(Path(__file__).parent / "./Parameter_Sets/Complete_parameter_set.p").columns.levels[-1]))
         
@@ -201,7 +201,7 @@ def get_more_thermal_params(N=100,F_2x=3.84):
 
 def tcr_ecs_to_q(input_parameters=True , F_2x=3.84 , help=False):
 
-	# converts a tcr / ecs / d dataframe into a d / q dataframe for use in UnFaIRv2
+	# converts a 2-box tcr / ecs / d dataframe into a d / q dataframe for use in GIR
 	# F2x is the GIR default forcing parameter value
 
 	if help:
@@ -223,8 +223,6 @@ def tcr_ecs_to_q(input_parameters=True , F_2x=3.84 , help=False):
 		return output_params.loc[['d','q']]
 
 def q_to_tcr_ecs(input_parameters=True , F_2x=3.84 , help=False):
-
-	# converts a tcr / ecs / d dataframe into a d / q dataframe for use in UnFaIRv2
 
 	if help:
 		tcr_ecs_test = default_thermal_params()
@@ -447,7 +445,7 @@ def run_GIR( emissions_in = False , \
 	return out_dict
 
 
-############################### Researcher Tools ###############################
+############################### Advanced Tools #################################
 
 
 def prescribed_temps_gas_cycle(emissions_in , \
@@ -528,41 +526,36 @@ def unstep_concentration(C, T, a, tau, r, PI_conc, emis2conc, timestep, concentr
 	dim_thermal_param = T.shape[2]
 	n_gas = C.shape[3]
 	n_year = C.shape[4]
-	
+    
 	alpha = np.zeros((dim_scenario,dim_gas_param,dim_thermal_param,n_gas,n_year))
 	G = alpha.copy()
 	emissions = alpha.copy()
 	R = np.zeros(a.shape)
-	
+
 	G_A = (C - PI_conc[...,np.newaxis]) / emis2conc[...,np.newaxis]
-	
+
 	g1 = np.sum( a * tau * ( 1. - ( 1. + 100/tau ) * np.exp(-100/tau) ), axis=-1 )
 	g0 = ( np.sinh( np.sum( a * tau * ( 1. - np.exp(-100/tau) ) , axis=-1) / g1 ) )**(-1.)
-	
+
 	# inital timestep all variables are 0
-	
+
 	dt = timestep[0]
-	
+
 	alpha[...,0] = calculate_alpha(G=G[...,0],G_A=G[...,0],T=G[...,0],r=r,g0=g0,g1=g1)
-	
+
 	emissions[...,0] = ( ( C[...,0] - PI_conc - np.sum(R * np.exp( -dt/(alpha[...,0,np.newaxis] * tau) ) ,axis=-1 ) ) / emis2conc ) / np.sum( a * alpha[...,0,np.newaxis] * ( tau / dt ) * ( 1. - np.exp( -dt / ( alpha[...,0,np.newaxis] * tau ) ) ) , axis=-1 )
-	
+
 	R = emissions[...,0,np.newaxis] * emis2conc[...,np.newaxis] * a * alpha[...,0,np.newaxis] * ( tau / dt ) * ( 1. - np.exp( -dt/(alpha[...,0,np.newaxis]*tau) ) ) + R * np.exp( -dt/(alpha[...,0,np.newaxis] * tau) )
-	
+
 	G = np.cumsum(emissions,axis=-1)
-	
+
 	for t in np.arange(1,C.shape[-1]):
-		
 		dt = timestep[t]
-		
 		alpha[...,t] = calculate_alpha(G=G[...,t-1],G_A=G_A[...,t-1],T=T[...,t-1,np.newaxis],r=r,g0=g0,g1=g1)
-	
 		emissions[...,t] = ( ( C[...,t] - PI_conc - np.sum( R * np.exp( -dt / ( alpha[...,t,np.newaxis] * tau ) ) ,axis=-1 ) ) / emis2conc ) / np.sum( a * alpha[...,t,np.newaxis] * ( tau / dt ) * ( 1. - np.exp( -dt / ( alpha[...,t,np.newaxis] * tau ) ) ) , axis=-1 )
-	
 		R = emissions[...,t,np.newaxis] * emis2conc[...,np.newaxis] * a * alpha[...,t,np.newaxis] * ( tau / dt ) * ( 1. - np.exp( -dt/(alpha[...,t,np.newaxis]*tau) ) ) + R * np.exp( -dt/(alpha[...,t,np.newaxis] * tau) )
-		
 		G = np.cumsum(emissions,axis=-1)
-	
+
 	return emissions, R, G, G_A[...,-1]
 
 
