@@ -5,80 +5,49 @@ import pandas as pd
 import scipy as sp
 from pathlib import Path
 
-def return_empty_emissions(df_to_copy=False, start_year=1765, end_year=2500, timestep=1, scen_names=[0], gases_in = ['CO2','CH4','N2O']):
+def return_empty_emissions(df_to_copy=False, start_year=1765, end_year=2500, timestep=1, scen_names=[0], gases_in = ['CO2','CH4','N2O'], help=False):
 
-	# Returns an emissions dataframe of the correct format for use in GIR with the given scenario names
-    
-    # Note that this is inclusive of the full end year
+    if help:
+        print('This function returns a dataframe of zeros in the correct format for use in GIR. Pass an existing emission/ concentration array to return a corresponding forcing array.')
     
     if type(df_to_copy)==pd.core.frame.DataFrame:
-        
-        dict_of_zeros = {}
-        
-        for gas in gases_in:
-            dict_of_zeros[gas] = np.zeros(df_to_copy.index.size)
-        
-        df = pd.DataFrame(dict_of_zeros, index=df_to_copy.index)
-        
-        df = pd.concat([df]*df_to_copy.columns.levels[0].size, keys=df_to_copy.columns.levels[0], axis=1)
-        
-        df.index = df.index.rename('Year')
-
-        df.columns = df.columns.rename(['Scenario','Gas'])
+        df = pd.DataFrame(index = df_to_copy.index,columns=pd.MultiIndex.from_product([df_to_copy.columns.levels[0],gases_in],names=['Scenario','Gas'])).fillna(0).apply(pd.to_numeric)
         
     else:
-        
-        data_size = int(np.floor((end_year+1-start_year)/timestep))
-        
-        dict_of_zeros = {}
-        
-        for gas in gases_in:
-            dict_of_zeros[gas] = np.zeros(data_size)
 
-        df = pd.DataFrame(dict_of_zeros, index=np.arange(start_year,end_year+1,timestep)+(timestep!=1)*timestep/2)
-
-        df = pd.concat([df]*len(scen_names), keys=scen_names, axis=1)
-
-        df.index = df.index.rename('Year')
-
-        df.columns = df.columns.rename(['Scenario','Gas'])
+        df = pd.DataFrame(index=np.arange(start_year,end_year+1,timestep)+(timestep!=1)*timestep/2,columns=pd.MultiIndex.from_product([scen_names,gases_in],names=['Scenario','Gas'])).fillna(0).apply(pd.to_numeric)
+        df.index.rename('Year',inplace=True)
 
     return df
 
-def return_empty_forcing(df_to_copy=False, start_year=1765, end_year=2500, timestep=1, scen_names=[0]):
+def return_empty_forcing(df_to_copy=False, start_year=1765, end_year=2500, timestep=1, scen_names=[0], help=False):
+    
+    if help:
+        print('This function returns a dataframe of zeros in the correct format for use in GIR. Pass an existing emission/ concentration array to return a corresponding forcing array.')
     
     if type(df_to_copy)==pd.core.frame.DataFrame:
-        
-        df = pd.DataFrame({'forcing':np.zeros(df_to_copy.index.size)}, index=df_to_copy.index)
-        
-        df = pd.concat([df]*df_to_copy.columns.levels[0].size, keys=df_to_copy.columns.levels[0], axis=1)
-        
-        df.index = df.index.rename('Year')
-
-        df.columns = df.columns.rename(['Scenario','Variable'])
+        df = pd.DataFrame(index = df_to_copy.index,columns=pd.MultiIndex.from_product([df_to_copy.columns.levels[0],['forcing']],names=['Scenario','Variable'])).fillna(0).apply(pd.to_numeric)
         
     else:
         
-        data_size = int(np.floor((end_year+1-start_year)/timestep))
-
-        df = pd.DataFrame({'forcing':np.zeros(data_size)}, index=np.arange(start_year,end_year+1,timestep)+(timestep!=1)*timestep/2)
-
-        df = pd.concat([df]*len(scen_names), keys=scen_names, axis=1)
-
-        df.index = df.index.rename('Year')
-
-        df.columns = df.columns.rename(['Scenario','Variable'])
+        df = pd.DataFrame(index=np.arange(start_year,end_year+1,timestep)+(timestep!=1)*timestep/2,columns=pd.MultiIndex.from_product([scen_names,['forcing']],names=['Scenario','Gas'])).fillna(0).apply(pd.to_numeric)
+        df.index.rename('Year',inplace=True)
 
     return df
 
 def input_to_numpy(input_df):
 
-	# converts the dataframe input into a numpy array for calculation, dimension order = [name, gas, time/parameter]
+    # converts the dataframe input into a numpy array for calculation, dimension order = [name, gas, time/parameter]
 
-	return input_df.values.T.reshape(input_df.columns.levels[0].size, input_df.columns.levels[1].size, input_df.index.size)
+    return input_df.values.T.reshape(input_df.columns.levels[0].size, input_df.columns.levels[1].size, input_df.index.size)
 
 
 def get_gas_parameter_defaults(choose_gases=['CO2','CH4','N2O'],CH4_forc_feedbacks=False, help=False):
+    
+    if help:
+        print('This function returns the GIR default parameter set for a gas set of your choice. You can choose from the following gas species:')
+        possible_gases = list(pd.read_pickle(Path(__file__).parent / "./Parameter_Sets/Complete_parameter_set.p").columns.levels[-1])
+        return possible_gases
     
     CHOOSE_params = pd.read_pickle(Path(__file__).parent / "./Parameter_Sets/Complete_parameter_set.p").reindex(choose_gases,axis=1,level=1)
     
@@ -89,12 +58,6 @@ def get_gas_parameter_defaults(choose_gases=['CO2','CH4','N2O'],CH4_forc_feedbac
     elif CH4_forc_feedbacks=='ozone_parameterisation':
         
         CHOOSE_params.loc['f2',(param_set_name,'CH4')] += 3.7e-04 + 6.9e-05 - 4.6e-05 # add on the indirect forcings
-        
-    if help:
-        
-        print('This function returns the GIR default parameter set for a gas set of your choice. You can choose from the following gas species:')
-        print()
-        print(list(pd.read_pickle(Path(__file__).parent / "./Parameter_Sets/Complete_parameter_set.p").columns.levels[-1]))
         
     else:
         
@@ -317,7 +280,7 @@ def run_GIR( emissions_in = False , \
 	dim_scenario,scen_names = emissions_in.columns.levels[0].size,list(emissions_in.columns.levels[0])
 	dim_gas_param,gas_set_names = gas_parameters.columns.levels[0].size,list(gas_parameters.columns.levels[0])
 	dim_thermal_param,thermal_set_names = thermal_parameters.columns.levels[0].size,list(thermal_parameters.columns.levels[0])
-	n_gas,gas_names = emissions_in.columns.levels[1].size,list(gas_parameters.columns.levels[1])
+	n_gas,gas_names = gas_parameters.columns.levels[1].size,list(gas_parameters.columns.levels[1])
 	n_year = time_index.size
 
 	names_list = [scen_names,gas_set_names,thermal_set_names,gas_names]
@@ -325,11 +288,14 @@ def run_GIR( emissions_in = False , \
 
 	timestep = np.append(np.diff(time_index)[0],np.diff(time_index))
 
-	# Reformat inputs into the right shape
+	# Reformat inputs into the right shape, first sorting the scenarios and gases to ensure everything matches up
 
+	gas_parameters = gas_parameters.reindex(gas_names,axis=1,level=1)
+	emissions_in = emissions_in.reindex(scen_names,axis=1,level=0).reindex(gas_names,axis=1,level=1)
 	emissions = input_to_numpy(emissions_in)[:,np.newaxis,np.newaxis,...]
 
 	if concentration_driven:
+		concentrations_in = concentrations_in.reindex(scen_names,axis=1,level=0).reindex(gas_names,axis=1,level=1)
 		if emissions_concentration_switch:
 			concentrations = input_to_numpy(concentrations_in.loc[:emissions_in.index[0]-1e-8])[:,np.newaxis,np.newaxis,...] # only want concentrations UP TO the start of emissions
 		else:
@@ -353,6 +319,7 @@ def run_GIR( emissions_in = False , \
 	if forcing_in is False:
 		ext_forcing = np.zeros((dim_scenario,dim_gas_param,dim_thermal_param,1,n_year))
 	else:
+		forcing_in = forcing_in.reindex(scen_names,axis=1,level=0)
 		ext_forcing = input_to_numpy(forcing_in)[:,np.newaxis,np.newaxis,...]
 
 	# Slice the parameter sets into numpy arrays of the right shape
