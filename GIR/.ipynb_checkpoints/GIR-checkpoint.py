@@ -3,6 +3,7 @@
 import numpy as np
 import pandas as pd
 import scipy as sp
+from pathlib import Path
 
 def return_empty_emissions(df_to_copy=False, start_year=1765, end_year=2500, timestep=1, scen_names=[0], gases_in = ['CO2','CH4','N2O']):
 
@@ -79,11 +80,7 @@ def input_to_numpy(input_df):
 
 def get_gas_parameter_defaults(choose_gases=['CO2','CH4','N2O'],CH4_forc_feedbacks=False, help=False):
     
-    ALL_params = pd.read_pickle('./Parameter_Sets/Complete_parameter_set.p')
-
-    param_set_name = ALL_params.columns.levels[0][0]
-
-    CHOOSE_params = pd.concat([ALL_params[param_set_name][choose_gases]],keys=[param_set_name],axis=1)
+    CHOOSE_params = pd.read_pickle(Path(__file__).parent / "./Parameter_Sets/Complete_parameter_set.p").reindex(choose_gases,axis=1,level=1)
     
     if CH4_forc_feedbacks=='indirect':
         
@@ -97,19 +94,25 @@ def get_gas_parameter_defaults(choose_gases=['CO2','CH4','N2O'],CH4_forc_feedbac
         
         print('This function returns the SEAFaIR default parameter set for a gas set of your choice. You can choose from the following gas species:')
         print()
-        print(list(ALL_params.columns.levels[-1]))
+        print(list(pd.read_pickle(Path(__file__).parent / "./Parameter_Sets/Complete_parameter_set.p").columns.levels[-1]))
         
     else:
         
         return CHOOSE_params
     
-def get_thermal_parameter_defaults():
+def get_thermal_parameter_defaults(TCR_ECS=np.array([1.6,2.76]),F_2x=3.84):
     
     thermal_parameter_list = ['d','q']
 
     thermal_parameters = pd.DataFrame(columns=[1,2,3],index=thermal_parameter_list)
-    thermal_parameters.loc['d'] = np.array([283,9.88,0.85])
-    thermal_parameters.loc['q'] = np.array([0.328,0.175,0.242])
+    
+    d = np.array([283,9.88,0.85])
+    q = np.array([0,0,0.242])
+    k = 1-(d/70)*(1-np.exp(-70/d))
+    q[:2] = ((TCR_ECS[0]/F_2x - k[2]*q[2]) - np.roll(k[:2],axis=0,shift=1)*(TCR_ECS[1]/F_2x - q[2]))/(k[:2] - np.roll(k[:2],axis=0,shift=1))
+    
+    thermal_parameters.loc['d'] = d
+    thermal_parameters.loc['q'] = q
 
     thermal_parameters = pd.concat([thermal_parameters], keys = ['default'], axis = 1)
 
@@ -124,7 +127,7 @@ def get_more_gas_cycle_params(N,choose_gases=['CO2','CH4','N2O'],CH4_forc_feedba
     
     param_defaults = get_gas_parameter_defaults(choose_gases=choose_gases,CH4_forc_feedbacks=CH4_forc_feedbacks)
 
-    param_uncert = pd.read_pickle('./Parameter_Sets/Complete_parameter_uncertainty.p')
+    param_uncert = pd.read_pickle(Path(__file__).parent / "./Parameter_Sets/Complete_parameter_uncertainty.p")
 
     param_ensemble = pd.concat(N*[param_defaults['default']],keys=['gas'+str(x) for x in np.arange(N)],axis=1)
 
@@ -147,7 +150,7 @@ def get_more_thermal_params(N=100,F_2x=3.84):
     
     from copulas.multivariate import GaussianMultivariate
     
-    d1_d2_q1_copula = GaussianMultivariate.load('./Parameter_Sets/d1_d2_q1_CMIP6_copula.pkl')
+    d1_d2_q1_copula = GaussianMultivariate.load(Path(__file__).parent / "./Parameter_Sets/d1_d2_q1_CMIP6_copula.pkl")
 
     d1_d2_q1_df = d1_d2_q1_copula.sample(10*N)
 
@@ -617,7 +620,7 @@ def unstep_forcing(forcing_in,gas_parameters=get_gas_parameter_defaults(),therma
 
 def get_cmip6_thermal_params():
     
-    JT_params = pd.read_csv('./J_Tsutsui_params/2019-09-20_1417/parms_cmip6_20190920.csv')
+    JT_params = pd.read_csv(Path(__file__).parent / "./J_Tsutsui_params/2019-09-20_1417/parms_cmip6_20190920.csv")
 
     JT_params = JT_params.loc[(JT_params.iloc[:,1] == 'tas')&((JT_params.iloc[:,2] == 'irm-2')|(JT_params.iloc[:,2] == 'irm-3'))]
 
