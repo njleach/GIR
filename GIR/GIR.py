@@ -290,7 +290,7 @@ def run_GIR( emissions_in = False , \
 
 	# Reformat inputs into the right shape, first sorting the scenarios and gases to ensure everything matches up
 
-	gas_parameters = gas_parameters.reindex(gas_names,axis=1,level=1)
+	gas_parameters = gas_parameters.reindex(gas_names,axis=1,level=1).reindex(gas_set_names,axis=1,level=0)
 	emissions_in = emissions_in.reindex(scen_names,axis=1,level=0).reindex(gas_names,axis=1,level=1)
 	emissions = input_to_numpy(emissions_in)[:,np.newaxis,np.newaxis,...]
 
@@ -303,7 +303,8 @@ def run_GIR( emissions_in = False , \
             
 	# If thermal parameter names are identical to gas parameter names, assume they are dependent (correspond exactly)
     
-	if gas_set_names == thermal_set_names:
+	if set(gas_set_names) == set(thermal_set_names):
+		thermal_parameters = thermal_parameters.reindex(gas_set_names,axis=1,level=0)
 		d = input_to_numpy(thermal_parameters.loc[['d']])[np.newaxis,:,np.newaxis,...,0]
 		q = input_to_numpy(thermal_parameters.loc[['q']])[np.newaxis,:,np.newaxis,...,0]
 		dim_thermal_param=1
