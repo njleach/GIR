@@ -1,7 +1,7 @@
 # GIR
 A Generalised Impulse-Response modelling framework.
 
-GIR is a maximally reduced simple climate model for exploring globally averaged climate impacts of greenhouse gas (GHG) or aerosol emissions, changes in GHG concentrations, or external forcings. GIR is based on a set of six equations - three gas cycle equations to convert emissions to concentrations, one equation to convert concentrations to effective radiative forcings, and two equations representing a simple energy-balance thermal response. All GHGs (and even aerosols) are treated identically by the equations - differences in the gas cycles or atmospheric chemistries of individual species are included via the parameters - which allows GIR to be fully parallelised and is therefore highly efficient to run.
+GIR is a maximally reduced simple climate model for exploring globally averaged climate impacts of greenhouse gas (GHG) or aerosol emissions, changes in GHG concentrations, or external forcings. GIR is based on a set of six equations - three gas cycle equations to convert emissions to concentrations, one equation to convert concentrations to effective radiative forcings, and two equations representing a simple energy-balance thermal response. All GHGs (and aerosols) are treated identically by the equations - differences in the gas cycles or atmospheric chemistries of individual species are introduced via the parameters - which allows GIR to be fully parallelised and is therefore highly efficient to run.
 ## Introduction (in brief)
 The gas cycle of GIR is based on the carbon cycle component of the Finite amplitude Impulse Response model (FaIR) [see Millar et al. (2017) and Smith et al. (2017)]. We have made minor alterations to allow the atmospheric chemistry of some gas species (eg. methane) to be more accurately represented, and have replaced the iIRF100 numeric root finding scheme with an analytic approximation. By default, only the carbon gas cycle has more than one sink (we keep the same four carbon sinks as in FaIR).
 The concentration-forcing equation in GIR has three terms: logarithmic, linear and square-root. These allow the dominant behaviours of increasing gas concentrations of species with differing spectral saturation levels to be represented faithfully (and can also allow for inclusion of some non-linearity beyond the dominant term).
@@ -35,6 +35,15 @@ GIR takes time-indexed dataframes for (corresponding) emission/concentration/for
 GIR converts the input parameter and emission/concentration/forcing dataframes into numpy arrays for calculation, and then back to dataframes for output.
 Since GIR runs all scenarios and parameter sets in parallel, it is easy to overload the RAM of your machine. The approximate required RAM is of order (# of timesteps) * (# of scenarios) * (# of gas cycle parameter sets) * (# of gas species) * (# of thermal parameter sets).
 ## Further information
-For more detailed information including some examples of running GIR, please see [here](https://github.com/njleach/GIR/blob/master/GIR/GIR_example_notebook.ipynb)
+For more detailed information including some examples of running GIR, please see [here](https://github.com/njleach/GIR/blob/master/GIR/GIR_example_notebook.ipynb).
+## Versioning
+GIR is currently in version 1.0.0. Versioning is as follows:
+
+| Index  | Change to model | 
+| ------------- | ------------- |
+| Major | Large scale changes to the model and how it is run. Not necessarily backwards compatible. |
+| Intermediate | Changes to the functionality or operation of the model or packaged functions. Backwards compatible.  |
+| Minor | Changes to the code structure with no user-end changes. Updates to the default parameter sets. |
+
 # License
 [CC4.0](https://creativecommons.org/licenses/by/4.0/)
