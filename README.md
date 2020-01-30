@@ -8,6 +8,7 @@ The concentration-forcing equation in GIR has three terms: logarithmic, linear a
 The thermal response is a simple impulse-response energy balance model [Gregory et al. (2002)]. While the most commonly used version of this model calculate thermal response based on a two-layer system, work has suggested that the responses of complex GCMs can be emulated better by a three-layer system [Tsutsui (2017)], largely to improve the very short timescale response. As such, we keep the number of layer in GIR general, though our default thermal parameter set contains three.
 ## Installing GIR
 GIR is compatible with python 3.5+ (due to the use of starred expressions in some routines).
+
 Currently, GIR is not provided as a conda or pip python module (though we hope to provide this in the future). Users must download or pull the latest version from this [repo](https://github.com/njleach/GIR).
 ## Running GIR
 To use GIR in a python script or jupyter notebook, you must include the following lines in your preamble:
@@ -47,6 +48,7 @@ GIR is currently in version 1.0.0. Versioning is as follows:
 | Minor | Changes to the code structure with no user-end changes. Updates to the default parameter sets. |
 
 #Zenodo DOI
+
 [![DOI](https://zenodo.org/badge/231077183.svg)](https://zenodo.org/badge/latestdoi/231077183)
 
 # License
