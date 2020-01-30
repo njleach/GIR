@@ -1,10 +1,10 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2019.7.4)  21 JAN 2020 14:40
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2019.7.4)  21 JAN 2020 14:46
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
  %&-line parsing enabled.
-**/home/leachl/Documents/Simple_models/FaIR_v2-0/GIR/Paper_ltx/Submission/LEACH_GMD_v2.tex
-(/home/leachl/Documents/Simple_models/FaIR_v2-0/GIR/Paper_ltx/Submission/LEACH_GMD_v2.tex
+**/home/leachl/Documents/Simple_models/FaIR_v2-0/GIR/Paper_ltx/Submission/SI_v2_v1_diff.tex
+(/home/leachl/Documents/Simple_models/FaIR_v2-0/GIR/Paper_ltx/Submission/SI_v2_v1_diff.tex
 LaTeX2e <2017-04-15>
 Babel <3.18> and hyphenation patterns for 84 language(s) loaded.
 (/home/leachl/Documents/Simple_models/FaIR_v2-0/GIR/Paper_ltx/Submission/copernicus.cls
@@ -3293,31 +3293,31 @@ Package color Info: Redefining color textcol on input line 2561.
 Package color Info: Redefining color bgcol on input line 2562.
 Package color Info: Redefining color barcol on input line 2563.
 )
-LaTeX Info: Redefining \vec on input line 13.
- (/home/leachl/Documents/Simple_models/FaIR_v2-0/GIR/Paper_ltx/Submission/LEACH_GMD_v2.aux)
-\openout1 = `LEACH_GMD_v2.aux'.
+LaTeX Info: Redefining \vec on input line 16.
+ (/home/leachl/Documents/Simple_models/FaIR_v2-0/GIR/Paper_ltx/Submission/SI_v2_v1_diff.aux)
+\openout1 = `SI_v2_v1_diff.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 77.
-LaTeX Font Info:    ... okay on input line 77.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 77.
-LaTeX Font Info:    ... okay on input line 77.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 77.
-LaTeX Font Info:    ... okay on input line 77.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 77.
-LaTeX Font Info:    ... okay on input line 77.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 77.
-LaTeX Font Info:    ... okay on input line 77.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 77.
-LaTeX Font Info:    ... okay on input line 77.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 77.
-LaTeX Font Info:    Try loading font information for TS1+cmr on input line 77.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 98.
+LaTeX Font Info:    ... okay on input line 98.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 98.
+LaTeX Font Info:    ... okay on input line 98.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 98.
+LaTeX Font Info:    ... okay on input line 98.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 98.
+LaTeX Font Info:    ... okay on input line 98.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 98.
+LaTeX Font Info:    ... okay on input line 98.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 98.
+LaTeX Font Info:    ... okay on input line 98.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 98.
+LaTeX Font Info:    Try loading font information for TS1+cmr on input line 98.
  (/usr/share/texlive/texmf-dist/tex/latex/base/ts1cmr.fd
 File: ts1cmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
-LaTeX Font Info:    ... okay on input line 77.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 77.
-LaTeX Font Info:    ... okay on input line 77.
-LaTeX Font Info:    Try loading font information for T1+ptm on input line 77.
+LaTeX Font Info:    ... okay on input line 98.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 98.
+LaTeX Font Info:    ... okay on input line 98.
+LaTeX Font Info:    Try loading font information for T1+ptm on input line 98.
  (/usr/share/texlive/texmf-dist/tex/latex/psnfss/t1ptm.fd
 File: t1ptm.fd 2001/06/04 font definitions for T1/ptm.
 ) (/usr/share/texlive/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
@@ -3350,7 +3350,7 @@ Package caption Info: hyperref package is loaded.
 Package caption Info: rotating package is loaded.
 Package caption Info: End \AtBeginDocument code.
 \AtBeginShipoutBox=\box38
-Package hyperref Info: Link coloring OFF on input line 77.
+Package hyperref Info: Link coloring OFF on input line 98.
  (/usr/share/texlive/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2016/05/21 v2.44 Cross-referencing by name of section
  (/usr/share/texlive/texmf-dist/tex/generic/oberdiek/gettitlestring.sty
@@ -3358,240 +3358,128 @@ Package: gettitlestring 2016/05/16 v1.5 Cleanup title references (HO)
 )
 \c@section@level=\count149
 )
-LaTeX Info: Redefining \ref on input line 77.
-LaTeX Info: Redefining \pageref on input line 77.
-LaTeX Info: Redefining \nameref on input line 77.
+LaTeX Info: Redefining \ref on input line 98.
+LaTeX Info: Redefining \pageref on input line 98.
+LaTeX Info: Redefining \nameref on input line 98.
 LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <17.28> not available
-(Font)              Font shape `T1/ptm/b/n' tried instead on input line 128.
-LaTeX Font Info:    Try loading font information for U+msa on input line 128.
+(Font)              Font shape `T1/ptm/b/n' tried instead on input line 150.
+LaTeX Font Info:    Font shape `T1/ptm/bx/it' in size <17.28> not available
+(Font)              Font shape `T1/ptm/b/it' tried instead on input line 150.
+LaTeX Font Info:    Try loading font information for U+msa on input line 150.
  (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 128.
+LaTeX Font Info:    Try loading font information for U+msb on input line 150.
  (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
 LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <10> not available
-(Font)              Font shape `T1/ptm/b/n' tried instead on input line 128.
-LaTeX Font Info:    Try loading font information for T1+phv on input line 134.
+(Font)              Font shape `T1/ptm/b/n' tried instead on input line 150.
+LaTeX Font Info:    Try loading font information for T1+phv on input line 152.
  (/usr/share/texlive/texmf-dist/tex/latex/psnfss/t1phv.fd
 File: t1phv.fd 2001/06/04 scalable font definitions for T1/phv.
 )
 LaTeX Font Info:    Font shape `T1/phv/m/n' will be
-(Font)              scaled to size 8.54997pt on input line 134.
-LaTeX Font Info:    Try loading font information for TS1+ptm on input line 143.
- (/usr/share/texlive/texmf-dist/tex/latex/psnfss/ts1ptm.fd
-File: ts1ptm.fd 2001/06/04 font definitions for TS1/ptm.
-)
-<"../../Final_figures/GIR_schematic".pdf, id=27, 674.52pt x 349.305pt>
-File: "../../Final_figures/GIR_schematic".pdf Graphic file (type pdf)
-<use "../../Final_figures/GIR_schematic".pdf>
-Package pdftex.def Info: "../../Final_figures/GIR_schematic".pdf  used on input line 148.
-(pdftex.def)             Requested size: 503.61377pt x 260.80551pt.
+(Font)              scaled to size 8.54997pt on input line 152.
 LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <9> not available
-(Font)              Font shape `T1/ptm/b/n' tried instead on input line 149.
+(Font)              Font shape `T1/ptm/b/n' tried instead on input line 155.
 
-Underfull \hbox (badness 10000) in paragraph at lines 141--152
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 141--152
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 141--152
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 141--152
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 141--152
-
+Overfull \hbox (125.38087pt too wide) in paragraph at lines 156--164
+ []$[]$ 
  []
 
 [1
 
-{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] [2] [3]
-Underfull \hbox (badness 10000) in paragraph at lines 161--164
-
- []
-
-[4 <../../Final_figures/GIR_schematic.pdf
-
-pdfTeX warning: pdflatex (file ../../Final_figures/GIR_schematic.pdf): PDF inclusion: invalid other resource which is no dict (key 'ProcSets', type <array>); ignored.
->]
-Underfull \hbox (badness 10000) in paragraph at lines 165--196
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 165--196
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 165--196
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 165--196
-
- []
-
-[5]
-Underfull \hbox (badness 10000) in paragraph at lines 197--199
-
- []
-
-[6] [7]
-<"../../Final_figures/Emission driven historical concentrations".pdf, id=395, 950.50107pt x 319.18935pt>
-File: "../../Final_figures/Emission driven historical concentrations".pdf Graphic file (type pdf)
-<use "../../Final_figures/Emission driven historical concentrations".pdf>
-Package pdftex.def Info: "../../Final_figures/Emission driven historical concentrations".pdf  used on input line 202.
-(pdftex.def)             Requested size: 503.61377pt x 169.12083pt.
- [8]
-Underfull \hbox (badness 10000) in paragraph at lines 217--218
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 217--218
-
- []
-
-[9 <../../Final_figures/Emission driven historical concentrations.pdf>]
-<"../../Final_figures/Etminan verification over RCPs".pdf, id=740, 1156.32pt x 361.35pt>
-File: "../../Final_figures/Etminan verification over RCPs".pdf Graphic file (type pdf)
-<use "../../Final_figures/Etminan verification over RCPs".pdf>
-Package pdftex.def Info: "../../Final_figures/Etminan verification over RCPs".pdf  used on input line 220.
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] [2]
+<"../../Final_figures/iIRF100_numeric_analytic".pdf, id=24, 396.682pt x 263.49629pt>
+File: "../../Final_figures/iIRF100_numeric_analytic".pdf Graphic file (type pdf)
+<use "../../Final_figures/iIRF100_numeric_analytic".pdf>
+Package pdftex.def Info: "../../Final_figures/iIRF100_numeric_analytic".pdf  used on input line 168.
+(pdftex.def)             Requested size: 503.61377pt x 334.54408pt.
+ [3 <../../Final_figures/iIRF100_numeric_analytic.pdf>]
+<"../../Final_figures/RCP concetration driven residual emissions".pdf, id=82, 859.37517pt x 352.91537pt>
+File: "../../Final_figures/RCP concetration driven residual emissions".pdf Graphic file (type pdf)
+<use "../../Final_figures/RCP concetration driven residual emissions".pdf>
+Package pdftex.def Info: "../../Final_figures/RCP concetration driven residual emissions".pdf  used on input line 173.
+(pdftex.def)             Requested size: 503.61377pt x 206.82353pt.
+ [4 <../../Final_figures/RCP concetration driven residual emissions.pdf>]
+<"../../Final_figures/Rigby_tuned_other_gases_plus_RCP".pdf, id=128, 1445.4pt x 1084.05pt>
+File: "../../Final_figures/Rigby_tuned_other_gases_plus_RCP".pdf Graphic file (type pdf)
+<use "../../Final_figures/Rigby_tuned_other_gases_plus_RCP".pdf>
+Package pdftex.def Info: "../../Final_figures/Rigby_tuned_other_gases_plus_RCP".pdf  used on input line 178.
+(pdftex.def)             Requested size: 503.61377pt x 377.7029pt.
+ [5 <../../Final_figures/Rigby_tuned_other_gases_plus_RCP.pdf>]
+<"../../Final_figures/RF deviation versus Etminan over RCPs".pdf, id=236, 1156.32pt x 361.35pt>
+File: "../../Final_figures/RF deviation versus Etminan over RCPs".pdf Graphic file (type pdf)
+<use "../../Final_figures/RF deviation versus Etminan over RCPs".pdf>
+Package pdftex.def Info: "../../Final_figures/RF deviation versus Etminan over RCPs".pdf  used on input line 183.
 (pdftex.def)             Requested size: 503.61377pt x 157.37895pt.
- [10 <../../Final_figures/Etminan verification over RCPs.pdf>] [11] [12] [13]
-Underfull \hbox (badness 10000) in paragraph at lines 280--281
-
- []
-
-[14] [15]
-<"../../Final_figures/FaIRv2 v13 MAGICC comparison harmonized SSP default gas concentrations".pdf, id=976, 1180.92131pt x 319.18938pt>
-File: "../../Final_figures/FaIRv2 v13 MAGICC comparison harmonized SSP default gas concentrations".pdf Graphic file (type pdf)
-<use "../../Final_figures/FaIRv2 v13 MAGICC comparison harmonized SSP default gas concentrations".pdf>
-Package pdftex.def Info: "../../Final_figures/FaIRv2 v13 MAGICC comparison harmonized SSP default gas concentrations".pdf  used on input line 331.
-(pdftex.def)             Requested size: 503.61377pt x 136.1188pt.
-<"../../Final_figures/FaIRv2 v13 MAGICC comparison harmonized SSP default gas forcing response".pdf, id=988, 1557.17697pt x 319.18938pt>
-File: "../../Final_figures/FaIRv2 v13 MAGICC comparison harmonized SSP default gas forcing response".pdf Graphic file (type pdf)
-<use "../../Final_figures/FaIRv2 v13 MAGICC comparison harmonized SSP default gas forcing response".pdf>
-Package pdftex.def Info: "../../Final_figures/FaIRv2 v13 MAGICC comparison harmonized SSP default gas forcing response".pdf  used on input line 337.
-(pdftex.def)             Requested size: 503.61377pt x 103.22879pt.
-<"../../Final_figures/FaIRv2 v13 MAGICC comparison harmonized SSP default probabilistic temperature response".pdf, id=996, 1553.83636pt x 319.18938pt>
-File: "../../Final_figures/FaIRv2 v13 MAGICC comparison harmonized SSP default probabilistic temperature response".pdf Graphic file (type pdf)
-<use "../../Final_figures/FaIRv2 v13 MAGICC comparison harmonized SSP default probabilistic temperature response".pdf>
-Package pdftex.def Info: "../../Final_figures/FaIRv2 v13 MAGICC comparison harmonized SSP default probabilistic temperature response".pdf  used on input line 343.
-(pdftex.def)             Requested size: 503.61377pt x 103.45282pt.
- [16] [17 <../../Final_figures/FaIRv2 v13 MAGICC comparison harmonized SSP default gas concentrations.pdf>]
-Underfull \hbox (badness 10000) in paragraph at lines 349--353
-
- []
+ [6 <../../Final_figures/RF deviation versus Etminan over RCPs.pdf>]
+<"../../Final_figures/RCP concentration driven emissions".pdf, id=295, 1148.70096pt x 352.91537pt>
+File: "../../Final_figures/RCP concentration driven emissions".pdf Graphic file (type pdf)
+<use "../../Final_figures/RCP concentration driven emissions".pdf>
+Package pdftex.def Info: "../../Final_figures/RCP concentration driven emissions".pdf  used on input line 190.
+(pdftex.def)             Requested size: 503.61377pt x 154.72319pt.
+ [7
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 349--353
-
- []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 349--353
 
- []
+ <../../Final_figures/RCP concentration driven emissions.pdf>]
+<"../../Final_figures/RCP concentration driven RF".pdf, id=653, 1149.046pt x 352.91534pt>
+File: "../../Final_figures/RCP concentration driven RF".pdf Graphic file (type pdf)
+<use "../../Final_figures/RCP concentration driven RF".pdf>
+Package pdftex.def Info: "../../Final_figures/RCP concentration driven RF".pdf  used on input line 197.
+(pdftex.def)             Requested size: 503.61377pt x 154.6801pt.
+ [8
 
+ <../../Final_figures/RCP concentration driven RF.pdf>]
+<"../../Final_figures/RCP concentration driven temperatures".pdf, id=694, 715.09659pt x 570.60364pt>
+File: "../../Final_figures/RCP concentration driven temperatures".pdf Graphic file (type pdf)
+<use "../../Final_figures/RCP concentration driven temperatures".pdf>
+Package pdftex.def Info: "../../Final_figures/RCP concentration driven temperatures".pdf  used on input line 204.
+(pdftex.def)             Requested size: 503.61377pt x 401.849pt.
+ [9
 
-Underfull \hbox (badness 10000) in paragraph at lines 349--353
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 349--353
-
- []
-
-[18 <../../Final_figures/FaIRv2 v13 MAGICC comparison harmonized SSP default gas forcing response.pdf> <../../Final_figures/FaIRv2 v13 MAGICC comparison harmonized SSP default probabilistic temperature response.pdf
-
-pdfTeX warning: pdflatex (file ../../Final_figures/FaIRv2 v13 MAGICC comparison harmonized SSP default probabilistic temperature response.pdf): PDF inclusion: multiple pdfs with page group included in a single page
->]
-Underfull \hbox (badness 10000) in paragraph at lines 355--360
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 355--360
-
- []
+ <../../Final_figures/RCP concentration driven temperatures.pdf>]
+<"../../Final_figures/RCP emission driven concentrations".pdf, id=764, 1148.66959pt x 352.91534pt>
+File: "../../Final_figures/RCP emission driven concentrations".pdf Graphic file (type pdf)
+<use "../../Final_figures/RCP emission driven concentrations".pdf>
+Package pdftex.def Info: "../../Final_figures/RCP emission driven concentrations".pdf  used on input line 210.
+(pdftex.def)             Requested size: 503.61377pt x 154.72856pt.
+ [10 <../../Final_figures/RCP emission driven concentrations.pdf>] (/home/leachl/Documents/Simple_models/FaIR_v2-0/GIR/Paper_ltx/Submission/SI_v2_v1_diff.bbl [11
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 355--360
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 355--360
-
- []
-
-[19] [20] [21pdfTeX warning (ext4): destination with the same identifier (name{section.A}) has been already used, duplicate ignored
+pdfTeX warning (ext4): destination with the same identifier (name{section.A}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.404 ...JS, ZN, JL and MRA wrote the manuscript.}
-                                                   %% this section is mandatory] (/home/leachl/Documents/Simple_models/FaIR_v2-0/GIR/Paper_ltx/Submission/LEACH_GMD_v2.bbl [22]
-Underfull \hbox (badness 2990) in paragraph at lines 91--94
-[]\T1/ptm/m/n/9 Davidson, E. A. and Kan-ter, D.: In-ven-to-ries and sce-nar-ios of ni-trous ox-ide emis-sions, En-vi-ron-men-tal Re-search Let-ters, 9,
- []
+l.1 \begin{thebibliography}{15}
+                               ] [12]) [13]
 
-[23]
-Underfull \hbox (badness 1168) in paragraph at lines 162--169
-[]\T1/ptm/m/n/9 Gregory, J. M., An-drews, T., and Good, P.: The in-con-stancy of the tran-sient cli-mate re-sponse pa-ram-e-ter un-der in-creas-ing CO
- []
+Class copernicus Warning: No section Abstract; proceeding without it.
 
-[24]
-Underfull \hbox (badness 3954) in paragraph at lines 233--238
-[]\T1/ptm/m/n/9 Jenkins, S., Mil-lar, R. J., Leach, N., and Allen, M. R.: Fram-ing Cli-mate Goals in Terms of Cu-mu-la-tive CO2-Forcing-
- []
-
-
-Underfull \hbox (badness 2393) in paragraph at lines 233--238
-\T1/ptm/m/n/9 Equivalent Emis-sions, Geo-phys-i-cal Re-search Let-ters, https://doi.org/[]10.1002/2017GL076173[], []$http : / / www . mendeley . com / research /
- []
-
-[25] [26] [27]
-Underfull \hbox (badness 1648) in paragraph at lines 534--539
-[]\T1/ptm/m/n/9 Ricke, K. L. and Caldeira, K.: Max-i-mum warm-ing oc-curs about one decade af-ter a car-bon diox-ide emis-sion, En-vi-ron-men-tal
- []
-
-[28]) [29]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 603.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 603.
- (/home/leachl/Documents/Simple_models/FaIR_v2-0/GIR/Paper_ltx/Submission/LEACH_GMD_v2.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 603.
-Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 603.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 603.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 457.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 457.
+(/home/leachl/Documents/Simple_models/FaIR_v2-0/GIR/Paper_ltx/Submission/SI_v2_v1_diff.aux)
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 457.
+Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 457.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 457.
  ) 
 Here is how much of TeX's memory you used:
- 13160 strings out of 492982
- 170133 string characters out of 6134897
- 327716 words of memory out of 5000000
- 16360 multiletter control sequences out of 15000+600000
- 50331 words of font info for 78 fonts, out of 8000000 for 9000
+ 12998 strings out of 492982
+ 167875 string characters out of 6134897
+ 307199 words of memory out of 5000000
+ 16296 multiletter control sequences out of 15000+600000
+ 48105 words of font info for 75 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 43i,13n,40p,3924b,610s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy9.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on /home/leachl/Documents/Simple_models/FaIR_v2-0/GIR/Paper_ltx/Submission/LEACH_GMD_v2.pdf (29 pages, 647115 bytes).
+ 43i,10n,40p,1335b,504s stack positions out of 5000i,500n,10000p,200000b,80000s
+{/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/latxfont/lasy6.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmbi8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
+Output written on /home/leachl/Documents/Simple_models/FaIR_v2-0/GIR/Paper_ltx/Submission/SI_v2_v1_diff.pdf (13 pages, 494717 bytes).
 PDF statistics:
- 1530 PDF objects out of 1728 (max. 8388607)
- 1091 compressed objects within 11 object streams
- 141 named destinations out of 1000 (max. 500000)
- 31 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 916 PDF objects out of 1000 (max. 8388607)
+ 496 compressed objects within 5 object streams
+ 44 named destinations out of 1000 (max. 500000)
+ 41 words of extra memory for PDF output out of 10000 (max. 10000000)
 

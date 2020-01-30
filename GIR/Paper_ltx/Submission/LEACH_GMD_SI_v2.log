@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2019.7.4)  21 JAN 2020 10:29
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2019.7.4)  21 JAN 2020 14:44
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -3386,35 +3386,35 @@ LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <9> not available
  [1
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] [2]
-<"../../Final_figures/iIRF100_numeric_analytic".pdf, id=23, 396.682pt x 263.49629pt>
+<"../../Final_figures/iIRF100_numeric_analytic".pdf, id=21, 396.682pt x 263.49629pt>
 File: "../../Final_figures/iIRF100_numeric_analytic".pdf Graphic file (type pdf)
 <use "../../Final_figures/iIRF100_numeric_analytic".pdf>
 Package pdftex.def Info: "../../Final_figures/iIRF100_numeric_analytic".pdf  used on input line 146.
 (pdftex.def)             Requested size: 503.61377pt x 334.54408pt.
  [3 <../../Final_figures/iIRF100_numeric_analytic.pdf>]
-<"../../Final_figures/RCP concetration driven residual emissions".pdf, id=81, 859.37517pt x 352.91534pt>
+<"../../Final_figures/RCP concetration driven residual emissions".pdf, id=79, 859.37517pt x 352.91537pt>
 File: "../../Final_figures/RCP concetration driven residual emissions".pdf Graphic file (type pdf)
 <use "../../Final_figures/RCP concetration driven residual emissions".pdf>
 Package pdftex.def Info: "../../Final_figures/RCP concetration driven residual emissions".pdf  used on input line 151.
-(pdftex.def)             Requested size: 503.61377pt x 206.82352pt.
+(pdftex.def)             Requested size: 503.61377pt x 206.82353pt.
  [4 <../../Final_figures/RCP concetration driven residual emissions.pdf>]
-<"../../Final_figures/Rigby_tuned_other_gases_plus_RCP".pdf, id=124, 1445.4pt x 1084.05pt>
+<"../../Final_figures/Rigby_tuned_other_gases_plus_RCP".pdf, id=125, 1445.4pt x 1084.05pt>
 File: "../../Final_figures/Rigby_tuned_other_gases_plus_RCP".pdf Graphic file (type pdf)
 <use "../../Final_figures/Rigby_tuned_other_gases_plus_RCP".pdf>
 Package pdftex.def Info: "../../Final_figures/Rigby_tuned_other_gases_plus_RCP".pdf  used on input line 156.
 (pdftex.def)             Requested size: 503.61377pt x 377.7029pt.
  [5 <../../Final_figures/Rigby_tuned_other_gases_plus_RCP.pdf>]
-<"../../Final_figures/RF deviation versus Etminan over RCPs".pdf, id=232, 1156.32pt x 361.35pt>
+<"../../Final_figures/RF deviation versus Etminan over RCPs".pdf, id=233, 1156.32pt x 361.35pt>
 File: "../../Final_figures/RF deviation versus Etminan over RCPs".pdf Graphic file (type pdf)
 <use "../../Final_figures/RF deviation versus Etminan over RCPs".pdf>
 Package pdftex.def Info: "../../Final_figures/RF deviation versus Etminan over RCPs".pdf  used on input line 161.
 (pdftex.def)             Requested size: 503.61377pt x 157.37895pt.
  [6 <../../Final_figures/RF deviation versus Etminan over RCPs.pdf>]
-<"../../Final_figures/RCP concentration driven emissions".pdf, id=291, 1148.70096pt x 352.91534pt>
+<"../../Final_figures/RCP concentration driven emissions".pdf, id=292, 1148.70096pt x 352.91537pt>
 File: "../../Final_figures/RCP concentration driven emissions".pdf Graphic file (type pdf)
 <use "../../Final_figures/RCP concentration driven emissions".pdf>
 Package pdftex.def Info: "../../Final_figures/RCP concentration driven emissions".pdf  used on input line 168.
-(pdftex.def)             Requested size: 503.61377pt x 154.72318pt.
+(pdftex.def)             Requested size: 503.61377pt x 154.72319pt.
  [7
 
 
@@ -3422,7 +3422,7 @@ Package pdftex.def Info: "../../Final_figures/RCP concentration driven emissions
 
 
  <../../Final_figures/RCP concentration driven emissions.pdf>]
-<"../../Final_figures/RCP concentration driven RF".pdf, id=362, 1149.046pt x 352.91534pt>
+<"../../Final_figures/RCP concentration driven RF".pdf, id=650, 1149.046pt x 352.91534pt>
 File: "../../Final_figures/RCP concentration driven RF".pdf Graphic file (type pdf)
 <use "../../Final_figures/RCP concentration driven RF".pdf>
 Package pdftex.def Info: "../../Final_figures/RCP concentration driven RF".pdf  used on input line 175.
@@ -3430,7 +3430,7 @@ Package pdftex.def Info: "../../Final_figures/RCP concentration driven RF".pdf  
  [8
 
  <../../Final_figures/RCP concentration driven RF.pdf>]
-<"../../Final_figures/RCP concentration driven temperatures".pdf, id=404, 715.09659pt x 570.60364pt>
+<"../../Final_figures/RCP concentration driven temperatures".pdf, id=691, 715.09659pt x 570.60364pt>
 File: "../../Final_figures/RCP concentration driven temperatures".pdf Graphic file (type pdf)
 <use "../../Final_figures/RCP concentration driven temperatures".pdf>
 Package pdftex.def Info: "../../Final_figures/RCP concentration driven temperatures".pdf  used on input line 182.
@@ -3438,7 +3438,7 @@ Package pdftex.def Info: "../../Final_figures/RCP concentration driven temperatu
  [9
 
  <../../Final_figures/RCP concentration driven temperatures.pdf>]
-<"../../Final_figures/RCP emission driven concentrations".pdf, id=474, 1148.66959pt x 352.91534pt>
+<"../../Final_figures/RCP emission driven concentrations".pdf, id=761, 1148.66959pt x 352.91534pt>
 File: "../../Final_figures/RCP emission driven concentrations".pdf Graphic file (type pdf)
 <use "../../Final_figures/RCP emission driven concentrations".pdf>
 Package pdftex.def Info: "../../Final_figures/RCP emission driven concentrations".pdf  used on input line 188.
@@ -3470,11 +3470,11 @@ Here is how much of TeX's memory you used:
  48105 words of font info for 75 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  43i,9n,40p,1337b,504s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy9.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmbi8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on /home/leachl/Documents/Simple_models/FaIR_v2-0/GIR/Paper_ltx/Submission/LEACH_GMD_SI_v2.pdf (13 pages, 459742 bytes).
+{/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmbi8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
+Output written on /home/leachl/Documents/Simple_models/FaIR_v2-0/GIR/Paper_ltx/Submission/LEACH_GMD_SI_v2.pdf (13 pages, 477245 bytes).
 PDF statistics:
- 623 PDF objects out of 1000 (max. 8388607)
- 257 compressed objects within 3 object streams
+ 904 PDF objects out of 1000 (max. 8388607)
+ 487 compressed objects within 5 object streams
  44 named destinations out of 1000 (max. 500000)
  41 words of extra memory for PDF output out of 10000 (max. 10000000)
 

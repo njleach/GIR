@@ -3,8 +3,8 @@ INPUT /etc/texmf/web2c/texmf.cnf
 INPUT /usr/share/texmf/web2c/texmf.cnf
 INPUT /usr/share/texlive/texmf-dist/web2c/texmf.cnf
 INPUT /var/lib/texmf/web2c/pdftex/pdflatex.fmt
-INPUT /home/leachl/Documents/Simple_models/FaIR_v2-0/GIR/Paper_ltx/Submission/LEACH_GMD_SI_v2.tex
-OUTPUT /home/leachl/Documents/Simple_models/FaIR_v2-0/GIR/Paper_ltx/Submission/LEACH_GMD_SI_v2.log
+INPUT /home/leachl/Documents/Simple_models/FaIR_v2-0/GIR/Paper_ltx/Submission/MAIN_v2_v1_diff.tex
+OUTPUT /home/leachl/Documents/Simple_models/FaIR_v2-0/GIR/Paper_ltx/Submission/MAIN_v2_v1_diff.log
 INPUT /home/leachl/Documents/Simple_models/FaIR_v2-0/GIR/Paper_ltx/Submission/copernicus.cls
 INPUT /home/leachl/Documents/Simple_models/FaIR_v2-0/GIR/Paper_ltx/Submission/copernicus.cls
 INPUT /usr/share/texlive/texmf-dist/tex/latex/base/fixltx2e.sty
@@ -166,9 +166,9 @@ INPUT /usr/share/texlive/texmf-dist/tex/latex/hyperref/hpdftex.def
 INPUT /usr/share/texlive/texmf-dist/tex/latex/oberdiek/rerunfilecheck.sty
 INPUT /usr/share/texlive/texmf-dist/tex/latex/oberdiek/rerunfilecheck.sty
 INPUT /usr/share/texlive/texmf-dist/tex/latex/lineno/lineno.sty
-INPUT /home/leachl/Documents/Simple_models/FaIR_v2-0/GIR/Paper_ltx/Submission/LEACH_GMD_SI_v2.aux
-INPUT /home/leachl/Documents/Simple_models/FaIR_v2-0/GIR/Paper_ltx/Submission/LEACH_GMD_SI_v2.aux
-OUTPUT /home/leachl/Documents/Simple_models/FaIR_v2-0/GIR/Paper_ltx/Submission/LEACH_GMD_SI_v2.aux
+INPUT /home/leachl/Documents/Simple_models/FaIR_v2-0/GIR/Paper_ltx/Submission/MAIN_v2_v1_diff.aux
+INPUT /home/leachl/Documents/Simple_models/FaIR_v2-0/GIR/Paper_ltx/Submission/MAIN_v2_v1_diff.aux
+OUTPUT /home/leachl/Documents/Simple_models/FaIR_v2-0/GIR/Paper_ltx/Submission/MAIN_v2_v1_diff.aux
 INPUT /usr/share/texlive/texmf-dist/tex/latex/base/ts1cmr.fd
 INPUT /usr/share/texlive/texmf-dist/tex/latex/base/ts1cmr.fd
 INPUT /usr/share/texlive/texmf-dist/tex/latex/psnfss/t1ptm.fd
@@ -186,10 +186,9 @@ INPUT /usr/share/texlive/texmf-dist/tex/latex/hyperref/nameref.sty
 INPUT /usr/share/texlive/texmf-dist/tex/latex/hyperref/nameref.sty
 INPUT /usr/share/texlive/texmf-dist/tex/generic/oberdiek/gettitlestring.sty
 INPUT /usr/share/texlive/texmf-dist/tex/generic/oberdiek/gettitlestring.sty
-OUTPUT /home/leachl/Documents/Simple_models/FaIR_v2-0/GIR/Paper_ltx/Submission/LEACH_GMD_SI_v2.pdf
+OUTPUT /home/leachl/Documents/Simple_models/FaIR_v2-0/GIR/Paper_ltx/Submission/MAIN_v2_v1_diff.pdf
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/adobe/times/ptmr8t.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/adobe/times/ptmb8t.tfm
-INPUT /usr/share/texlive/texmf-dist/fonts/tfm/adobe/times/ptmbi8t.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm
 INPUT /usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
@@ -225,10 +224,16 @@ INPUT /usr/share/texlive/texmf-dist/fonts/tfm/adobe/times/ptmr8t.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/adobe/times/ptmr8t.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/adobe/times/ptmb8t.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/adobe/times/ptmr8t.tfm
-INPUT /usr/share/texlive/texmf-dist/fonts/tfm/adobe/times/ptmri8t.tfm
 INPUT /usr/share/texlive/texmf-dist/tex/latex/psnfss/t1phv.fd
 INPUT /usr/share/texlive/texmf-dist/tex/latex/psnfss/t1phv.fd
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/adobe/helvetic/phvr8t.tfm
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/adobe/times/ptmri8t.tfm
+INPUT /usr/share/texlive/texmf-dist/tex/latex/psnfss/ts1ptm.fd
+INPUT /usr/share/texlive/texmf-dist/tex/latex/psnfss/ts1ptm.fd
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/adobe/times/ptmr8c.tfm
+INPUT /home/leachl/Documents/Simple_models/FaIR_v2-0/GIR/Paper_ltx/Submission/../../Final_figures/GIR_schematic.pdf
+INPUT ../../Final_figures/GIR_schematic.pdf
+INPUT ../../Final_figures/GIR_schematic.pdf
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/adobe/times/ptmb8t.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmr9.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmmi9.tfm
@@ -239,8 +244,6 @@ INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/amsfonts/symbols/msbm10.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/vf/adobe/times/ptmb8t.vf
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/adobe/times/ptmb8r.tfm
 INPUT /var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map
-INPUT /usr/share/texlive/texmf-dist/fonts/vf/adobe/times/ptmbi8t.vf
-INPUT /usr/share/texlive/texmf-dist/fonts/tfm/adobe/times/ptmbi8r.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/vf/adobe/times/ptmr8t.vf
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/adobe/times/ptmr8r.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/vf/adobe/times/ptmr8t.vf
@@ -251,52 +254,60 @@ INPUT /usr/share/texlive/texmf-dist/fonts/vf/adobe/times/ptmr8t.vf
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/adobe/times/ptmr8r.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/vf/adobe/times/ptmb8t.vf
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/adobe/times/ptmb8r.tfm
-INPUT /usr/share/texlive/texmf-dist/fonts/vf/adobe/times/ptmri8t.vf
-INPUT /usr/share/texlive/texmf-dist/fonts/tfm/adobe/times/ptmri8r.tfm
-INPUT /usr/share/texlive/texmf-dist/fonts/vf/adobe/times/ptmr8t.vf
-INPUT /usr/share/texlive/texmf-dist/fonts/tfm/adobe/times/ptmr8r.tfm
-INPUT /usr/share/texlive/texmf-dist/fonts/vf/adobe/times/ptmb8t.vf
-INPUT /usr/share/texlive/texmf-dist/fonts/tfm/adobe/times/ptmb8r.tfm
-INPUT /home/leachl/Documents/Simple_models/FaIR_v2-0/GIR/Paper_ltx/Submission/../../Final_figures/iIRF100_numeric_analytic.pdf
-INPUT ../../Final_figures/iIRF100_numeric_analytic.pdf
-INPUT ../../Final_figures/iIRF100_numeric_analytic.pdf
-INPUT /home/leachl/Documents/Simple_models/FaIR_v2-0/GIR/Paper_ltx/Submission/../../Final_figures/RCP concetration driven residual emissions.pdf
-INPUT ../../Final_figures/RCP concetration driven residual emissions.pdf
-INPUT ../../Final_figures/RCP concetration driven residual emissions.pdf
-INPUT /home/leachl/Documents/Simple_models/FaIR_v2-0/GIR/Paper_ltx/Submission/../../Final_figures/Rigby_tuned_other_gases_plus_RCP.pdf
-INPUT ../../Final_figures/Rigby_tuned_other_gases_plus_RCP.pdf
-INPUT ../../Final_figures/Rigby_tuned_other_gases_plus_RCP.pdf
-INPUT /home/leachl/Documents/Simple_models/FaIR_v2-0/GIR/Paper_ltx/Submission/../../Final_figures/RF deviation versus Etminan over RCPs.pdf
-INPUT ../../Final_figures/RF deviation versus Etminan over RCPs.pdf
-INPUT ../../Final_figures/RF deviation versus Etminan over RCPs.pdf
-INPUT /usr/share/texlive/texmf-dist/fonts/tfm/adobe/times/ptmri8t.tfm
-INPUT /home/leachl/Documents/Simple_models/FaIR_v2-0/GIR/Paper_ltx/Submission/../../Final_figures/RCP concentration driven emissions.pdf
-INPUT ../../Final_figures/RCP concentration driven emissions.pdf
-INPUT ../../Final_figures/RCP concentration driven emissions.pdf
-INPUT /usr/share/texlive/texmf-dist/fonts/vf/adobe/times/ptmri8t.vf
-INPUT /usr/share/texlive/texmf-dist/fonts/tfm/adobe/times/ptmri8r.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/vf/adobe/helvetic/phvr8t.vf
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/adobe/helvetic/phvr8r.tfm
-INPUT /home/leachl/Documents/Simple_models/FaIR_v2-0/GIR/Paper_ltx/Submission/../../Final_figures/RCP concentration driven RF.pdf
-INPUT ../../Final_figures/RCP concentration driven RF.pdf
-INPUT ../../Final_figures/RCP concentration driven RF.pdf
-INPUT /home/leachl/Documents/Simple_models/FaIR_v2-0/GIR/Paper_ltx/Submission/../../Final_figures/RCP concentration driven temperatures.pdf
-INPUT ../../Final_figures/RCP concentration driven temperatures.pdf
-INPUT ../../Final_figures/RCP concentration driven temperatures.pdf
-INPUT /home/leachl/Documents/Simple_models/FaIR_v2-0/GIR/Paper_ltx/Submission/../../Final_figures/RCP emission driven concentrations.pdf
-INPUT ../../Final_figures/RCP emission driven concentrations.pdf
-INPUT ../../Final_figures/RCP emission driven concentrations.pdf
-INPUT /home/leachl/Documents/Simple_models/FaIR_v2-0/GIR/Paper_ltx/Submission/LEACH_GMD_SI_v2.bbl
-INPUT /home/leachl/Documents/Simple_models/FaIR_v2-0/GIR/Paper_ltx/Submission/LEACH_GMD_SI_v2.bbl
-INPUT /home/leachl/Documents/Simple_models/FaIR_v2-0/GIR/Paper_ltx/Submission/LEACH_GMD_SI_v2.aux
+INPUT /usr/share/texlive/texmf-dist/fonts/vf/adobe/times/ptmri8t.vf
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/adobe/times/ptmri8r.tfm
+INPUT /usr/share/texlive/texmf-dist/fonts/vf/adobe/times/ptmr8t.vf
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/adobe/times/ptmr8r.tfm
+INPUT /usr/share/texlive/texmf-dist/fonts/vf/adobe/times/ptmr8c.vf
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/adobe/times/ptmr8t.tfm
+INPUT /usr/share/texlive/texmf-dist/fonts/vf/adobe/times/ptmb8t.vf
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/adobe/times/ptmb8r.tfm
+INPUT /home/leachl/Documents/Simple_models/FaIR_v2-0/GIR/Paper_ltx/Submission/../../Final_figures/Emission driven historical concentrations.pdf
+INPUT ../../Final_figures/Emission driven historical concentrations.pdf
+INPUT ../../Final_figures/Emission driven historical concentrations.pdf
+INPUT /home/leachl/Documents/Simple_models/FaIR_v2-0/GIR/Paper_ltx/Submission/../../Final_figures/Etminan verification over RCPs.pdf
+INPUT ../../Final_figures/Etminan verification over RCPs.pdf
+INPUT ../../Final_figures/Etminan verification over RCPs.pdf
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/adobe/times/ptmri8t.tfm
+INPUT /usr/share/texlive/texmf-dist/fonts/vf/adobe/times/ptmri8t.vf
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/adobe/times/ptmri8r.tfm
+INPUT /home/leachl/Documents/Simple_models/FaIR_v2-0/GIR/Paper_ltx/Submission/../../Final_figures/FaIRv2 v13 MAGICC comparison harmonized SSP default gas concentrations.pdf
+INPUT ../../Final_figures/FaIRv2 v13 MAGICC comparison harmonized SSP default gas concentrations.pdf
+INPUT ../../Final_figures/FaIRv2 v13 MAGICC comparison harmonized SSP default gas concentrations.pdf
+INPUT /home/leachl/Documents/Simple_models/FaIR_v2-0/GIR/Paper_ltx/Submission/../../Final_figures/FaIRv2 v13 MAGICC comparison harmonized SSP default gas forcing response.pdf
+INPUT ../../Final_figures/FaIRv2 v13 MAGICC comparison harmonized SSP default gas forcing response.pdf
+INPUT ../../Final_figures/FaIRv2 v13 MAGICC comparison harmonized SSP default gas forcing response.pdf
+INPUT /home/leachl/Documents/Simple_models/FaIR_v2-0/GIR/Paper_ltx/Submission/../../Final_figures/FaIRv2 v13 MAGICC comparison harmonized SSP default probabilistic temperature response.pdf
+INPUT ../../Final_figures/FaIRv2 v13 MAGICC comparison harmonized SSP default probabilistic temperature response.pdf
+INPUT ../../Final_figures/FaIRv2 v13 MAGICC comparison harmonized SSP default probabilistic temperature response.pdf
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/adobe/times/ptmr8t.tfm
+INPUT /usr/share/texlive/texmf-dist/fonts/vf/adobe/times/ptmr8t.vf
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/adobe/times/ptmr8r.tfm
+INPUT /home/leachl/Documents/Simple_models/FaIR_v2-0/GIR/Paper_ltx/Submission/MAIN_v2_v1_diff.bbl
+INPUT /home/leachl/Documents/Simple_models/FaIR_v2-0/GIR/Paper_ltx/Submission/MAIN_v2_v1_diff.bbl
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/adobe/times/ptmr8c.tfm
+INPUT /usr/share/texlive/texmf-dist/fonts/vf/adobe/times/ptmr8c.vf
+INPUT /home/leachl/Documents/Simple_models/FaIR_v2-0/GIR/Paper_ltx/Submission/MAIN_v2_v1_diff.aux
 INPUT /usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc
+INPUT /usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb
 INPUT /usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb
+INPUT /usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb
+INPUT /usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb
+INPUT /usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb
 INPUT /usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb
+INPUT /usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb
+INPUT /usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb
 INPUT /usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb
 INPUT /usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb
+INPUT /usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb
+INPUT /usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb
 INPUT /usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb
+INPUT /usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb
+INPUT /usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy9.pfb
+INPUT /usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/latxfont/lasy6.pfb
 INPUT /usr/share/texlive/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb
 INPUT /usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmb8a.pfb
-INPUT /usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmbi8a.pfb
 INPUT /usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmr8a.pfb
 INPUT /usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmri8a.pfb

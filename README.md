@@ -7,6 +7,7 @@ The gas cycle of GIR is based on the carbon cycle component of the Finite amplit
 The concentration-forcing equation in GIR has three terms: logarithmic, linear and square-root. These allow the dominant behaviours of increasing gas concentrations of species with differing spectral saturation levels to be represented faithfully (and can also allow for inclusion of some non-linearity beyond the dominant term).
 The thermal response is a simple impulse-response energy balance model [Gregory et al. (2002)]. While the most commonly used version of this model calculate thermal response based on a two-layer system, work has suggested that the responses of complex GCMs can be emulated better by a three-layer system [Tsutsui (2017)], largely to improve the very short timescale response. As such, we keep the number of layer in GIR general, though our default thermal parameter set contains three.
 ## Installing GIR
+GIR is compatible with python 3.5+ (due to the use of starred expressions in some routines).
 Currently, GIR is not provided as a conda or pip python module (though we hope to provide this in the future). Users must download or pull the latest version from this [repo](https://github.com/njleach/GIR).
 ## Running GIR
 To use GIR in a python script or jupyter notebook, you must include the following lines in your preamble:
@@ -44,6 +45,9 @@ GIR is currently in version 1.0.0. Versioning is as follows:
 | Major | Large scale changes to the model and how it is run. Not necessarily backwards compatible. |
 | Intermediate | Changes to the functionality or operation of the model or packaged functions. Backwards compatible.  |
 | Minor | Changes to the code structure with no user-end changes. Updates to the default parameter sets. |
+
+#Zenodo DOI
+[![DOI](https://zenodo.org/badge/231077183.svg)](https://zenodo.org/badge/latestdoi/231077183)
 
 # License
 [CC4.0](https://creativecommons.org/licenses/by/4.0/)
