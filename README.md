@@ -47,7 +47,7 @@ GIR is currently in version 1.0.0. Versioning is as follows:
 | Intermediate | Changes to the functionality or operation of the model or packaged functions. Backwards compatible.  |
 | Minor | Changes to the code structure with no user-end changes. Updates to the default parameter sets. |
 
-#Zenodo DOI
+# Zenodo DOI
 
 [![DOI](https://zenodo.org/badge/231077183.svg)](https://zenodo.org/badge/latestdoi/231077183)
 
