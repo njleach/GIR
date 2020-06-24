@@ -130,13 +130,22 @@ def GIR_model(emissions = False, concentrations = False, forcing = False, a=a, t
 	print('GIR run over ', dim_scens, ' scenario, ', dim_gas_param_sets, ' gas parameter sets, ', dim_thermal_param_sets, ' thermal parameter sets, ', dim_gases, ' gases, and ', n_year, ' years...')
 	return E_out, C_out, RF_out, T_out, alpha_out
 
-def make_input_dimensions(input_array, num_scens, num_gas_params, num_thermal_params, num_gases, num_years):
+
+def make_input_dimensions_test(input_array, num_scens, num_gas_params, num_thermal_params, num_gases, num_years):
 
 	fail_bool = False
 
-	# inout array
-	if (np.array(input_array.shape[:-1]) == np.array([num_scens, num_gas_params, num_thermal_params, num_gases])).all():
-		pass
+	# input array
+	if np.array(input_array.shape[:-1]).size == np.array([num_scens, num_gas_params, num_thermal_params, num_gases]).size:
+		print('same')
+
+	if np.array(input_array.shape[:-1]).size == np.array([num_scens, num_gas_params, num_thermal_params, num_gases]).size:
+		for i in range(0,np.array(input_array.shape[:-1]).size):
+			if np.array(input_array.shape[:-1])[i] == np.array([num_scens, num_gas_params, num_thermal_params, num_gases])[i]:
+				pass
+			else:
+				print('====================================================')
+				print('FAILED: input array wrong shape')
 	elif num_gases != input_array.shape[-2]:
 		print('====================================================')
 		print('FAILED: number of gases doesn\'t match size of input array')
@@ -148,15 +157,15 @@ def make_input_dimensions(input_array, num_scens, num_gas_params, num_thermal_pa
 		print('FAILED: Be more careful with input_array\'s shape!')
 		print('Dimensions should be of form: [num_scens, num_gas_params, num_thermal_params, num_gases, num_years]')
 		fail_bool = True
-
-
+    
 	if fail_bool == False:
 		print('input_array outputted in form [num_scens, num_gas_params, num_thermal_params, num_gases, num_years]...')	
 		return input_array
 	else:
 		return input_array
 
-def make_param_dimensions(a, tau, r, PI_conc, emis2conc, f, d, q, num_scens, num_gas_params, num_thermal_params, num_gases):
+    
+def make_param_dimensions(a, tau, r, PI_conc, emis2conc, f, d, q, num_scens, num_gas_params, num_thermal_params, num_gases, num_therm_boxes):
 
 	fail_bool = False
 
@@ -253,11 +262,11 @@ def make_param_dimensions(a, tau, r, PI_conc, emis2conc, f, d, q, num_scens, num
 	# d array
 	if (np.array(d.shape) == np.array([num_scens, num_gas_params, num_thermal_params, num_gases])).all():
 		pass
-	elif num_gases != d.shape[-1]:
+	elif num_therm_boxes != d.shape[-1]:
 		print('====================================================')
 		print('FAILED: number of gases doesn\'t match size of \'d\' array')
 		fail_bool = True
-	elif (num_scens == 1) and (num_gas_params == 1) and (num_thermal_params == 1) and (np.array(d.shape) == np.array([num_gases])).all():
+	elif (num_scens == 1) and (num_gas_params == 1) and (num_thermal_params == 1) and (np.array(d.shape) == np.array([num_therm_boxes])).all():
 		d = d[np.newaxis, np.newaxis, np.newaxis, ...]
 	else:
 		print('====================================================')
@@ -268,11 +277,11 @@ def make_param_dimensions(a, tau, r, PI_conc, emis2conc, f, d, q, num_scens, num
 	# q array
 	if (np.array(q.shape) == np.array([num_scens, num_gas_params, num_thermal_params, num_gases])).all():
 		pass
-	elif num_gases != q.shape[-1]:
+	elif num_therm_boxes != q.shape[-1]:
 		print('====================================================')
 		print('FAILED: number of gases doesn\'t match size of \'q\' array')
 		fail_bool = True
-	elif (num_scens == 1) and (num_gas_params == 1) and (num_thermal_params == 1) and (np.array(q.shape) == np.array([num_gases])).all():
+	elif (num_scens == 1) and (num_gas_params == 1) and (num_thermal_params == 1) and (np.array(q.shape) == np.array([num_therm_boxes])).all():
 		q = q[np.newaxis, np.newaxis, np.newaxis, ...]
 	else:
 		print('====================================================')
