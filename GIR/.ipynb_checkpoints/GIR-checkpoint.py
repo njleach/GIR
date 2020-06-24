@@ -509,6 +509,30 @@ def unstep_forcing(forcing_in,gas_parameters=get_gas_parameter_defaults(),therma
 
 ## Fitting the r parameters from Emissions and Concentrations ##
 
+def OLSE_NORM(X,Y,add_intercept=True):
+    
+    ## computes a multiple OLS regression over a field against several indices. First dimension is time, second is features (X), or targets (Y)
+    
+    if add_intercept:
+    
+        X_1 = np.concatenate((np.ones(X.shape[0])[:,np.newaxis],X),axis=1)
+        
+    else:
+        
+        X_1 = X.copy()
+    
+    B = np.dot( np.linalg.inv( np.dot( X_1.T , X_1 ) ) , np.dot( X_1.T , Y ) )
+    
+    e = Y - np.dot(X_1,B)
+    
+    SSE = np.sum(e**2,axis=0)
+
+    MSE_var = SSE / (X_1.shape[0] - X_1.shape[-1])
+
+    SE_B = np.sqrt( np.diag( np.linalg.inv( np.dot( X_1.T , X_1 ) ) )[:,np.newaxis] * MSE_var[np.newaxis,:] )
+    
+    return {'coefs':B[1:],'coef_err':SE_B[1:],'res':e,'intercept':B[0],'intercept_err':SE_B[0]}
+
 def alpha_root(alpha,R_old,C,E,a,tau,PI_conc,emis2conc,dt=1):
     
     # computes alpha through a root finding algorithm from emissions and concentrations
