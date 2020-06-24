@@ -258,12 +258,7 @@ def step_temperature(S_old,F,q,d,dt=1):
 	return S_new,T
 
 
-def run_GIR( emissions_in = False , \
-				concentrations_in = False , \
-				forcing_in = False , \
-				gas_parameters = get_gas_parameter_defaults() , \
-				thermal_parameters = get_thermal_parameter_defaults() , \
-				show_run_info = True ):
+def run_GIR( emissions_in = False , concentrations_in = False , forcing_in = False , gas_parameters = get_gas_parameter_defaults() , thermal_parameters = get_thermal_parameter_defaults() , show_run_info = True ):
 
 	# Determine the number of scenario runs , parameter sets , gases , integration period, timesteps
 
@@ -307,6 +302,7 @@ def run_GIR( emissions_in = False , \
 	else:
 		d = input_to_numpy(thermal_parameters.loc[['d']])[np.newaxis,np.newaxis,...,0]
 		q = input_to_numpy(thermal_parameters.loc[['q']])[np.newaxis,np.newaxis,...,0]
+
 
 	if show_run_info:
 		print('Integrating ' + str(dim_scenario) + ' scenarios, ' + str(dim_gas_param) + ' gas cycle parameter sets, ' + str(dim_thermal_param) + ' independent thermal response parameter sets, over ' + str(list(emissions_in.columns.levels[1])) + ', between ' + str(time_index[0]) + ' and ' + str(time_index[-1]) + '...')
@@ -398,9 +394,7 @@ def run_GIR( emissions_in = False , \
 ############################### Advanced Tools #################################
 
 
-def prescribed_temps_gas_cycle(emissions_in , \
-				gas_parameters , \
-			    T):
+def prescribed_temps_gas_cycle(emissions_in , gas_parameters , T):
 
 	# for running the gas cycle module only, with a prescribed temperature dataset. For fitting cycle parameters
 
@@ -461,54 +455,6 @@ def prescribed_temps_gas_cycle(emissions_in , \
 	return out_dict
 
 
-# def unstep_concentration(C, T, a, tau, r, PI_conc, emis2conc, timestep, concentration_driven = False):
-
-# 	## This is intended to be used with arrays of the shape the main model (ie in the main model) uses for calculation, and outputs data in a similar format (ie. not pandas!)
-
-# 	# Dimensions : [scenario, gas params, thermal params, gas, time, (gas/thermal pools)]
-
-# 	# If this switch is turned on, the model will set the pre-industrial concentration value equal to the first timestep it's given (avoiding initialisation shock)
-# # 	if concentration_driven:
-# # 		PI_conc = C[...,0]
-
-# 	dim_scenario = T.shape[0]
-# 	dim_gas_param = T.shape[1]
-# 	dim_thermal_param = T.shape[2]
-# 	n_gas = C.shape[3]
-# 	n_year = C.shape[4]
-    
-# 	alpha = np.zeros((dim_scenario,dim_gas_param,dim_thermal_param,n_gas,n_year))
-# 	G = alpha.copy()
-# 	emissions = alpha.copy()
-# 	R = np.zeros(a.shape)
-
-# 	G_A = (C - PI_conc[...,np.newaxis]) / emis2conc[...,np.newaxis]
-
-# 	g1 = np.sum( a * tau * ( 1. - ( 1. + 100/tau ) * np.exp(-100/tau) ), axis=-1 )
-# 	g0 = ( np.sinh( np.sum( a * tau * ( 1. - np.exp(-100/tau) ) , axis=-1) / g1 ) )**(-1.)
-
-# 	# inital timestep all variables are 0
-
-# 	dt = timestep[0]
-
-# 	alpha[...,0] = calculate_alpha(G=G[...,0],G_A=G[...,0],T=G[...,0],r=r,g0=g0,g1=g1)
-
-# 	emissions[...,0] = ( ( C[...,0] - PI_conc - np.sum(R * np.exp( -dt/(alpha[...,0,np.newaxis] * tau) ) ,axis=-1 ) ) / emis2conc ) / np.sum( a * alpha[...,0,np.newaxis] * ( tau / dt ) * ( 1. - np.exp( -dt / ( alpha[...,0,np.newaxis] * tau ) ) ) , axis=-1 )
-
-# 	R = emissions[...,0,np.newaxis] * emis2conc[...,np.newaxis] * a * alpha[...,0,np.newaxis] * ( tau / dt ) * ( 1. - np.exp( -dt/(alpha[...,0,np.newaxis]*tau) ) ) + R * np.exp( -dt/(alpha[...,0,np.newaxis] * tau) )
-
-# 	G = np.cumsum(emissions,axis=-1)
-
-# 	for t in np.arange(1,C.shape[-1]):
-# 		dt = timestep[t]
-# 		alpha[...,t] = calculate_alpha(G=G[...,t-1],G_A=G_A[...,t-1],T=T[...,t-1,np.newaxis],r=r,g0=g0,g1=g1)
-# 		emissions[...,t] = ( ( C[...,t] - PI_conc - np.sum( R * np.exp( -dt / ( alpha[...,t,np.newaxis] * tau ) ) ,axis=-1 ) ) / emis2conc ) / np.sum( a * alpha[...,t,np.newaxis] * ( tau / dt ) * ( 1. - np.exp( -dt / ( alpha[...,t,np.newaxis] * tau ) ) ) , axis=-1 )
-# 		R = emissions[...,t,np.newaxis] * emis2conc[...,np.newaxis] * a * alpha[...,t,np.newaxis] * ( tau / dt ) * ( 1. - np.exp( -dt/(alpha[...,t,np.newaxis]*tau) ) ) + R * np.exp( -dt/(alpha[...,t,np.newaxis] * tau) )
-# 		G = np.cumsum(emissions,axis=-1)
-
-# 	return emissions, R, G, G_A[...,-1]
-
-
 def unstep_forcing(forcing_in,gas_parameters=get_gas_parameter_defaults(),thermal_params=get_thermal_parameter_defaults()):
     
     f = input_to_numpy(gas_parameters.loc['f1':'f3'])[np.newaxis,:,np.newaxis,...]
@@ -561,6 +507,69 @@ def unstep_forcing(forcing_in,gas_parameters=get_gas_parameter_defaults(),therma
     return C_out
 
 
+## Fitting the r parameters from Emissions and Concentrations ##
+
+def alpha_root(alpha,R_old,C,E,a,tau,PI_conc,emis2conc,dt=1):
+    
+    # computes alpha through a root finding algorithm from emissions and concentrations
+
+    return E - ( C - PI_conc - np.sum(R_old * np.exp( -dt/(alpha*tau) ) , axis=-1 ) ) / ( emis2conc * np.sum( a * alpha * ( tau / dt ) * ( 1. - np.exp( -dt / ( alpha * tau ) ) ) , axis=-1 ) )
+
+def get_alpha_from_E_C(C,E,a,tau,PI_conc,emis2conc,timestep=False):
+    
+    # returns alpha from concentrations and emissions
+    
+    if timestep is False:
+        timestep = np.ones_like(C)
+    C_end = np.zeros_like(C)
+    alpha = np.zeros_like(C)
+    C_calc = np.zeros_like(C)
+    G_A = np.zeros_like(C)
+    
+    R = np.zeros_like(a)
+    C_end[0] = C[0]*2 - PI_conc
+    alpha[0] = sp.optimize.root(alpha_root,0.1,args=(R,C_end[0],E[0],a,tau,PI_conc,emis2conc,timestep[0]),method='lm').x
+    C_calc[0],R,G_A[0] = step_concentration(R_old=R,alpha=alpha[0],E=E[0],a=a,tau=tau,PI_conc=PI_conc,emis2conc=emis2conc,dt=timestep[0])
+    
+    for t in np.arange(1,C.size):
+        C_end[t] = C[t]*2 - C_end[...,t-1]
+        alpha[t] = sp.optimize.root(alpha_root,alpha[t-1],args=(R,C_end[t],E[t],a,tau,PI_conc,emis2conc,timestep[t]),method='lm').x
+        C_calc[t],R,G_A[t] = step_concentration(R_old=R,alpha=alpha[t],E=E[t],a=a,tau=tau,PI_conc=PI_conc,emis2conc=emis2conc,dt=timestep[t])
+        
+    return alpha,C_calc,G_A
+
+def fit_r0_rC_rT_rA(C,E,T,a,tau,PI_conc,emis2conc,timestep=False,coefs=['r_U','r_T','r_C']):
+    
+    # computes alpha from concentrations/emissions and returns the linear fit to specified r parameters
+    
+    if timestep==False:
+        timestep = np.ones_like(C)
+    
+    alpha,C_calc,G_A = get_alpha_from_E_C(C,E,a,tau,PI_conc,emis2conc,timestep)
+    G = np.cumsum(E)
+    
+    g1 = np.sum( a * tau * ( 1. - ( 1. + 100/tau ) * np.exp(-100/tau) ), axis=-1 )
+    g0 = ( np.sinh( np.sum( a * tau * ( 1. - np.exp(-100/tau) ) , axis=-1) / g1 ) )**(-1.)
+    
+    X = []
+    
+    if 'r_U' in coefs:
+        X += [G-G_A]
+    if 'r_T' in coefs:
+        X += [T]
+    if 'r_C' in coefs:
+        X += [G_A]
+    
+    X = np.array(X).T
+    Y = g1*np.arcsinh(alpha/g0)[:,np.newaxis]
+    
+    # have to shift the X and Y arrays since alpha starts at the PI value & regressors start at the 1st timestep
+    _lr = OLSE_NORM(X[:-1],Y[1:])
+    
+    return pd.Series(dict(zip(['r_0']+coefs,list(_lr['intercept'])+list(_lr['coefs'].flatten()))))
+
+## Extra definition to easily grab the Tsutsui (2020) parameters ##
+
 def get_cmip6_thermal_params():
     
     JT_params = pd.read_csv(Path(__file__).parent / "./J_Tsutsui_params/2019-09-20_1417/parms_cmip6_20190920.csv")
@@ -595,3 +604,8 @@ def get_cmip6_thermal_params():
     JT_UnFaIR_params.loc['q',([x for x in JT_UnFaIR_params.columns.levels[0] if 'irm-2' in x],3)] = 0
     
     return JT_UnFaIR_params
+
+
+
+
+
