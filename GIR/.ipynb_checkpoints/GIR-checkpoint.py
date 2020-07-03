@@ -260,136 +260,148 @@ def step_temperature(S_old,F,q,d,dt=1):
 
 def run_GIR( emissions_in = False , concentrations_in = False , forcing_in = False , gas_parameters = get_gas_parameter_defaults() , thermal_parameters = get_thermal_parameter_defaults() , show_run_info = True ):
 
-	# Determine the number of scenario runs , parameter sets , gases , integration period, timesteps
+    # Determine the number of scenario runs , parameter sets , gases , integration period, timesteps
 
-	# There are 2 modes : emissions_driven , concentration_driven
+    # There are 2 modes : emissions_driven , concentration_driven
 
-	# The model will assume if both are given then emissions take priority
+    # The model will assume if both are given then emissions take priority
 
-	if emissions_in is False: # check if concentration driven
-		concentration_driven = True
-		emissions_in = return_empty_emissions(concentrations_in,gases_in=concentrations_in.columns.levels[1])
-		time_index = concentrations_in.index
-	else: # otherwise emissions driven
-		concentration_driven=False
-		time_index = emissions_in.index
+    if emissions_in is False: # check if concentration driven
+        concentration_driven = True
+        emissions_in = return_empty_emissions(concentrations_in,gases_in=concentrations_in.columns.levels[1])
+        time_index = concentrations_in.index
+    else: # otherwise emissions driven
+        concentration_driven=False
+        time_index = emissions_in.index
 
-	dim_scenario,scen_names = emissions_in.columns.levels[0].size,list(emissions_in.columns.levels[0])
-	dim_gas_param,gas_set_names = gas_parameters.columns.levels[0].size,list(gas_parameters.columns.levels[0])
-	dim_thermal_param,thermal_set_names = thermal_parameters.columns.levels[0].size,list(thermal_parameters.columns.levels[0])
-	n_gas,gas_names = gas_parameters.columns.levels[1].size,list(gas_parameters.columns.levels[1])
-	n_year = time_index.size
+    [(dim_scenario,scen_names),(dim_gas_param,gas_set_names),(dim_thermal_param,thermal_set_names)]=[(x.size,list(x)) for x in [emissions_in.columns.levels[0],gas_parameters.columns.levels[0],thermal_parameters.columns.levels[0]]]
+    gas_names = [x for x in gas_parameters.columns.levels[1] if '|' not in x]
+    n_gas = len(gas_names)
+    n_forc,forc_names = gas_parameters.columns.levels[1].size,list(gas_parameters.columns.levels[1])
+    n_year = time_index.size
 
-	names_list = [scen_names,gas_set_names,thermal_set_names,gas_names]
-	names_titles = ['Scenario','Gas cycle set','Thermal set','Gas name']
+    ## map the concentrations onto the forcings 
+    gas_forc_map = [gas_names.index(forc_names[x].split('|')[0]) for x in np.arange(len(forc_names))]
 
-	timestep = np.append(np.diff(time_index),np.diff(time_index)[-1])
+    names_list = [scen_names,gas_set_names,thermal_set_names,gas_names]
+    names_titles = ['Scenario','Gas cycle set','Thermal set','Gas name']
+    forc_names_list = [scen_names,gas_set_names,thermal_set_names,forc_names]
+    forc_names_titles = ['Scenario','Gas cycle set','Thermal set','Forcing component']
 
-	# Reformat inputs into the right shape, first sorting the scenarios and gases to ensure everything matches up
+    timestep = np.append(np.diff(time_index),np.diff(time_index)[-1])
 
-	gas_parameters = gas_parameters.reindex(gas_names,axis=1,level=1).reindex(gas_set_names,axis=1,level=0)
-	emissions = input_to_numpy(emissions_in.reindex(scen_names,axis=1,level=0).reindex(gas_names,axis=1,level=1))[:,np.newaxis,np.newaxis,...]
-            
-	# If thermal parameter names are identical to gas parameter names, assume they are dependent (correspond exactly)
-    
-	if set(gas_set_names) == set(thermal_set_names):
-		thermal_parameters = thermal_parameters.reindex(gas_set_names,axis=1,level=0)
-		d = input_to_numpy(thermal_parameters.loc[['d']])[np.newaxis,:,np.newaxis,...,0]
-		q = input_to_numpy(thermal_parameters.loc[['q']])[np.newaxis,:,np.newaxis,...,0]
-		dim_thermal_param=1
-		names_list = [scen_names,gas_set_names,gas_names]
-		names_titles = ['Scenario','Parameter set','Gas name']
-	else:
-		d = input_to_numpy(thermal_parameters.loc[['d']])[np.newaxis,np.newaxis,...,0]
-		q = input_to_numpy(thermal_parameters.loc[['q']])[np.newaxis,np.newaxis,...,0]
+    emissions = emissions_in.loc[:,(scen_names,gas_names)].values.T.reshape(dim_scenario,1,1,n_gas,n_year)
 
+    # check if no dimensions are degenerate
+    if (set(scen_names) != set(gas_set_names))&(set(scen_names) != set(thermal_set_names))&(set(gas_set_names) != set(thermal_set_names)):
+        gas_shape, gas_slice = [1,dim_gas_param,1],gas_set_names
+        therm_shape, therm_slice = [1,1,dim_thermal_param],thermal_set_names
+    # check if all degenerate
+    elif (set(scen_names) == set(gas_set_names))&(set(scen_names) == set(thermal_set_names)):
+        gas_shape, gas_slice = [dim_scenario,1,1],scen_names
+        therm_shape, therm_slice = [dim_scenario,1,1],scen_names
+        dim_gas_param = 1
+        dim_thermal_param = 1
+        [x.pop(1) for x in [names_list,names_titles,forc_names_list,forc_names_titles]]
+        [x.pop(1) for x in [names_list,names_titles,forc_names_list,forc_names_titles]]
+    # check other possibilities
+    else:
+        if set(scen_names) == set(gas_set_names):
+            gas_shape, gas_slice = [dim_scenario,1,1],scen_names
+            therm_shape, therm_slice = [1,1,dim_thermal_param],thermal_set_names
+            dim_gas_param = 1
+            [x.pop(1) for x in [names_list,names_titles,forc_names_list,forc_names_titles]]
+        elif set(scen_names) == set(thermal_set_names):
+            gas_shape, gas_slice = [1,dim_gas_param,1],gas_set_names
+            therm_shape, therm_slice = [dim_scenario,1,1],scen_names
+            dim_thermal_param = 1
+            [x.pop(2) for x in [names_list,names_titles,forc_names_list,forc_names_titles]]
+        else:
+            gas_shape, gas_slice = [1,dim_gas_param,1],gas_set_names
+            therm_shape, therm_slice = [1,dim_gas_param,1],gas_set_names
+            dim_thermal_param = 1
+            [x.pop(2) for x in [names_list,names_titles,forc_names_list,forc_names_titles]]    
 
-	if show_run_info:
-		print('Integrating ' + str(dim_scenario) + ' scenarios, ' + str(dim_gas_param) + ' gas cycle parameter sets, ' + str(dim_thermal_param) + ' independent thermal response parameter sets, over ' + str(list(emissions_in.columns.levels[1])) + ', between ' + str(time_index[0]) + ' and ' + str(time_index[-1]) + '...')
-        
-	if forcing_in is False:
-		ext_forcing = np.zeros((dim_scenario,dim_gas_param,dim_thermal_param,1,n_year))
-	else:
-		forcing_in = forcing_in.reindex(scen_names,axis=1,level=0)
-		ext_forcing = input_to_numpy(forcing_in)[:,np.newaxis,np.newaxis,...]
+    a,tau,r,PI_conc,emis2conc=[gas_parameters.loc[x,(gas_slice,gas_names)].values.T.reshape(gas_shape+[n_gas,-1]) for x in [['a1','a2','a3','a4'],['tau1','tau2','tau3','tau4'],['r0','rC','rT','rA'],'PI_conc','emis2conc']]
+    f = gas_parameters.loc['f1':'f3',(gas_slice,forc_names)].values.T.reshape(gas_shape+[n_forc,-1])
+    d,q = [thermal_parameters.loc[[x],(therm_slice,slice(None))].values.T.reshape(therm_shape+[-1]) for x in ['d','q']]
 
-	# Slice the parameter sets into numpy arrays of the right shape
-	# Dimensions : [scenario, gas params, thermal params, gas, time, (gas/thermal pools)]
+    if show_run_info:
+        print('Integrating ' + str(dim_scenario) + ' scenarios, ' + str(dim_gas_param) + ' gas cycle parameter sets, ' + str(dim_thermal_param) + ' independent thermal response parameter sets, over ' + str(list(emissions_in.columns.levels[1])) + ', between ' + str(time_index[0]) + ' and ' + str(time_index[-1]) + '...')
 
-	a = input_to_numpy(gas_parameters.loc['a1':'a4'])[np.newaxis,:,np.newaxis,...]
-	tau = input_to_numpy(gas_parameters.loc['tau1':'tau4'])[np.newaxis,:,np.newaxis,...]
-	r = input_to_numpy(gas_parameters.loc['r0':'rA'])[np.newaxis,:,np.newaxis,...]
-	emis2conc = input_to_numpy(gas_parameters.loc[['emis2conc']])[np.newaxis,:,np.newaxis,...,0]
-	PI_conc = input_to_numpy(gas_parameters.loc[['PI_conc']])[np.newaxis,:,np.newaxis,...,0]
-    
-	g1 = np.sum( a * tau * ( 1. - ( 1. + 100/tau ) * np.exp(-100/tau) ), axis=-1 )
-	g0 = ( np.sinh( np.sum( a * tau * ( 1. - np.exp(-100/tau) ) , axis=-1) / g1 ) )**(-1.)
-    
-	f = input_to_numpy(gas_parameters.loc['f1':'f3'])[np.newaxis,:,np.newaxis,...]
+    if forcing_in is False:
+        ext_forcing = np.zeros((dim_scenario,1,1,1,n_year))
+    else:
+        forcing_in = forcing_in.reindex(scen_names,axis=1,level=0)
+        ext_forcing = forcing_in.loc[:,(scen_names,slice(None))].values.T.reshape(dim_scenario,1,1,1,n_year)
 
-	# Create appropriate shape variable arrays / calculate RF if concentration driven
+    # Dimensions : [scenario, gas params, thermal params, gas, time, (gas/thermal pools)]
 
-	C = np.zeros((dim_scenario,dim_gas_param,dim_thermal_param,n_gas,n_year))
-	RF = np.zeros((dim_scenario,dim_gas_param,dim_thermal_param,n_gas,n_year))
-	T = np.zeros((dim_scenario,dim_gas_param,dim_thermal_param,n_year))
-	alpha = np.zeros((dim_scenario,dim_gas_param,dim_thermal_param,n_gas,n_year))
-	alpha[...,0] = calculate_alpha(G=np.zeros(C[...,0].shape),G_A=np.zeros(C[...,0].shape),T=np.zeros(C[...,0].shape),r=r,g0=g0,g1=g1)
+    g1 = np.sum( a * tau * ( 1. - ( 1. + 100/tau ) * np.exp(-100/tau) ), axis=-1 )
+    g0 = ( np.sinh( np.sum( a * tau * ( 1. - np.exp(-100/tau) ) , axis=-1) / g1 ) )**(-1.)
 
-	if concentration_driven:
+    # Create appropriate shape variable arrays / calculate RF if concentration driven
 
-		diagnosed_emissions = np.zeros((dim_scenario,dim_gas_param,dim_thermal_param,n_gas,n_year))
-		C[:] = input_to_numpy(concentrations_in.reindex(scen_names,axis=1,level=0).reindex(gas_names,axis=1,level=1))[:,np.newaxis,np.newaxis,...]
-		C_end = np.zeros(C.shape)
-		RF[:] = step_forcing(C,PI_conc[...,np.newaxis],f[...,np.newaxis,:])
-		C_end[...,0] = C[...,0]*2 - PI_conc
-		diagnosed_emissions[...,0],R,G_A = unstep_concentration(R_old=np.zeros(a.shape),C=C_end[...,0],alpha=alpha[...,0,np.newaxis],a=a,tau=tau,PI_conc=PI_conc,emis2conc=emis2conc,dt=timestep[0])
-		S,T[...,0] = step_temperature(S_old=np.zeros(d.shape),F=np.sum(RF[...,0],axis=-1)[...,np.newaxis]+ext_forcing[...,0],q=q,d=d,dt=timestep[0])
-		for t in np.arange(1,n_year):
-			G = np.sum(diagnosed_emissions,axis=-1)
-			alpha[...,t] = calculate_alpha(G=G,G_A=G_A,T=np.sum(S,axis=-1)[...,np.newaxis],r=r,g0=g0,g1=g1)
-			C_end[...,t] = C[...,t]*2 - C_end[...,t-1]
-			diagnosed_emissions[...,t],R,G_A = unstep_concentration(R_old=R,C=C_end[...,t],alpha=alpha[...,t,np.newaxis],a=a,tau=tau,PI_conc=PI_conc,emis2conc=emis2conc,dt=timestep[t])
-			S,T[...,t] = step_temperature(S_old=S,F=np.sum(RF[...,t],axis=-1)[...,np.newaxis]+ext_forcing[...,t],q=q,d=d,dt=timestep[t])
+    C = np.zeros((dim_scenario,dim_gas_param,dim_thermal_param,n_gas,n_year))
+    RF = np.zeros((dim_scenario,dim_gas_param,dim_thermal_param,n_forc,n_year))
+    T = np.zeros((dim_scenario,dim_gas_param,dim_thermal_param,n_year))
+    alpha = np.zeros((dim_scenario,dim_gas_param,dim_thermal_param,n_gas,n_year))
+    alpha[...,0] = calculate_alpha(G=np.zeros(C[...,0].shape),G_A=np.zeros(C[...,0].shape),T=np.zeros(C[...,0].shape),r=r,g0=g0,g1=g1)
 
-		C_out = concentrations_in
-		E_out = pd.DataFrame(np.moveaxis(diagnosed_emissions,-1,0).reshape(diagnosed_emissions.shape[-1],-1),index = time_index,columns=pd.MultiIndex.from_product(names_list,names=names_titles))
+    if concentration_driven:
 
-	if not concentration_driven:
-		G = np.cumsum(emissions,axis=-1)
-		C[...,0],R,G_A = step_concentration(R_old = np.zeros(a.shape),alpha=alpha[...,0,np.newaxis],E=emissions[...,0,np.newaxis],a=a,tau=tau,PI_conc=PI_conc,emis2conc=emis2conc,dt=timestep[0])
-		RF[...,0] = step_forcing(C=C[...,0],PI_conc=PI_conc,f=f)
-		S,T[...,0] = step_temperature(S_old=np.zeros(d.shape),F=np.sum(RF[...,0],axis=-1)[...,np.newaxis]+ext_forcing[...,0],q=q,d=d,dt=timestep[0])
+        diagnosed_emissions = np.zeros((dim_scenario,dim_gas_param,dim_thermal_param,n_gas,n_year))
+        C[:] = input_to_numpy(concentrations_in.reindex(scen_names,axis=1,level=0).reindex(gas_names,axis=1,level=1))[:,np.newaxis,np.newaxis,...]
+        C_end = np.zeros(C.shape)
+        RF[:] = step_forcing(C[...,gas_forc_map,:],PI_conc[...,gas_forc_map,:],f[...,np.newaxis,:])
+        C_end[...,0] = C[...,0]*2 - PI_conc[...,0]
+        diagnosed_emissions[...,0],R,G_A = unstep_concentration(R_old=np.zeros(a.shape),C=C_end[...,0],alpha=alpha[...,0,np.newaxis],a=a,tau=tau,PI_conc=PI_conc[...,0],emis2conc=emis2conc[...,0],dt=timestep[0])
+        S,T[...,0] = step_temperature(S_old=np.zeros(d.shape),F=np.sum(RF[...,0],axis=-1)[...,np.newaxis]+ext_forcing[...,0],q=q,d=d,dt=timestep[0])
+        for t in np.arange(1,n_year):
+            G = np.sum(diagnosed_emissions,axis=-1)
+            alpha[...,t] = calculate_alpha(G=G,G_A=G_A,T=np.sum(S,axis=-1)[...,np.newaxis],r=r,g0=g0,g1=g1)
+            C_end[...,t] = C[...,t]*2 - C_end[...,t-1]
+            diagnosed_emissions[...,t],R,G_A = unstep_concentration(R_old=R,C=C_end[...,t],alpha=alpha[...,t,np.newaxis],a=a,tau=tau,PI_conc=PI_conc[...,0],emis2conc=emis2conc[...,0],dt=timestep[t])
+            S,T[...,t] = step_temperature(S_old=S,F=np.sum(RF[...,t],axis=-1)[...,np.newaxis]+ext_forcing[...,t],q=q,d=d,dt=timestep[t])
 
-		for t in np.arange(1,n_year):
-			alpha[...,t] = calculate_alpha(G=G[...,t-1],G_A=G_A,T=np.sum(S,axis=-1)[...,np.newaxis],r=r,g0=g0,g1=g1)
-			C[...,t],R,G_A = step_concentration(R_old = R,alpha=alpha[...,t,np.newaxis],E=emissions[...,t,np.newaxis],a=a,tau=tau,PI_conc=PI_conc,emis2conc=emis2conc,dt=timestep[t])
-			RF[...,t] = step_forcing(C=C[...,t],PI_conc=PI_conc,f=f)
-			S,T[...,t] = step_temperature(S_old=S,F=np.sum(RF[...,t],axis=-1)[...,np.newaxis]+ext_forcing[...,t],q=q,d=d,dt=timestep[t])
+        C_out = concentrations_in
+        E_out = pd.DataFrame(np.moveaxis(diagnosed_emissions,-1,0).reshape(diagnosed_emissions.shape[-1],-1),index = time_index,columns=pd.MultiIndex.from_product(names_list,names=names_titles))
 
-		C_out = pd.DataFrame(np.moveaxis(C,-1,0).reshape(C.shape[-1],-1),index = time_index,columns=pd.MultiIndex.from_product(names_list,names=names_titles))
-		E_out = emissions_in
+    if not concentration_driven:
+        G = np.cumsum(emissions,axis=-1)
+        C[...,0],R,G_A = step_concentration(R_old = np.zeros(a.shape),alpha=alpha[...,0,np.newaxis],E=emissions[...,0,np.newaxis],a=a,tau=tau,PI_conc=PI_conc[...,0],emis2conc=emis2conc[...,0],dt=timestep[0])
+        RF[...,0] = step_forcing(C=C[...,gas_forc_map,0],PI_conc=PI_conc[...,gas_forc_map,0],f=f)
+        S,T[...,0] = step_temperature(S_old=np.zeros(d.shape),F=np.sum(RF[...,0],axis=-1)[...,np.newaxis]+ext_forcing[...,0],q=q,d=d,dt=timestep[0])
 
-	ext_forcing = np.zeros(np.sum(RF,axis=-2)[...,np.newaxis,:].shape) + ext_forcing
-	RF = np.concatenate((RF,ext_forcing),axis=-2)
-	RF = np.concatenate((RF,np.sum(RF,axis=-2)[...,np.newaxis,:]),axis=-2)
-        
-	alpha_out = pd.DataFrame(np.moveaxis(alpha,-1,0).reshape(alpha.shape[-1],-1),index = time_index,columns=pd.MultiIndex.from_product(names_list,names=names_titles))
-	RF_out = pd.DataFrame(np.moveaxis(RF,-1,0).reshape(RF.shape[-1],-1),index = time_index,columns=pd.MultiIndex.from_product([x+['External','Total']*(x==names_list[-1]) for x in names_list],names=names_titles))
-	T_out = pd.DataFrame(np.moveaxis(T,-1,0).reshape(T.shape[-1],-1),index = time_index,columns=pd.MultiIndex.from_product(names_list[:-1],names=names_titles[:-1]))
+        for t in np.arange(1,n_year):
+            alpha[...,t] = calculate_alpha(G=G[...,t-1],G_A=G_A,T=np.sum(S,axis=-1)[...,np.newaxis],r=r,g0=g0,g1=g1)
+            C[...,t],R,G_A = step_concentration(R_old = R,alpha=alpha[...,t,np.newaxis],E=emissions[...,t,np.newaxis],a=a,tau=tau,PI_conc=PI_conc[...,0],emis2conc=emis2conc[...,0],dt=timestep[t])
+            RF[...,t] = step_forcing(C=C[...,gas_forc_map,t],PI_conc=PI_conc[...,gas_forc_map,0],f=f)
+            S,T[...,t] = step_temperature(S_old=S,F=np.sum(RF[...,t],axis=-1)[...,np.newaxis]+ext_forcing[...,t],q=q,d=d,dt=timestep[t])
 
-	out_dict = {'C':C_out, \
-				'RF':RF_out, \
-				'T':T_out, \
-				'alpha':alpha_out, \
-				'Emissions':E_out , \
-				'gas_parameters':gas_parameters , \
-				'thermal parameters':thermal_parameters}
+        C_out = pd.DataFrame(np.moveaxis(C,-1,0).reshape(C.shape[-1],-1),index = time_index,columns=pd.MultiIndex.from_product(names_list,names=names_titles))
+        E_out = emissions_in
 
-	for axis in [x for x in list(out_dict.keys())[:-2] if type(x)==pd.core.frame.DataFrame]:
-		out_dict[axis].index = out_dict[axis].index.rename('Year')
+    ext_forcing = np.zeros(np.sum(RF,axis=-2)[...,np.newaxis,:].shape) + ext_forcing
+    RF = np.concatenate((RF,ext_forcing),axis=-2)
+    RF = np.concatenate((RF,np.sum(RF,axis=-2)[...,np.newaxis,:]),axis=-2)
 
-	return out_dict
+    alpha_out = pd.DataFrame(np.moveaxis(alpha,-1,0).reshape(alpha.shape[-1],-1),index = time_index,columns=pd.MultiIndex.from_product(names_list,names=names_titles))
+    RF_out = pd.DataFrame(np.moveaxis(RF,-1,0).reshape(RF.shape[-1],-1),index = time_index,columns=pd.MultiIndex.from_product([x+['External','Total']*(x==forc_names_list[-1]) for x in forc_names_list],names=forc_names_titles))
+    T_out = pd.DataFrame(np.moveaxis(T,-1,0).reshape(T.shape[-1],-1),index = time_index,columns=pd.MultiIndex.from_product(names_list[:-1],names=names_titles[:-1]))
 
+    out_dict = {'C':C_out, \
+                'RF':RF_out, \
+                'T':T_out, \
+                'alpha':alpha_out, \
+                'Emissions':E_out , \
+                'gas_parameters':gas_parameters , \
+                'thermal parameters':thermal_parameters}
+
+    for axis in [x for x in list(out_dict.keys())[:-2] if type(x)==pd.core.frame.DataFrame]:
+        out_dict[axis].index = out_dict[axis].index.rename('Year')
+
+    return out_dict
 
 ############################### Advanced Tools #################################
 
@@ -455,6 +467,68 @@ def prescribed_temps_gas_cycle(emissions_in , gas_parameters , T):
 	return out_dict
 
 
+def invert_concentrations_prescribed_T( concentrations_in,  gas_parameters , T ):
+    
+    time_index = concentrations_in.index
+
+    [(dim_scenario,scen_names),(dim_gas_param,gas_set_names)]=[(x.size,list(x)) for x in [concentrations_in.columns.levels[0],gas_parameters.columns.levels[0]]]
+    gas_names = [x for x in gas_parameters.columns.levels[1] if '|' not in x]
+    n_gas = len(gas_names)
+    n_year = time_index.size
+
+    names_list = [scen_names,gas_set_names,gas_names]
+    names_titles = ['Scenario','Gas cycle set','Gas name']
+
+    timestep = np.append(np.diff(time_index),np.diff(time_index)[-1])
+    
+    if set(scen_names) == set(gas_set_names):
+        gas_shape, gas_slice = [dim_scenario,1],scen_names
+        dim_gas_param = 1
+        [x.pop(1) for x in [names_list,names_titles]]
+    else:
+        gas_shape, gas_slice = [1,dim_gas_param],gas_set_names
+
+    a,tau,r,PI_conc,emis2conc=[gas_parameters.loc[x,(gas_slice,gas_names)].values.T.reshape(gas_shape+[n_gas,-1]) for x in [['a1','a2','a3','a4'],['tau1','tau2','tau3','tau4'],['r0','rC','rT','rA'],'PI_conc','emis2conc']]
+
+    # Dimensions : [scenario, gas params, gas, time, (gas/thermal pools)]
+
+    g1 = np.sum( a * tau * ( 1. - ( 1. + 100/tau ) * np.exp(-100/tau) ), axis=-1 )
+    g0 = ( np.sinh( np.sum( a * tau * ( 1. - np.exp(-100/tau) ) , axis=-1) / g1 ) )**(-1.)
+
+    # Create appropriate shape variable arrays / calculate RF if concentration driven
+
+    C = np.zeros((dim_scenario,dim_gas_param,n_gas,n_year))
+    T = T.values.flatten().reshape(1,1,-1)
+    alpha = np.zeros((dim_scenario,dim_gas_param,n_gas,n_year))
+    alpha[...,0] = calculate_alpha(G=np.zeros(C[...,0].shape),G_A=np.zeros(C[...,0].shape),T=np.zeros(C[...,0].shape),r=r,g0=g0,g1=g1)
+
+    diagnosed_emissions = np.zeros((dim_scenario,dim_gas_param,n_gas,n_year))
+    C[:] = input_to_numpy(concentrations_in.reindex(scen_names,axis=1,level=0).reindex(gas_names,axis=1,level=1))[:,np.newaxis,...]
+    C_end = np.zeros(C.shape)
+    C_end[...,0] = C[...,0]*2 - PI_conc[...,0]
+    diagnosed_emissions[...,0],R,G_A = unstep_concentration(R_old=np.zeros(a.shape),C=C_end[...,0],alpha=alpha[...,0,np.newaxis],a=a,tau=tau,PI_conc=PI_conc[...,0],emis2conc=emis2conc[...,0],dt=timestep[0])
+    for t in np.arange(1,n_year):
+        G = np.sum(diagnosed_emissions,axis=-1)
+        alpha[...,t] = calculate_alpha(G=G,G_A=G_A,T=T[...,t-1,np.newaxis],r=r,g0=g0,g1=g1)
+        C_end[...,t] = C[...,t]*2 - C_end[...,t-1]
+        diagnosed_emissions[...,t],R,G_A = unstep_concentration(R_old=R,C=C_end[...,t],alpha=alpha[...,t,np.newaxis],a=a,tau=tau,PI_conc=PI_conc[...,0],emis2conc=emis2conc[...,0],dt=timestep[t])
+
+    C_out = concentrations_in
+    E_out = pd.DataFrame(np.moveaxis(diagnosed_emissions,-1,0).reshape(diagnosed_emissions.shape[-1],-1),index = time_index,columns=pd.MultiIndex.from_product(names_list,names=names_titles))
+
+    alpha_out = pd.DataFrame(np.moveaxis(alpha,-1,0).reshape(alpha.shape[-1],-1),index = time_index,columns=pd.MultiIndex.from_product(names_list,names=names_titles))
+
+    out_dict = {'C':C_out, \
+                'alpha':alpha_out, \
+                'Emissions':E_out , \
+                'gas_parameters':gas_parameters , \
+                'T':T}
+
+    for axis in [x for x in list(out_dict.keys())[:-2] if type(x)==pd.core.frame.DataFrame]:
+        out_dict[axis].index = out_dict[axis].index.rename('Year')
+
+    return out_dict
+
 def unstep_forcing(forcing_in,gas_parameters=get_gas_parameter_defaults(),thermal_params=get_thermal_parameter_defaults()):
     
     f = input_to_numpy(gas_parameters.loc['f1':'f3'])[np.newaxis,:,np.newaxis,...]
@@ -507,7 +581,7 @@ def unstep_forcing(forcing_in,gas_parameters=get_gas_parameter_defaults(),therma
     return C_out
 
 
-## Fitting the r parameters from Emissions and Concentrations ##
+## Fitting the r parameters from Emissions and Concentrations __ WIP ##
 
 def OLSE_NORM(X,Y,add_intercept=True):
     
@@ -565,6 +639,7 @@ def get_alpha_from_E_C(C,E,a,tau,PI_conc,emis2conc,timestep=False):
 def fit_r0_rC_rT_rA(C,E,T,a,tau,PI_conc,emis2conc,timestep=False,coefs=['r_U','r_T','r_C']):
     
     # computes alpha from concentrations/emissions and returns the linear fit to specified r parameters
+    # Note this only works on timeseries where the concentration remains significantly different to the pre-industrial value
     
     if timestep==False:
         timestep = np.ones_like(C)
