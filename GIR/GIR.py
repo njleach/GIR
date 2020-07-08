@@ -211,13 +211,15 @@ def q_to_tcr_ecs(input_parameters=True , F_2x=3.84 , help=False):
 
 		return output_params
 
-def calculate_alpha(G,G_A,T,r,g0,g1,iirf100_max = 97.0):
+def calculate_alpha(G,G_A,T,r,g0,g1,iirf100_max = False):
 
 	iirf100_val = r[...,0] + r[...,1] * (G-G_A) + r[...,2] * T + r[...,3] * G_A
 
 	iirf100_val = np.abs(iirf100_val)
+    
+	if iirf100_max:
 
-	iirf100_val = (iirf100_val>iirf100_max) * iirf100_max + iirf100_val * (iirf100_val<iirf100_max)
+		iirf100_val = (iirf100_val>iirf100_max) * iirf100_max + iirf100_val * (iirf100_val<iirf100_max)
 
 	alpha_val = g0 * np.sinh(iirf100_val / g1)
 
@@ -244,8 +246,10 @@ def unstep_concentration(R_old,C,alpha,a,tau,PI_conc,emis2conc,dt=1):
 	return E,R_new,G_A
 
 def step_forcing(C,PI_conc,f):
+    
+	# if the logarithmic/sqrt term is undefined (ie. C is zero or negative), this contributes zero to the overall forcing. An exception will appear, however.
 
-	RF = f[...,0] * np.log( C/PI_conc ) + f[...,1] * ( C - PI_conc ) + f[...,2] * ( np.sqrt(C) - np.sqrt(PI_conc) )
+	RF = f[...,0] * np.nan_to_num( np.log( C/PI_conc ) ) + f[...,1] * ( C - PI_conc ) + f[...,2] * np.nan_to_num( np.sqrt(C) - np.sqrt(PI_conc) )
 
 	return RF
 
