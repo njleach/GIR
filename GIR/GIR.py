@@ -284,7 +284,7 @@ def run_GIR( emissions_in = False , concentrations_in = False , forcing_in = Fal
     n_forc,forc_names = gas_parameters.columns.levels[1].size,list(gas_parameters.columns.levels[1])
     n_year = time_index.size
 
-    ## map the concentrations onto the forcings 
+    ## map the concentrations onto the forcings (ie. so the correct indirect forcing parameters read the correct concentration arrays)
     gas_forc_map = [gas_names.index(forc_names[x].split('|')[0]) for x in np.arange(len(forc_names))]
 
     names_list = [scen_names,gas_set_names,thermal_set_names,gas_names]
@@ -293,8 +293,6 @@ def run_GIR( emissions_in = False , concentrations_in = False , forcing_in = Fal
     forc_names_titles = ['Scenario','Gas cycle set','Thermal set','Forcing component']
 
     timestep = np.append(np.diff(time_index),np.diff(time_index)[-1])
-
-    emissions = emissions_in.loc[:,(scen_names,gas_names)].values.T.reshape(dim_scenario,1,1,n_gas,n_year)
 
     # check if no dimensions are degenerate
     if (set(scen_names) != set(gas_set_names))&(set(scen_names) != set(thermal_set_names))&(set(gas_set_names) != set(thermal_set_names)):
@@ -324,20 +322,31 @@ def run_GIR( emissions_in = False , concentrations_in = False , forcing_in = Fal
             gas_shape, gas_slice = [1,dim_gas_param,1],gas_set_names
             therm_shape, therm_slice = [1,dim_gas_param,1],gas_set_names
             dim_thermal_param = 1
-            [x.pop(2) for x in [names_list,names_titles,forc_names_list,forc_names_titles]]    
-
-    a,tau,r,PI_conc,emis2conc=[gas_parameters.loc[x,(gas_slice,gas_names)].values.T.reshape(gas_shape+[n_gas,-1]) for x in [['a1','a2','a3','a4'],['tau1','tau2','tau3','tau4'],['r0','rC','rT','rA'],'PI_conc','emis2conc']]
-    f = gas_parameters.loc['f1':'f3',(gas_slice,forc_names)].values.T.reshape(gas_shape+[n_forc,-1])
-    d,q = [thermal_parameters.loc[[x],(therm_slice,slice(None))].values.T.reshape(therm_shape+[-1]) for x in ['d','q']]
-
-    if show_run_info:
-        print('Integrating ' + str(dim_scenario) + ' scenarios, ' + str(dim_gas_param) + ' gas cycle parameter sets, ' + str(dim_thermal_param) + ' independent thermal response parameter sets, over ' + str(list(emissions_in.columns.levels[1])) + ', between ' + str(time_index[0]) + ' and ' + str(time_index[-1]) + '...')
-
+            [x.pop(2) for x in [names_list,names_titles,forc_names_list,forc_names_titles]]
+            
+    ## Reindex to align columns:
+    
+    emissions = emissions_in.reindex(scen_names,axis=1,level=0).reindex(gas_names,axis=1,level=1).loc[:,(scen_names,gas_names)].values.T.reshape(dim_scenario,1,1,n_gas,n_year)
+    
     if forcing_in is False:
         ext_forcing = np.zeros((dim_scenario,1,1,1,n_year))
     else:
         forcing_in = forcing_in.reindex(scen_names,axis=1,level=0)
         ext_forcing = forcing_in.loc[:,(scen_names,slice(None))].values.T.reshape(dim_scenario,1,1,1,n_year)
+        
+    if concentration_driven:
+        concentrations_in = concentrations_in.reindex(scen_names,axis=1,level=0).reindex(gas_names,axis=1,level=1)
+        
+    gas_parameters = gas_parameters.reindex(gas_slice,axis=1,level=0)
+    thermal_parameters = thermal_parameters.reindex(therm_slice,axis=1,level=0)
+    
+    ## get parameter arrays
+    a,tau,r,PI_conc,emis2conc=[gas_parameters.reindex(gas_names,axis=1,level=1).loc[x,(gas_slice,gas_names)].values.T.reshape(gas_shape+[n_gas,-1]) for x in [['a1','a2','a3','a4'],['tau1','tau2','tau3','tau4'],['r0','rC','rT','rA'],'PI_conc','emis2conc']]
+    f = gas_parameters.reindex(forc_names,axis=1,level=1).loc['f1':'f3',(gas_slice,forc_names)].values.T.reshape(gas_shape+[n_forc,-1])
+    d,q = [thermal_parameters.loc[[x],(therm_slice,slice(None))].values.T.reshape(therm_shape+[-1]) for x in ['d','q']]
+
+    if show_run_info:
+        print('Integrating ' + str(dim_scenario) + ' scenarios, ' + str(dim_gas_param) + ' gas cycle parameter sets, ' + str(dim_thermal_param) + ' independent thermal response parameter sets, over ' + str(list(emissions_in.columns.levels[1])) + ', between ' + str(time_index[0]) + ' and ' + str(time_index[-1]) + '...')
 
     # Dimensions : [scenario, gas params, thermal params, gas, time, (gas/thermal pools)]
 
@@ -355,7 +364,7 @@ def run_GIR( emissions_in = False , concentrations_in = False , forcing_in = Fal
     if concentration_driven:
 
         diagnosed_emissions = np.zeros((dim_scenario,dim_gas_param,dim_thermal_param,n_gas,n_year))
-        C[:] = input_to_numpy(concentrations_in.reindex(scen_names,axis=1,level=0).reindex(gas_names,axis=1,level=1))[:,np.newaxis,np.newaxis,...]
+        C[:] = input_to_numpy(concentrations_in)[:,np.newaxis,np.newaxis,...]
         C_end = np.zeros(C.shape)
         RF[:] = step_forcing(C[...,gas_forc_map,:],PI_conc[...,gas_forc_map,:],f[...,np.newaxis,:])
         C_end[...,0] = C[...,0]*2 - PI_conc[...,0]
