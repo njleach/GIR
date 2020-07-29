@@ -57,7 +57,7 @@ def get_GIR_to_RCMIP_map():
     GIR_to_RCMIP_map.loc['carbon_dioxide','RCMIP_emms_scaling'] = 12/(44.01*1000)
 
     GIR_to_RCMIP_map.loc[RCMIP_to_GIR_map_concs.values(),'RCMIP_concs_key'] = list(RCMIP_to_GIR_map_concs.keys())
-    GIR_to_RCMIP_map.loc[RCMIP_to_GIR_map_concs.values(),'RCMIP_concs_unit'] = RCMIP_concs.loc[('World','ssp245'),['Unit']].loc[RCMIP_to_GIR_map_concs.keys()].values
+    GIR_to_RCMIP_map.loc[RCMIP_to_GIR_map_concs.values(),'RCMIP_concs_unit'] = RCMIP_concs.loc[('World','ssp245')].reindex(RCMIP_to_GIR_map_concs.keys()).loc[:,'Unit'].values#.loc[('World','ssp245',RCMIP_to_GIR_map_concs.keys()),'Unit'].values
     GIR_to_RCMIP_map.loc[RCMIP_to_GIR_map_concs.values(),'RCMIP_concs_scaling'] = 1/1000
     GIR_to_RCMIP_map.loc['nitrous_oxide','RCMIP_concs_scaling'] = 1
     GIR_to_RCMIP_map.loc['methane','RCMIP_concs_scaling'] = 1
