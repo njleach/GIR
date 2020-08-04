@@ -1,12 +1,13 @@
 import pandas as pd
 import numpy as np
 import scipy as sp
+from pathlib import Path
 
 def get_RCMIP_data():
     
-    RCMIP_concs = pd.read_csv('https://drive.google.com/u/0/uc?id=1o5LMu-Tw5lhwnPUb68c08HQHmrEXFBck&export=download').set_index(['Region','Scenario','Variable'])
-    RCMIP_emms = pd.read_csv('https://drive.google.com/u/0/uc?id=1krA0lficstXqahlNCko7nbfqgjKrd_Sa&export=download').set_index(['Region','Scenario','Variable'])
-    RCMIP_forc = pd.read_csv('https://drive.google.com/u/0/uc?id=1-YP2RbchNdGRpGtZjTr0T6CdKZiEshbx&export=download').set_index(['Region','Scenario','Variable'])
+    RCMIP_concs = pd.read_csv(Path(__file__).parent / '../tmp/rcmip-concentrations-annual-means-v4-0-0.csv').set_index(['Region','Scenario','Variable'])#pd.read_csv('https://drive.google.com/u/0/uc?id=1o5LMu-Tw5lhwnPUb68c08HQHmrEXFBck&export=download').set_index(['Region','Scenario','Variable'])
+    RCMIP_emms = pd.read_csv(Path(__file__).parent / '../tmp/rcmip-emissions-annual-means-v4-0-0.csv').set_index(['Region','Scenario','Variable'])#pd.read_csv('https://drive.google.com/u/0/uc?id=1krA0lficstXqahlNCko7nbfqgjKrd_Sa&export=download').set_index(['Region','Scenario','Variable'])
+    RCMIP_forc = pd.read_csv(Path(__file__).parent / '../tmp/rcmip-radiative-forcing-annual-means-v4-0-0.csv').set_index(['Region','Scenario','Variable'])#pd.read_csv('https://drive.google.com/u/0/uc?id=1-YP2RbchNdGRpGtZjTr0T6CdKZiEshbx&export=download').set_index(['Region','Scenario','Variable'])
     
     return RCMIP_concs, RCMIP_emms, RCMIP_forc
 
@@ -25,13 +26,13 @@ def get_GIR_to_RCMIP_map():
                       ,'Emissions|F-Gases|HFC|HFC125','Emissions|F-Gases|HFC|HFC134a','Emissions|F-Gases|HFC|HFC143a','Emissions|F-Gases|HFC|HFC152a','Emissions|F-Gases|HFC|HFC227ea'\
                       ,'Emissions|F-Gases|HFC|HFC236fa','Emissions|F-Gases|HFC|HFC23','Emissions|F-Gases|HFC|HFC245fa','Emissions|F-Gases|HFC|HFC32','Emissions|F-Gases|HFC|HFC365mfc','Emissions|F-Gases|HFC|HFC4310mee'\
                       ,'Emissions|CH4','Emissions|Montreal Gases|CH3Br','Emissions|Montreal Gases|CH3Cl','Emissions|F-Gases|NF3','Emissions|N2O','Emissions|F-Gases|SF6'\
-                      ,'Emissions|F-Gases|SO2F2','Emissions|Sulfur','Emissions|NOx','Emissions|CO','Emissions|VOC','Emissions|BC','Emissions|NH3','Emissions|OC']
+                      ,'Emissions|F-Gases|SO2F2','Emissions|Sulfur','Emissions|NOx','Emissions|CO','Emissions|VOC','Emissions|BC','Emissions|NH3','Emissions|OC','Emissions|NOx|MAGICC Fossil and Industrial|Aircraft']
 
     GIR_name = ['c2f6', 'c3f8', 'c4f10', 'c5f12', 'c6f14', 'c7f16', 'c8f18', 'c_c4f8',\
                 'carbon_dioxide', 'carbon_tetrachloride', 'cf4', 'cfc113', 'cfc114', 'cfc115', 'cfc11', 'cfc12', 'ch2cl2', 'ch3ccl3', 'chcl3',\
                 'halon1211', 'halon1301', 'halon2402', 'halon1202', 'hcfc141b', 'hcfc142b', 'hcfc22',\
                 'hfc125', 'hfc134a', 'hfc143a', 'hfc152a', 'hfc227ea', 'hfc236fa', 'hfc23', 'hfc245fa', 'hfc32', 'hfc365mfc', 'hfc4310mee',\
-                'methane', 'methyl_bromide', 'methyl_chloride', 'nf3', 'nitrous_oxide', 'sf6', 'so2f2', 'so2', 'nox', 'co', 'nmvoc','bc','nh3','oc']
+                'methane', 'methyl_bromide', 'methyl_chloride', 'nf3', 'nitrous_oxide', 'sf6', 'so2f2', 'so2', 'nox', 'co', 'nmvoc','bc','nh3','oc','nox_avi']
 
     RCMIP_to_GIR_map_emms = dict(zip(RCMIP_emms_name,GIR_name))
 
@@ -41,17 +42,17 @@ def get_GIR_to_RCMIP_map():
     GIR_to_RCMIP_map['native_emms_unit'] = 'Mt'
     GIR_to_RCMIP_map.loc['carbon_dioxide','native_emms_unit'] = 'GtC'
     GIR_to_RCMIP_map.loc['nitrous_oxide','native_emms_unit'] = 'MtN2O-N2'
-    GIR_to_RCMIP_map.loc['nox','native_emms_unit'] = 'MtNO2'
+    GIR_to_RCMIP_map.loc[['nox','nox_avi'],'native_emms_unit'] = 'MtNO2'
     
     GIR_to_RCMIP_map['native_concs_unit'] = 'ppb'
     GIR_to_RCMIP_map.loc['carbon_dioxide','native_concs_unit'] = 'ppm'
-    GIR_to_RCMIP_map.loc[['so2','nox','co','nmvoc','bc','nh3','oc'],'native_concs_unit'] = 'Mt'
-    GIR_to_RCMIP_map.loc['nox','native_concs_unit'] = 'MtNO2'
+    GIR_to_RCMIP_map.loc[['so2','nox','co','nmvoc','bc','nh3','oc','nox_avi'],'native_concs_unit'] = 'Mt'
+    GIR_to_RCMIP_map.loc[['nox','nox_avi'],'native_concs_unit'] = 'MtNO2'
 
     GIR_to_RCMIP_map.loc[RCMIP_to_GIR_map_emms.values(),'RCMIP_emms_key'] = list(RCMIP_to_GIR_map_emms.keys())
     GIR_to_RCMIP_map.loc[RCMIP_to_GIR_map_emms.values(),'RCMIP_emms_unit'] = RCMIP_emms.loc[('World','ssp245'),['Unit']].loc[RCMIP_to_GIR_map_emms.keys()].values
     GIR_to_RCMIP_map.loc[RCMIP_to_GIR_map_emms.values(),'RCMIP_emms_scaling'] = 1/1000
-    GIR_to_RCMIP_map.loc[['so2','nox','co','nmvoc','bc','nh3','oc'],'RCMIP_emms_scaling'] = 1
+    GIR_to_RCMIP_map.loc[['so2','nox','co','nmvoc','bc','nh3','oc','nox_avi'],'RCMIP_emms_scaling'] = 1
     GIR_to_RCMIP_map.loc['nitrous_oxide','RCMIP_emms_scaling'] = 28/(44*1000)
     GIR_to_RCMIP_map.loc['methane','RCMIP_emms_scaling'] = 1
     GIR_to_RCMIP_map.loc['carbon_dioxide','RCMIP_emms_scaling'] = 12/(44.01*1000)
@@ -62,7 +63,7 @@ def get_GIR_to_RCMIP_map():
     GIR_to_RCMIP_map.loc['nitrous_oxide','RCMIP_concs_scaling'] = 1
     GIR_to_RCMIP_map.loc['methane','RCMIP_concs_scaling'] = 1
     GIR_to_RCMIP_map.loc['carbon_dioxide','RCMIP_concs_scaling'] = 1
-    GIR_to_RCMIP_map.loc[['so2','nox','co','nmvoc','bc','nh3','oc'],'RCMIP_concs_scaling'] = np.nan
+    GIR_to_RCMIP_map.loc[['so2','nox','co','nmvoc','bc','nh3','oc','nox_avi'],'RCMIP_concs_scaling'] = np.nan
     
     return GIR_to_RCMIP_map
 
@@ -80,6 +81,7 @@ def get_GIR_to_RCMIP_map_forc():
     GIR_to_RCMIP_map_forc.loc['bc_on_snow','RCMIP_forc_key'] = 'Effective Radiative Forcing|Anthropogenic|Other|BC on Snow'
     GIR_to_RCMIP_map_forc.loc['strat_h2o','RCMIP_forc_key'] = 'Effective Radiative Forcing|Anthropogenic|Other|CH4 Oxidation Stratospheric H2O'
     GIR_to_RCMIP_map_forc.loc['so2','RCMIP_forc_key'] = 'Effective Radiative Forcing|Anthropogenic|Aerosols|Aerosols-radiation Interactions|Fossil and Industrial|Sulfate'
+    GIR_to_RCMIP_map_forc.loc['contrails','RCMIP_forc_key'] = 'Effective Radiative Forcing|Anthropogenic|Other|Contrails and Contrail-induced Cirrus'
     GIR_to_RCMIP_map_forc.loc['Total','RCMIP_forc_key'] = 'Effective Radiative Forcing'
     GIR_to_RCMIP_map_forc.loc['External','RCMIP_forc_key'] = 'Effective Radiative Forcing|External'
     return GIR_to_RCMIP_map_forc

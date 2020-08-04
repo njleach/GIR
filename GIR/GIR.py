@@ -5,6 +5,7 @@ import pandas as pd
 import numexpr as ne
 import scipy as sp
 from pathlib import Path
+from tqdm import tqdm
 
 def return_empty_emissions(df_to_copy=False, start_year=1765, end_year=2500, timestep=1, scen_names=[0], gases_in = ['CO2','CH4','N2O'], help=False):
 
@@ -161,7 +162,7 @@ def get_more_thermal_params(N=100,F_2x=3.84):
     return thermal_params
 
 
-def tcr_ecs_to_q(input_parameters=True , F_2x=3.84 , help=False):
+def tcr_ecs_to_q(input_parameters=True , F_2x=3.76 , help=False):
 
 	# converts a 2-box tcr / ecs / d dataframe into a d / q dataframe for use in GIR
 	# F2x is the GIR default forcing parameter value
@@ -179,12 +180,12 @@ def tcr_ecs_to_q(input_parameters=True , F_2x=3.84 , help=False):
 	else:
 		output_params = input_parameters.copy()
 		param_arr = input_to_numpy(input_parameters)
-		k = 1.0 - (param_arr[:,:,0]/70.0)*(1.0 - np.exp(-70.0/param_arr[:,:,0]))
+		k = 1.0 - (param_arr[:,:,0]/69.66)*(1.0 - np.exp(-69.66/param_arr[:,:,0]))
 		output_params.loc['q'] = ( ( param_arr[:,0,1][:,np.newaxis] - param_arr[:,1,1][:,np.newaxis] * np.roll(k,shift=1) )/( F_2x * ( k - np.roll(k,shift=1) ) ) ) .flatten()
 
 		return output_params.loc[['d','q']]
 
-def q_to_tcr_ecs(input_parameters=True , F_2x=3.84 , help=False):
+def q_to_tcr_ecs(input_parameters=True , F_2x=3.76 , help=False):
 
 	if help:
 		tcr_ecs_test = default_thermal_params()
@@ -206,7 +207,7 @@ def q_to_tcr_ecs(input_parameters=True , F_2x=3.84 , help=False):
 
 			ECS = F_2x * params.loc['q'].sum()
 
-			TCR = F_2x * ( params.loc['q'] * (1 - (params.loc['d']/70) * ( 1 - np.exp(-70/params.loc['d']) ) ) ).sum()
+			TCR = F_2x * ( params.loc['q'] * (1 - (params.loc['d']/69.66) * ( 1 - np.exp(-69.66/params.loc['d']) ) ) ).sum()
 
 			output_params.loc[:,param_set] = [ECS,TCR]
 
@@ -214,15 +215,15 @@ def q_to_tcr_ecs(input_parameters=True , F_2x=3.84 , help=False):
 
 def calculate_alpha(G,G_A,T,r,g0,g1,iirf100_max = False):
 
-    iirf100_val = r[...,0] + r[...,1] * (G-G_A) + r[...,2] * T + r[...,3] * G_A
-
-    iirf100_val = np.abs(iirf100_val)
-
-    if iirf100_max:
-
-        iirf100_val = (iirf100_val>iirf100_max) * iirf100_max + iirf100_val * (iirf100_val<iirf100_max)
-
+#     iirf100_val = r[...,0] + r[...,1] * (G-G_A) + r[...,2] * T + r[...,3] * G_A
+#     iirf100_val = np.abs(iirf100_val)
+#     if iirf100_max:
+#         iirf100_val = (iirf100_val>iirf100_max) * iirf100_max + iirf100_val * (iirf100_val<iirf100_max)
 #     alpha_val = g0 * np.sinh(iirf100_val / g1)
+
+    iirf100_val = ne.evaluate("abs(r0 + rU * (G-G_A) + rT * T + rA * G_A)",{'r0':r[...,0],'rU':r[...,1],'rT':r[...,2],'rA':r[...,3],'G':G,'G_A':G_A,'T':T})
+    if iirf100_max:
+        iirf100_val = ne.evaluate("where(iirf100_val>iirf100_max,iirf100_max,iirf100_val)")
     alpha_val = ne.evaluate("g0 * sinh(iirf100_val / g1)")
 
     return alpha_val
@@ -230,18 +231,15 @@ def calculate_alpha(G,G_A,T,r,g0,g1,iirf100_max = False):
 def step_concentration(R_old,G_A_old,E,alpha,a,tau,PI_conc,emis2conc,dt=1):
     
 #     decay_rate = dt/(alpha*tau)
-    decay_rate = ne.evaluate("dt/(alpha*tau)")
-    
 #     decay_factor = np.exp( -decay_rate )
-    decay_factor = ne.evaluate("exp(-decay_rate)")
-
 #     R_new = E * a * 1/decay_rate * ( 1. - decay_factor ) + R_old * decay_factor
-    R_new = ne.evaluate("E * a / decay_rate * ( 1. - decay_factor ) + R_old * decay_factor")
-    
 #     G_A = np.sum(R_new,axis=-1)
-    G_A = ne.evaluate("sum(R_new,axis=4)")
-
 #     C = PI_conc + emis2conc * (G_A + G_A_old) / 2
+
+    decay_rate = ne.evaluate("dt/(alpha*tau)")
+    decay_factor = ne.evaluate("exp(-decay_rate)")
+    R_new = ne.evaluate("E * a / decay_rate * ( 1. - decay_factor ) + R_old * decay_factor")
+    G_A = ne.evaluate("sum(R_new,axis=4)")
     C = ne.evaluate("PI_conc + emis2conc * (G_A + G_A_old) / 2")
 
     return C,R_new,G_A
@@ -260,12 +258,15 @@ def step_forcing(C,PI_conc,f):
     
     # if the logarithmic/sqrt term is undefined (ie. C is zero or negative), this contributes zero to the overall forcing. An exception will appear, however.
 
-#     RF = f[...,0] * np.nan_to_num( np.log( C/PI_conc ) ) + f[...,1] * ( C - PI_conc ) + f[...,2] * np.nan_to_num( np.sqrt(C) - np.sqrt(PI_conc) )
-    logforc = f[...,0] * ne.evaluate("log(C/PI_conc)")
-    logforc[np.isnan(logforc)] = 0
-    linforc = f[...,1] * ( C - PI_conc )
-    sqrtforc = f[...,2] * ne.evaluate("sqrt(C) - sqrt(PI_conc)")
-    sqrtforc[np.isnan(sqrtforc)] = 0
+#     logforc = f[...,0] * np.log(C / PI_conc)
+#     linforc = f[...,1] * ( C - PI_conc )
+#     sqrtforc = f[...,2] * (np.sqrt(C) - np.sqrt(PI_conc))
+#     logforc[np.isnan(logforc)] = 0
+#     sqrtforc[np.isnan(sqrtforc)] = 0
+
+    logforc = ne.evaluate("f1 * where( (C/PI_conc) <= 0, 0, log(C/PI_conc) )",{'f1':f[...,0],'C':C,'PI_conc':PI_conc})
+    linforc = ne.evaluate("f2 * (C - PI_conc)",{'f2':f[...,1],'C':C,'PI_conc':PI_conc})
+    sqrtforc = ne.evaluate("f3 * ( (sqrt( where(C<0 ,0 ,C ) ) - sqrt(PI_conc)) )",{'f3':f[...,2],'C':C,'PI_conc':PI_conc})
 
     RF = logforc + linforc + sqrtforc
 
@@ -273,11 +274,13 @@ def step_forcing(C,PI_conc,f):
 
 def step_temperature(S_old,F,q,d,dt=1):
 
+#     decay_factor = np.exp(-dt/d)
+#     S_new = q * F * ( 1 - decay_factor ) + S_old * decay_factor
+#     T = np.sum(S_old + S_new,axis=-1) / 2
+    
     decay_factor = ne.evaluate("exp(-dt/d)")
-
-    S_new = q * F * ( 1 - decay_factor ) + S_old * decay_factor
-
-    T = np.sum(S_old + S_new,axis=-1) / 2
+    S_new = ne.evaluate("q * F * (1 - decay_factor) + S_old * decay_factor")
+    T = ne.evaluate("sum( (S_old + S_new)/2, axis=3 )")
 
     return S_new,T
 
@@ -365,7 +368,7 @@ def run_GIR( emissions_in = False , concentrations_in = False , forcing_in = Fal
     d,q = [thermal_parameters.loc[x].values.T.reshape(therm_shape+[-1]) for x in ['d','q']]
 
     if show_run_info:
-        print('Integrating ' + str(dim_scenario) + ' scenarios, ' + str(dim_gas_param) + ' gas cycle parameter sets, ' + str(dim_thermal_param) + ' independent thermal response parameter sets, over ' + str(list(emissions_in.columns.levels[1])) + ', between ' + str(time_index[0]) + ' and ' + str(time_index[-1]) + '...')
+        print('Integrating ' + str(dim_scenario) + ' scenarios, ' + str(dim_gas_param) + ' gas cycle parameter sets, ' + str(dim_thermal_param) + ' independent thermal response parameter sets, over ' + str(list(emissions_in.columns.levels[1])) + ', between ' + str(time_index[0]) + ' and ' + str(time_index[-1]) + '...',flush=True)
 
     # Dimensions : [scenario, gas params, thermal params, gas, time, (gas/thermal pools)]
 
@@ -389,7 +392,7 @@ def run_GIR( emissions_in = False , concentrations_in = False , forcing_in = Fal
         C_end[...,0] = C[...,0]*2 - PI_conc[...,0]
         diagnosed_emissions[...,0],R,G_A = unstep_concentration(R_old=np.zeros(a.shape),C=C_end[...,0],alpha=alpha[...,0,np.newaxis],a=a,tau=tau,PI_conc=PI_conc[...,0],emis2conc=emis2conc[...,0],dt=timestep[0])
         S,T[...,0] = step_temperature(S_old=np.zeros(d.shape),F=np.sum(RF[...,0],axis=-1)[...,np.newaxis]+ext_forcing[...,0],q=q,d=d,dt=timestep[0])
-        for t in np.arange(1,n_year):
+        for t in tqdm(np.arange(1,n_year),unit=' timestep'):
             G = np.sum(diagnosed_emissions,axis=-1)
             alpha[...,t] = calculate_alpha(G=G,G_A=G_A,T=np.sum(S,axis=-1)[...,np.newaxis],r=r,g0=g0,g1=g1)
             C_end[...,t] = C[...,t]*2 - C_end[...,t-1]
@@ -405,7 +408,7 @@ def run_GIR( emissions_in = False , concentrations_in = False , forcing_in = Fal
         RF[...,0] = step_forcing(C=C[...,gas_forc_map,0],PI_conc=PI_conc[...,gas_forc_map,0],f=f)
         S,T[...,0] = step_temperature(S_old=0,F=np.sum(RF[...,0],axis=-1)[...,np.newaxis]+ext_forcing[...,0],q=q,d=d,dt=timestep[0])
 
-        for t in np.arange(1,n_year):
+        for t in tqdm(np.arange(1,n_year),unit=' timestep'):
             alpha[...,t] = calculate_alpha(G=G[...,t-1],G_A=G_A,T=np.sum(S,axis=-1)[...,np.newaxis],r=r,g0=g0,g1=g1)
             C[...,t],R,G_A = step_concentration(R_old = R,G_A_old=G_A,alpha=alpha[...,t,np.newaxis],E=emissions[...,t,np.newaxis],a=a,tau=tau,PI_conc=PI_conc[...,0],emis2conc=emis2conc[...,0],dt=timestep[t])
             RF[...,t] = step_forcing(C=C[...,gas_forc_map,t],PI_conc=PI_conc[...,gas_forc_map,0],f=f)
