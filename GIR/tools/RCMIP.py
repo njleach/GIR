@@ -96,7 +96,7 @@ def RCMIP_to_GIR_input_emms(scenario):
     _out.index = _out.index.astype(int)
     return _out.apply(pd.to_numeric)
 
-def get_RCMIP_forc(scenario,drivers=['Effective Radiative Forcing|Anthropogenic|Albedo Change','Effective Radiative Forcing|Anthropogenic|Other|Contrails and Contrail-induced Cirrus','Effective Radiative Forcing|Natural']):
+def get_RCMIP_forc(scenario,drivers=['Effective Radiative Forcing|Anthropogenic|Albedo Change','Effective Radiative Forcing|Natural']):
     
     # returns the sum of specified driving rfs (by default those not included in GIR):
     _out = RCMIP_forc.loc[('World',scenario,drivers)].droplevel(level=[0,1]).iloc[:,4:]

@@ -244,13 +244,13 @@ def step_concentration(R_old,G_A_old,E,alpha,a,tau,PI_conc,emis2conc,dt=1):
 
     return C,R_new,G_A
 
-def unstep_concentration(R_old,C,alpha,a,tau,PI_conc,emis2conc,dt=1):
-
-    E = ( C - PI_conc - np.sum(R_old * np.exp( -dt/(alpha*tau) ) , axis=-1 ) ) / ( emis2conc * np.sum( a * alpha * ( tau / dt ) * ( 1. - np.exp( -dt / ( alpha * tau ) ) ) , axis=-1 ) )
-
-    R_new = E[...,np.newaxis] * emis2conc[...,np.newaxis] * a * alpha * (tau/dt) * ( 1. - np.exp( -dt/(alpha*tau) ) ) + R_old * np.exp( -dt/(alpha * tau) )
-
-    G_A = np.sum(R_new,axis=-1) / emis2conc
+def unstep_concentration(R_old,G_A_old,C,alpha,a,tau,PI_conc,emis2conc,dt=1):
+    
+    decay_rate = dt/(alpha*tau)
+    decay_factor = np.exp( -decay_rate )
+    G_A = 2*(C - PI_conc)/emis2conc - G_A_old
+    E = (( G_A - np.sum(R_old*decay_factor,axis=-1) ) / np.sum( a / decay_rate * ( 1. - decay_factor ) ,axis=-1 ))
+    R_new = E[...,None] * a * 1/decay_rate * ( 1. - decay_factor ) + R_old * decay_factor
 
     return E,R_new,G_A
 
@@ -284,7 +284,36 @@ def step_temperature(S_old,F,q,d,dt=1):
 
     return S_new,T
 
-def run_GIR( emissions_in = False , concentrations_in = False , forcing_in = False , gas_parameters = get_gas_parameter_defaults() , thermal_parameters = get_thermal_parameter_defaults() , show_run_info = True ):
+def run_GIR( emissions_in = False , concentrations_in = False , forcing_in = False , gas_parameters = get_gas_parameter_defaults() , thermal_parameters = get_thermal_parameter_defaults() , show_run_info = True , aer_concs_in = False ):
+    
+    """
+    Runs the development version of the FaIRv2.0 model, maintained by Nick Leach and Stuart Jenkins. 
+    
+    Model description paper: https://doi.org/10.5194/gmd-2019-379
+    
+    Parameters:
+    
+    emissions_in (pandas.core.frame.DataFrame strictly with column index as pandas.core.indexes.multi.MultiIndex):
+    A pandas DataFrame containing emission data for the desired GHG and aerosol species. The columns most be a MultiIndex with [scenarios , species] as the levels. The species must be consistent between scenarios.
+    
+    concentrations_in (pandas.core.frame.DataFrame strictly with column index as pandas.core.indexes.multi.MultiIndex):
+    A pandas DataFrame containing concentration data for the desired GHG and aerosol species. The columns most be a MultiIndex with [scenarios , species] as the levels. The species must be consistent between scenarios.
+    
+    forcing_in (pandas.core.frame.DataFrame strictly with column index as pandas.core.indexes.multi.MultiIndex):
+    A pandas DataFrame containing data for aggregated external forcing. The columns most be a MultiIndex with [scenarios , forcing] as the levels. Note that the length of the inner column level dimension must be one (ie. forcings must be aggregated).
+    
+    gas_parameters (pandas.core.frame.DataFrame strictly with column index as pandas.core.indexes.multi.MultiIndex):
+    A pandas DataFrame containing the gas cycle parameters for the desired GHG and aerosol species. The columns most be a MultiIndex with [parameter set , species] as the levels. The species must be consistent between parameter sets. 'Indirect' forcings can be specified by adding species with the syntax 'x|y': this means the gas cycle of species 'x' is used to compute an additional forcing based on the f parameters specified. 'y' designates the name of the indirect forcing, such as 'methane|strat_h2o'.
+    
+    thermal_parameters (pandas.core.frame.DataFrame strictly with column index as pandas.core.indexes.multi.MultiIndex):
+    A pandas DataFrame containing the response parameters used for each box. The columns most be a MultiIndex with [parameter set , response box] as the levels. Any number of boxes can be specified by varying the number of timescales 'd' and coefficients 'q' supplied.
+    
+    show_run_info (bool):
+    Specify whether to show information about the current run. Suggest setting to True for normal use, but False if optimising parameters or running recursively.
+    
+    aer_concs_in (bool or list):
+    If list is passed, determines whether any gases in a concentration driven run are to be treated as emissions (aerosols). The Pre-industrial concentration of these gases is added to the input concentration before integration.
+    """
 
     # Determine the number of scenario runs , parameter sets , gases , integration period, timesteps
 
@@ -308,6 +337,10 @@ def run_GIR( emissions_in = False , concentrations_in = False , forcing_in = Fal
 
     ## map the concentrations onto the forcings (ie. so the correct indirect forcing parameters read the correct concentration arrays)
     gas_forc_map = [gas_names.index(forc_names[x].split('|')[0]) for x in np.arange(len(forc_names))]
+    
+    ## if there are aerosol "concentrations" input that need to be treated as emissions (ie. added to the PI_conc):
+    if concentration_driven and not aer_concs_in is False:
+        gas_aer_map = [gas_names.index(aer_concs_in[x]) for x in np.arange(len(aer_concs_in))]
 
     names_list = [scen_names,gas_set_names,thermal_set_names,gas_names]
     names_titles = ['Scenario','Gas cycle set','Thermal set','Gas name']
@@ -356,19 +389,16 @@ def run_GIR( emissions_in = False , concentrations_in = False , forcing_in = Fal
         forcing_in = forcing_in.reindex(scen_names,axis=1,level=0)
         ext_forcing = forcing_in.loc[:,(scen_names,slice(None))].values.T.reshape(dim_scenario,1,1,1,n_year)
 
-    if concentration_driven:
-        concentrations_in = concentrations_in.reindex(scen_names,axis=1,level=0).reindex(gas_names,axis=1,level=1)
-
     gas_cycle_parameters = gas_parameters.reindex(gas_slice,axis=1,level=0).reindex(gas_names,axis=1,level=1)
     thermal_parameters = thermal_parameters.reindex(therm_slice,axis=1,level=0)
 
     ## get parameter arrays
     a,tau,r,PI_conc,emis2conc=[gas_cycle_parameters.loc[x].values.T.reshape(gas_shape+[n_gas,-1]) for x in [['a1','a2','a3','a4'],['tau1','tau2','tau3','tau4'],['r0','rC','rT','rA'],'PI_conc','emis2conc']]
-    f = gas_parameters.reindex(forc_names,axis=1,level=1).loc['f1':'f3'].values.T.reshape(gas_shape+[n_forc,-1])
+    f = gas_parameters.reindex(gas_slice,axis=1,level=0).reindex(forc_names,axis=1,level=1).loc['f1':'f3'].values.T.reshape(gas_shape+[n_forc,-1])
     d,q = [thermal_parameters.loc[x].values.T.reshape(therm_shape+[-1]) for x in ['d','q']]
 
     if show_run_info:
-        print('Integrating ' + str(dim_scenario) + ' scenarios, ' + str(dim_gas_param) + ' gas cycle parameter sets, ' + str(dim_thermal_param) + ' independent thermal response parameter sets, over ' + str(list(emissions_in.columns.levels[1])) + ', between ' + str(time_index[0]) + ' and ' + str(time_index[-1]) + '...',flush=True)
+        print('Integrating ' + str(dim_scenario) + ' scenarios, ' + str(dim_gas_param) + ' gas cycle parameter sets, ' + str(dim_thermal_param) + ' thermal response parameter sets, over ' + str(forc_names) + ' forcing agents, between ' + str(time_index[0]) + ' and ' + str(time_index[-1]) + '...',flush=True)
 
     # Dimensions : [scenario, gas params, thermal params, gas, time, (gas/thermal pools)]
 
@@ -385,18 +415,17 @@ def run_GIR( emissions_in = False , concentrations_in = False , forcing_in = Fal
 
     if concentration_driven:
 
-        diagnosed_emissions = np.empty((dim_scenario,dim_gas_param,dim_thermal_param,n_gas,n_year))
+        diagnosed_emissions = np.zeros((dim_scenario,dim_gas_param,dim_thermal_param,n_gas,n_year))
         C[:] = concentrations_in.reindex(scen_names,axis=1,level=0).reindex(gas_names,axis=1,level=1).values.T.reshape(dim_scenario,1,1,n_gas,n_year)
-        C_end = np.empty(C.shape)
+        if not aer_concs_in is False:
+            C[...,gas_aer_map,:] += PI_conc[...,gas_aer_map,:]
         RF[:] = step_forcing(C[...,gas_forc_map,:],PI_conc[...,gas_forc_map,:],f[...,np.newaxis,:])
-        C_end[...,0] = C[...,0]*2 - PI_conc[...,0]
-        diagnosed_emissions[...,0],R,G_A = unstep_concentration(R_old=np.zeros(a.shape),C=C_end[...,0],alpha=alpha[...,0,np.newaxis],a=a,tau=tau,PI_conc=PI_conc[...,0],emis2conc=emis2conc[...,0],dt=timestep[0])
-        S,T[...,0] = step_temperature(S_old=np.zeros(d.shape),F=np.sum(RF[...,0],axis=-1)[...,np.newaxis]+ext_forcing[...,0],q=q,d=d,dt=timestep[0])
+        diagnosed_emissions[...,0],R,G_A = unstep_concentration(R_old=0,G_A_old=0,C=C[...,0],alpha=alpha[...,0,np.newaxis],a=a,tau=tau,PI_conc=PI_conc[...,0],emis2conc=emis2conc[...,0],dt=timestep[0])
+        S,T[...,0] = step_temperature(S_old=0,F=np.sum(RF[...,0],axis=-1)[...,np.newaxis]+ext_forcing[...,0],q=q,d=d,dt=timestep[0])
         for t in tqdm(np.arange(1,n_year),unit=' timestep'):
             G = np.sum(diagnosed_emissions,axis=-1)
             alpha[...,t] = calculate_alpha(G=G,G_A=G_A,T=np.sum(S,axis=-1)[...,np.newaxis],r=r,g0=g0,g1=g1)
-            C_end[...,t] = C[...,t]*2 - C_end[...,t-1]
-            diagnosed_emissions[...,t],R,G_A = unstep_concentration(R_old=R,C=C_end[...,t],alpha=alpha[...,t,np.newaxis],a=a,tau=tau,PI_conc=PI_conc[...,0],emis2conc=emis2conc[...,0],dt=timestep[t])
+            diagnosed_emissions[...,t],R,G_A = unstep_concentration(R_old=R,G_A_old=G_A,C=C[...,t],alpha=alpha[...,t,np.newaxis],a=a,tau=tau,PI_conc=PI_conc[...,0],emis2conc=emis2conc[...,0],dt=timestep[t])
             S,T[...,t] = step_temperature(S_old=S,F=np.sum(RF[...,t],axis=-1)[...,np.newaxis]+ext_forcing[...,t],q=q,d=d,dt=timestep[t])
 
         C_out = concentrations_in
