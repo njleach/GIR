@@ -593,6 +593,23 @@ def invert_concentrations_prescribed_T( concentrations_in,  gas_parameters , T )
 
     return out_dict
 
+def invert_carbon_cycle_prescribed_T(C,T,a,tau,r,PI_conc,emis2conc):
+    
+    g1 = np.sum( a * tau * ( 1. - ( 1. + 100/tau ) * np.exp(-100/tau) ) )
+    g0 = ( np.sinh( np.sum( a * tau * ( 1. - np.exp(-100/tau) ) ) / g1 ) )**(-1.)
+    
+    diagnosed_emissions = np.zeros(C.size)
+    alpha = np.zeros(C.size)
+    
+    alpha[0] = calculate_alpha(G=0,G_A=0,T=0,r=r,g0=g0,g1=g1)
+    diagnosed_emissions[0],R,G_A = unstep_concentration(R_old=0,G_A_old=0,C=C[0],alpha=alpha[0,np.newaxis],a=a,tau=tau,PI_conc=PI_conc,emis2conc=emis2conc)
+    for t in np.arange(1,C.size):
+        G = np.sum(diagnosed_emissions)
+        alpha[t] = calculate_alpha(G=G,G_A=G_A,T=T[t-1],r=r,g0=g0,g1=g1)
+        diagnosed_emissions[t],R,G_A = unstep_concentration(R_old=R,G_A_old=G_A,C=C[t],alpha=alpha[t,np.newaxis],a=a,tau=tau,PI_conc=PI_conc,emis2conc=emis2conc)
+            
+    return pd.Series(index=np.arange(C.size),data=diagnosed_emissions)
+
 def unstep_forcing(forcing_in,gas_parameters=get_gas_parameter_defaults(),thermal_params=get_thermal_parameter_defaults()):
     
     f = input_to_numpy(gas_parameters.loc['f1':'f3'])[np.newaxis,:,np.newaxis,...]

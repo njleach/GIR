@@ -1,0 +1,1070 @@
+AS-RCEC_TaiESM1_r1i1p1f1_1pctCO2_rlut
+branch time (parent): 182500.0
+parent time units: days since 1850-01-01parent exp: piControlparent source id: TaiESM1parent variant label: r1i1p1f1
+AS-RCEC_TaiESM1_r1i1p1f1_1pctCO2_rsut
+branch time (parent): 182500.0
+parent time units: days since 1850-01-01parent exp: piControlparent source id: TaiESM1parent variant label: r1i1p1f1
+AS-RCEC_TaiESM1_r1i1p1f1_1pctCO2_tas
+branch time (parent): 182500.0
+parent time units: days since 1850-01-01parent exp: piControlparent source id: TaiESM1parent variant label: r1i1p1f1
+AS-RCEC_TaiESM1_r1i1p1f1_abrupt-4xCO2_rlut
+branch time (parent): 438000.0
+parent time units: days since 0701-01-01parent exp: piControlparent source id: TaiESM1parent variant label: r1i1p1f1
+AS-RCEC_TaiESM1_r1i1p1f1_abrupt-4xCO2_rsut
+branch time (parent): 438000.0
+parent time units: days since 0701-01-01parent exp: piControlparent source id: TaiESM1parent variant label: r1i1p1f1
+AS-RCEC_TaiESM1_r1i1p1f1_abrupt-4xCO2_tas
+branch time (parent): 438000.0
+parent time units: days since 0701-01-01parent exp: piControlparent source id: TaiESM1parent variant label: r1i1p1f1
+AS-RCEC_TaiESM1_r1i1p1f1_piControl_rlut
+branch time (parent): 430335.0
+parent time units: days since 0001-01-01parent exp: piControl-spinupparent source id: TaiESM1parent variant label: r1i1p1f1
+AS-RCEC_TaiESM1_r1i1p1f1_piControl_rsdt
+branch time (parent): 430335.0
+parent time units: days since 0001-01-01parent exp: piControl-spinupparent source id: TaiESM1parent variant label: r1i1p1f1
+AS-RCEC_TaiESM1_r1i1p1f1_piControl_rsut
+branch time (parent): 430335.0
+parent time units: days since 0001-01-01parent exp: piControl-spinupparent source id: TaiESM1parent variant label: r1i1p1f1
+AS-RCEC_TaiESM1_r1i1p1f1_piControl_tas
+branch time (parent): 430335.0
+parent time units: days since 0001-01-01parent exp: piControl-spinupparent source id: TaiESM1parent variant label: r1i1p1f1
+AWI_AWI-CM-1-1-MR_r1i1p1f1_1pctCO2_rlut
+branch time (parent): 90945.0
+parent time units: days since 2401-01-01 00:00:00parent exp: piControlparent source id: AWI-CM-1-1-MRparent variant label: r1i1p1f1
+AWI_AWI-CM-1-1-MR_r1i1p1f1_1pctCO2_rsut
+branch time (parent): 90945.0
+parent time units: days since 2401-01-01 00:00:00parent exp: piControlparent source id: AWI-CM-1-1-MRparent variant label: r1i1p1f1
+AWI_AWI-CM-1-1-MR_r1i1p1f1_1pctCO2_tas
+branch time (parent): 90945.0
+parent time units: days since 2401-01-01 00:00:00parent exp: piControlparent source id: AWI-CM-1-1-MRparent variant label: r1i1p1f1
+AWI_AWI-CM-1-1-MR_r1i1p1f1_abrupt-4xCO2_rlut
+branch time (parent): 90945.0
+parent time units: days since 2401-01-01 00:00:00parent exp: piControlparent source id: AWI-CM-1-1-MRparent variant label: r1i1p1f1
+AWI_AWI-CM-1-1-MR_r1i1p1f1_abrupt-4xCO2_rsdt
+branch time (parent): 90945.0
+parent time units: days since 2401-01-01 00:00:00parent exp: piControlparent source id: AWI-CM-1-1-MRparent variant label: r1i1p1f1
+AWI_AWI-CM-1-1-MR_r1i1p1f1_abrupt-4xCO2_rsut
+branch time (parent): 90945.0
+parent time units: days since 2401-01-01 00:00:00parent exp: piControlparent source id: AWI-CM-1-1-MRparent variant label: r1i1p1f1
+AWI_AWI-CM-1-1-MR_r1i1p1f1_abrupt-4xCO2_tas
+branch time (parent): 90945.0
+parent time units: days since 2401-01-01 00:00:00parent exp: piControlparent source id: AWI-CM-1-1-MRparent variant label: r1i1p1f1
+AWI_AWI-CM-1-1-MR_r1i1p1f1_piControl_rlut
+branch time (parent): 0.0
+parent time units: days since 1901-01-01 00:00:00parent exp: piControl-spinupparent source id: AWI-CM-1-1-MRparent variant label: r1i1p1f1
+1i1p1f1_abrupt-4xCO2_tas
+branch time (parent): 0.0
+parent time units: days since 1850-01-01
+parent exp: piControl
+parent source id: CAS-ESM2-0
+parent variant label: r1i1p1f1
+
+CAS_FGOALS-f3-L_r1i1p1f1_1pctCO2_tas
+branch time (parent): 12345.0
+parent time units: days since 0001-01-01
+parent exp: piControl
+parent source id: FGOALS-f3-L
+parent variant label: r1i1p1f1
+
+CAS_FGOALS-f3-L_r2i1p1f1_1pctCO2_tas
+branch time (parent): 12345.0
+parent time units: days since 0001-01-01
+parent exp: piControl
+parent source id: FGOALS-f3-L
+parent variant label: r1i1p1f1
+
+CAS_FGOALS-f3-L_r3i1p1f1_1pctCO2_tas
+branch time (parent): 12345.0
+parent time units: days since 0001-01-01
+parent exp: piControl
+parent source id: FGOALS-f3-L
+parent variant label: r1i1p1f1
+
+CAS_FGOALS-f3-L_r1i1p1f1_abrupt-4xCO2_tas
+branch time (parent): 12345.0
+parent time units: days since 0001-01-01
+parent exp: piControl
+parent source id: FGOALS-f3-L
+parent variant label: r1i1p1f1
+
+CAS_FGOALS-f3-L_r2i1p1f1_abrupt-4xCO2_tas
+branch time (parent): 12345.0
+parent time units: days since 0001-01-01
+parent exp: piControl
+parent source id: FGOALS-f3-L
+parent variant label: r1i1p1f1
+
+CAS_FGOALS-f3-L_r3i1p1f1_abrupt-4xCO2_tas
+branch time (parent): 12345.0
+parent time units: days since 0001-01-01
+parent exp: piControl
+parent source id: FGOALS-f3-L
+parent variant label: r1i1p1f1
+
+CAS_FGOALS-g3_r1i1p1f1_1pctCO2_tas
+branch time (parent): 251485.0
+parent time units: days since 0001-01-01
+parent exp: piControl
+parent source id: FGOALS-g3
+parent variant label: r1i1p1f1
+
+CAS_FGOALS-g3_r2i1p1f1_1pctCO2_tas
+branch time (parent): 251485.0
+parent time units: days since 0001-01-01
+parent exp: piControl
+parent source id: FGOALS-g3
+parent variant label: r1i1p1f1
+
+CAS_FGOALS-g3_r3i1p1f1_1pctCO2_tas
+branch time (parent): 251485.0
+parent time units: days since 0001-01-01
+parent exp: piControl
+parent source id: FGOALS-g3
+parent variant label: r1i1p1f1
+
+CAS_FGOALS-g3_r1i1p1f1_abrupt-4xCO2_tas
+branch time (parent): 168630.0
+parent time units: days since 0001-01-01
+parent exp: piControl
+parent source id: FGOALS-g3
+parent variant label: r1i1p1f1
+
+CCCma_CanESM5-CanOE_r1i1p2f1_1pctCO2_tas
+branch time (parent): 1350500.0
+parent time units: days since 1850-01-01 0:0:0.0
+parent exp: piControl
+parent source id: CanESM5-CanOE
+parent variant label: r1i1p2f1
+
+CCCma_CanESM5_r1i1p1f1_1pctCO2_tas
+branch time (parent): 1223115.0
+parent time units: days since 1850-01-01 0:0:0.0
+parent exp: piControl
+parent source id: CanESM5
+parent variant label: r1i1p1f1
+
+CCCma_CanESM5_r1i1p2f1_1pctCO2_tas
+branch time (parent): 1350500.0
+parent time units: days since 1850-01-01 0:0:0.0
+parent exp: piControl
+parent source id: CanESM5
+parent variant label: r1i1p2f1
+
+CCCma_CanESM5_r2i1p1f1_1pctCO2_tas
+branch time (parent): 1241365.0
+parent time units: days since 1850-01-01 0:0:0.0
+parent exp: piControl
+parent source id: CanESM5
+parent variant label: r1i1p1f1
+
+CCCma_CanESM5_r2i1p2f1_1pctCO2_tas
+branch time (parent): 1368750.0
+parent time units: days since 1850-01-01 0:0:0.0
+parent exp: piControl
+parent source id: CanESM5
+parent variant label: r1i1p2f1
+
+CCCma_CanESM5_r3i1p1f1_1pctCO2_tas
+branch time (parent): 1259615.0
+parent time units: days since 1850-01-01 0:0:0.0
+parent exp: piControl
+parent source id: CanESM5
+parent variant label: r1i1p1f1
+
+CCCma_CanESM5_r3i1p2f1_1pctCO2_tas
+branch time (parent): 1387000.0
+parent time units: days since 1850-01-01 0:0:0.0
+parent exp: piControl
+parent source id: CanESM5
+parent variant label: r1i1p2f1
+
+CCCma_CanESM5_r1i1p1f1_abrupt-4xCO2_tas
+branch time (parent): 1223115.0
+parent time units: days since 1850-01-01 0:0:0.0
+parent exp: piControl
+parent source id: CanESM5
+parent variant label: r1i1p1f1
+
+CCCma_CanESM5_r1i1p2f1_abrupt-4xCO2_tas
+branch time (parent): 1350500.0
+parent time units: days since 1850-01-01 0:0:0.0
+parent exp: piControl
+parent source id: CanESM5
+parent variant label: r1i1p2f1
+
+CCCR-IITM_IITM-ESM_r1i1p1f1_1pctCO2_tas
+branch time (parent): 0.0
+parent time units: days since 1850-01-01
+parent exp: piControl
+parent source id: IITM-ESM
+parent variant label: r1i1p1f1
+
+CCCR-IITM_IITM-ESM_r1i1p1f1_abrupt-4xCO2_tas
+branch time (parent): 0.0
+parent time units: days since 1850-01-01
+parent exp: piControl
+parent source id: IITM-ESM
+parent variant label: r1i1p1f1
+
+CMCC_CMCC-CM2-SR5_r1i1p1f1_1pctCO2_tas
+branch time (parent): 0.0
+parent time units: days since 1850-01-01
+parent exp: piControl
+parent source id: CMCC-CM2-SR5
+parent variant label: r1i1p1f1
+comment: none
+
+CMCC_CMCC-CM2-SR5_r1i1p1f1_abrupt-4xCO2_tas
+branch time (parent): 0.0
+parent time units: days since 1850-01-01
+parent exp: piControl
+parent source id: CMCC-CM2-SR5
+parent variant label: r1i1p1f1
+comment: none
+
+CNRM-CERparent exp: piControlparent source id: CanESM5-CanOEparent variant label: r1i1p2f1
+CCCma_CanESM5-CanOE_r1i1p2f1_1pctCO2_tas
+branch time (parent): 1350500.0
+parent time units: days since 1850-01-01 0:0:0.0parent exp: piControlparent source id: CanESM5-CanOEparent variant label: r1i1p2f1
+CCCma_CanESM5_r1i1p1f1_1pctCO2_rlut
+branch time (parent): 1223115.0
+parent time units: days since 1850-01-01 0:0:0.0parent exp: piControlparent source id: CanESM5parent variant label: r1i1p1f1
+CCCma_CanESM5_r1i1p1f1_1pctCO2_rsdt
+branch time (parent): 1223115.0
+parent time units: days since 1850-01-01 0:0:0.0parent exp: piControlparent source id: CanESM5parent variant label: r1i1p1f1
+CCCma_CanESM5_r1i1p1f1_1pctCO2_rsut
+branch time (parent): 1223115.0
+parent time units: days since 1850-01-01 0:0:0.0parent exp: piControlparent source id: CanESM5parent variant label: r1i1p1f1
+CCCma_CanESM5_r1i1p1f1_1pctCO2_tas
+branch time (parent): 1223115.0
+parent time units: days since 1850-01-01 0:0:0.0parent exp: piControlparent source id: CanESM5parent variant label: r1i1p1f1
+CCCma_CanESM5_r1i1p2f1_1pctCO2_rlut
+branch time (parent): 1350500.0
+parent time units: days since 1850-01-01 0:0:0.0parent exp: piControlparent source id: CanESM5parent variant label: r1i1p2f1
+CCCma_CanESM5_r1i1p2f1_1pctCO2_rsdt
+branch time (parent): 1350500.0
+parent time units: days since 1850-01-01 0:0:0.0parent exp: piControlparent source id: CanESM5parent variant label: r1i1p2f1
+CCCma_CanESM5_r1i1p2f1_1pctCO2_rsut
+branch time (parent): 1350500.0
+parent time units: days since 1850-01-01 0:0:0.0parent exp: piControlparent source id: CanESM5parent variant label: r1i1p2f1
+CCCma_CanESM5_r1i1p2f1_1pctCO2_tas
+branch time (parent): 1350500.0
+parent time units: days since 1850-01-01 0:0:0.0parent exp: piControlparent source id: CanESM5parent variant label: r1i1p2f1
+CCCma_CanESM5_r2i1p1f1_1pctCO2_rlut
+branch time (parent): 1241365.0
+parent time units: days since 1850-01-01 0:0:0.0parent exp: piControlparent source id: CanESM5parent variant label: r1i1p1f1
+CCCma_CanESM5_r2i1p1f1_1pctCO2_rsdt
+branch time (parent): 1241365.0
+parent time units: days since 1850-01-01 0:0:0.0parent exp: piControlparent source id: CanESM5parent variant label: r1i1p1f1
+CCCma_CanESM5_r2i1p1f1_1pctCO2_rsut
+branch time (parent): 1241365.0
+parent time units: days since 1850-01-01 0:0:0.0parent exp: piControlparent source id: CanESM5parent variant label: r1i1p1f1
+CCCma_CanESM5_r2i1p1f1_1pctCO2_tas
+branch time (parent): 1241365.0
+parent time units: days since 1850-01-01 0:0:0.0parent exp: piControlparent source id: CanESM5parent variant label: r1i1p1f1
+CCCma_CanESM5_r2i1p2f1_1pctCO2_rlut
+branch time (parent): 1368750.0
+parent time units: days since 1850-01-01 0:0:0.0parent exp: piControlparent source id: CanESM5parent variant label: r1i1p2f1
+CCCma_CanESM5_r2i1p2f1_1pctCO2_rsdt
+branch time (parent): 1368750.0
+parent time units: days since 1850-01-01 0:0:0.0parent exp: piControlparent source id: CanESM5parent variant label: r1i1p2f1
+CCCma_CanESM5_r2i1p2f1_1pctCO2_rsut
+branch time (parent): 1368750.0
+parent time units: days since 1850-01-01 0:0:0.0parent exp: piControlparent source id: CanESM5parent variant label: r1i1p2f1
+CCCma_CanESM5_r2i1p2f1_1pctCO2_tas
+branch time (parent): 1368750.0
+parent time units: days since 1850-01-01 0:0:0.0parent exp: piControlparent source id: CanESM5parent variant label: r1i1p2f1
+CCCma_CanESM5_r3i1p1f1_1pctCO2_rlut
+branch time (parent): 1259615.0
+parent time units: days since 1850-01-01 0:0:0.0parent exp: piControlparent source id: CanESM5parent variant label: r1i1p1f1
+CCCma_CanESM5_r3i1p1f1_1pctCO2_rsdt
+branch time (parent): 1259615.0
+parent time units: days since 1850-01-01 0:0:0.0parent exp: piControlparent source id: CanESM5parent variant label: r1i1p1f1
+CCCma_CanESM5_r3i1p1f1_1pctCO2_rsut
+branch time (parent): 1259615.0
+parent time units: days since 1850-01-01 0:0:0.0parent exp: piControlparent source id: CanESM5parent variant label: r1i1p1f1
+CCCma_CanESM5_r3i1p1f1_1pctCO2_tas
+branch time (parent): 1259615.0
+parent time units: days since 1850-01-01 0:0:0.0parent exp: piControlparent source id: CanESM5parent variant label: r1i1p1f1
+CCCma_CanESM5_r3i1p2f1_1pctCO2_rlut
+branch time (parent): 1387000.0
+parent time units: days since 1850-01-01 0:0:0.0parent exp: piControlparent source id: CanESM5parent variant label: r1i1p2f1
+CCCma_CanESM5_r3i1p2f1_1pctCO2_rsdt
+branch time (parent): 1387000.0
+parent time units: days since 1850-01-01 0:0:0.0parent exp: piControlparent source id: CanESM5parent variant label: r1i1p2f1
+CCCma_CanESM5_r3i1p2f1_1pctCO2_rsut
+branch time (parent): 1387000.0
+parent time units: days since 1850-01-01 0:0:0.0parent exp: piControlparent source id: CanESM5parent variant label: r1i1p2f1
+CCCma_CanESM5_r3i1p2f1_1pctCO2_tas
+branch time (parent): 1387000.0
+parent time units: days since 1850-01-01 0:0:0.0parent exp: piControlparent source id: CanESM5parent variant label: r1i1p2f1
+CCCR-IITM_IITM-ESM_r1i1p1f1_1pctCO2_tas
+branch time (parent): 0.0
+parent time units: days since 1850-01-01parent exp: piControlparent source id: IITM-ESMparent variant label: r1i1p1f1
+CMCC_CMCC-CM2-SR5_r1i1p1f1_1pctCO2_tas
+branch time (parent): 0.0
+parent time units: days since 1850-01-01parent exp: piControlparent source id: CMCC-CM2-SR5parent variant label: r1i1p1f1comment: none
+CNRM-CERFACS_CNRM-CM6-1-HR_r1i1p1f2_1pctCO2_rlut
+branch time (parent): 0.0
+parent time units: days since 1850-01-01 00:00:00parent exp: p i C o n t r o lparent source id: CNRM-CM6-1-HRparent variant label: r1i1p1f2
+CNRM-CERFACS_CNRM-CM6-1-HR_r1i1p1f2_1pctCO2_rsut
+branch time (parent): 0.0
+parent time units: days since 1850-01-01 00:00:00parent exp: p i C o n t r o lparent source id: CNRM-CM6-1-HRparent variant label: r1i1p1f2
+CNRM-CERFACS_CNRM-CM6-1-HR_r1i1p1f2_1pctCO2_tas
+branch time (parent): 0.0
+parent time units: days since 1850-01-01 00:00:00parent exp: p i C o n t r o lparent source id: CNRM-CM6-1-HRparent variant label: r1i1p1f2
+exp: piControl
+parent source id: EC-Earth3-Veg
+parent variant label: r1i1p1f1
+
+EC-Earth-Consortium_EC-Earth3-Veg_r1i1p1f1_abrupt-4xCO2_tas
+branch time (parent): 0.0
+parent time units: days since 1850-01-01
+parent exp: piControl
+parent source id: EC-Earth3-Veg
+parent variant label: r1i1p1f1
+
+EC-Earth-Consortium_EC-Earth3_r8i1p1f1_abrupt-4xCO2_tas
+branch time (parent): 138792.0
+parent time units: days since 1850-01-01
+parent exp: piControl
+parent source id: EC-Earth3
+parent variant label: r1i1p1f1
+
+FIO-QLNM_FIO-ESM-2-0_r1i1p1f1_1pctCO2_tas
+branch time (parent): 109500.0
+parent time units: days since 0001-01-01 00:00:00
+parent exp: piControl
+parent source id: FIO-ESM-2-0
+parent variant label: r1i1p1f1
+
+FIO-QLNM_FIO-ESM-2-0_r2i1p1f1_1pctCO2_tas
+branch time (parent): 120085.0
+parent time units: days since 0001-01-01 00:00:00
+parent exp: piControl
+parent source id: FIO-ESM-2-0
+parent variant label: r1i1p1f1
+
+FIO-QLNM_FIO-ESM-2-0_r3i1p1f1_1pctCO2_tas
+branch time (parent): 127385.0
+parent time units: days since 0001-01-01 00:00:00
+parent exp: piControl
+parent source id: FIO-ESM-2-0
+parent variant label: r1i1p1f1
+
+FIO-QLNM_FIO-ESM-2-0_r1i1p1f1_abrupt-4xCO2_tas
+branch time (parent): 109500.0
+parent time units: days since 0001-01-01 00:00:00
+parent exp: piControl
+parent source id: FIO-ESM-2-0
+parent variant label: r1i1p1f1
+
+FIO-QLNM_FIO-ESM-2-0_r2i1p1f1_abrupt-4xCO2_tas
+branch time (parent): 120085.0
+parent time units: days since 0001-01-01 00:00:00
+parent exp: piControl
+parent source id: FIO-ESM-2-0
+parent variant label: r1i1p1f1
+
+FIO-QLNM_FIO-ESM-2-0_r3i1p1f1_abrupt-4xCO2_tas
+branch time (parent): 127385.0
+parent time units: days since 0001-01-01 00:00:00
+parent exp: piControl
+parent source id: FIO-ESM-2-0
+parent variant label: r1i1p1f1
+
+HAMMOZ-Consortium_MPI-ESM-1-2-HAM_r1i1p1f1_1pctCO2_tas
+branch time (parent): 36524.0
+parent time units: days since 1850-1-1 00:00:00
+parent exp: piControl
+parent source id: MPI-ESM-1-2-HAM
+parent variant label: r1i1p1f1
+
+HAMMOZ-Consortium_MPI-ESM-1-2-HAM_r1i1p1f1_abrupt-4xCO2_tas
+branch time (parent): 36524.0
+parent time units: days since 1850-1-1 00:00:00
+parent exp: piControl
+parent source id: MPI-ESM-1-2-HAM
+parent variant label: r1i1p1f1
+
+INM_INM-CM4-8_r1i1p1f1_1pctCO2_tas
+branch time (parent): 35405.0
+parent time units: days since 1850-01-01
+parent exp: piControl
+parent source id: INM-CM4-8
+parent variant label: r1i1p1f1
+
+INM_INM-CM4-8_r1i1p1f1_abrupt-4xCO2_tas
+branch time (parent): 35405.0
+parent time units: days since 1850-01-01
+parent exp: piControl
+parent source id: INM-CM4-8
+parent variant label: r1i1p1f1
+
+INM_INM-CM5-0_r1i1p1f1_1pctCO2_tas
+branch time (parent): 90885.0
+parent time units: days since 1850-01-01
+parent exp: piControl
+parent source id: INM-CM5-0
+parent variant label: r1i1p1f1
+
+INM_INM-CM5-0_r1i1p1f1_abrupt-4xCO2_tas
+branch time (parent): 90885.0
+parent time units: days since 1850-01-01
+parent exp: piControl
+parent source id: INM-CM5-0
+parent variant label: r1i1p1f1
+
+IPSL_IPSL-CM6A-LR_r1i1p1f1_1pctCO2_tas
+branch time (parent): 7305.0
+parent time units: days since 1850-01-01 00:00:00
+parent exp: piControl
+parent source id: IPSL-CM6A-LR
+parent variant label: r1i1p1f1
+
+IPSL_IPSL-CM6A-LR_r10i1p1f1_abrupt-4xCO2_tas
+branch time (parent): 7578.0
+parent time units: days since 1850-01-01 00:00:00
+parent exp: piControl
+parent source id: IPSL-CM6A-LR
+parent variant label: r1i1p1f1
+
+IPSL_IPSL-CM6A-LR_r11i1p1f1_abrupt-4xCO2_tas
+branch time (parent): 7609.0
+parent time units: days since 1850-01-01 00:00:00
+parent exp: piControl
+parent source id: IPSL-CM6A-LR
+parent variant label: r1i1p1f1
+
+IPSL_IPSL-CM6A-LR_r12i1p1f1_abrupt-4xCO2_tas
+branch time (parent): 7639.0
+parent time units: days since 1850-01-01 00:00:00
+parent exp: piControl
+parent source id: IPSL-CM6A-LR
+parent variant label: r1i1p1f1
+
+IPSL_IPSL-CM6A-LR_r1i1p1f1_abrupt-4xCO2_tas
+branch time (parent): 7305.0
+parent time units: days since 1850-01-01 00:00:00
+parent exp: piControl
+parent source id: IPSL-CM6A-LR
+parent variant label: r1i1p1f1
+
+IPSL_IPSL-CM6A-LR_r2i1p1f1_abrupt-4xCO2_tas
+branch time (parent): 7336.0
+parent time units: days since 1850-01-01 00:00:00
+parent exp: piControl
+parent source id: IPSL-CM6A-LR
+parent variant label: r1i1p1f1
+
+IPSL_IPSL-CM6A-LR_r3i1p1f1_abrupt-4xCO2_tas
+branch time (parent): 7364.0
+parent time units: days since 1850-01-01 00:00:00
+parent exp: piControl
+parent source id: IPSL-CM6A-LR
+parent variant label: r1i1p1f1
+
+IPSL_IPSL-CM6A-LR_r4i1p1f1_abrupt-4xCO2_tas
+branch time (parent): 7395.0
+parent time units: days since 1850-01-01 00:00:00
+parent exp: piControl
+parent source id: IPSL-CM6A-LR
+parent variant label: r1i1p1f1
+
+IPSL_IPSL-CM6A-LR_r5i1p1f1_abrupt-4xCO2_tas
+branch time (parent): 7425.0
+parent time units: days since 1850-01-01 00:00:00
+parent exp: piControl
+parent source id: IPSL-CM6A-LR
+parent variant label: r1i1p1f1
+
+IPSL_IPSL-CM6A-LR_r6i1p1f1_abrupt-4xCO2_tas
+branch time (parent): 7456.0
+parent time units: days since 1850-01-01 00:00:00
+parent exp: piControl
+parent source id: IPSL-CM6A-LR
+parent variant label: r1i1p1f1
+
+IPSL_IPSL-CM6A-LR_r7i1p1f1_abrupt-4xCO2_tas
+branch time (parent): 7486.0
+parent time units: days since 1850-01-01 00:00:00
+parent exp: piControl
+parent source id: IPSL-CM6A-LR
+parent variant label: r1i1p1f1
+
+IPSL_IPSL-CM6A-LR_r8i1p1f1_abrupt-4xCO2_tas
+branch time (parent): 7517.0
+parent time units: days since 1850-01-01 00:00:00
+parent exp: piControl
+parent source id: IPSL-CM6A-LR
+parent variant label: r1i1p1f1
+
+IPSL_IPSL-CM6A-LR_r9i1p1f1_abrupt-4xCO2_tas
+branch time (parent): 7548.0
+parent time units: days since 1850-01-01 00:00:00
+parent exp: piControl
+parent source id: IPSL-CM6A-LR
+parent variant label: r1i1p1f1
+
+MIROC_MIROC-ES2L_r1i1p1f2_1pctCO2_tas
+branch time (parent): 0.0
+parent time units: days since 1850-1-1
+parent exp: piControl
+parent source id: MIROC-ES2L
+parent variant label: r1i1p1f2
+
+MIROC_MIROC-ES2L_r1i1p1f2_abrupt-4xCO2_tas
+branch time (parent): 0.0
+parent time units: days since 1850-1-1
+parent exp: piControl
+parent source id: MIROC-ES2L
+parent variant label: r1i1p1f2
+
+MIROC_MIROC6_r1i1p1f1_1pctCO2_tas
+branch time (parent): 0.0
+parent time units: days since 3200-1-1
+parent exp: piControl
+parent source id: MIROC6
+parent variant label: r1i1p1f1
+
+MIROC_MIROC6_r1i1p1f1_abrupt-4xCO2_tas
+branch time (parent): 0.0
+parent time units: days since 3200-1-1
+parent exp: piControl
+parent source id: MIROC6
+parent variant label: r1i1p1f1
+
+MOHC_HadGEM3-GC31-LL_r1i1p1f3_1pctCO2_tas
+branch time (parent): 0.0
+parent time units: days since 1850-01-01-00-00-00
+parent exp: piControl
+parent source id: HadGEM3-GC31-LL
+parent variant label: r1i1p1f1
+
+MOHC_HadGEM3-GC31-LL_r2i1p1f3_1pctCO2_tas
+branch time (parent): 12600.0
+parent time units: days since 1850-01-01-00-00-00
+parent exp: piControl
+parent source id: HadGEM3-GC31-LL
+parent variant label: r1i1p1f1
+
+MOHC_HadGEM3-GC31-LL_r3i1p1f3_1pctCO2_tas
+branch time (parent): 28800.0
+parent time units: days since 1850-01-01-00-00-00
+parent exp: piControl
+parent source id: HadGEM3-GC31-LL
+parent variant label: r1i1p1f1
+
+MOHC_HadGEM3-GC31-LL_r4i1p1f3_1pctCO2_tas
+branch time (parent): 43200.0
+parent time units: days since 1850-01-01-00-00-00
+parent exp: piControl
+parent source id: HadGEM3-GC31-LL
+parent variant label: r1i1p1f1
+
+MOHC_HadGEM3-GC31-LL_r1i1p1f3_abrupt-4xCO2_tas
+branch time (parent): 0.0
+parent time units: days since 1850-01-01-00-00-00
+parent exp: piControl
+parent source id: HadGEM3-GC31-LL
+parent variant label: r1i1p1f1
+
+MOHC_HadGEM3-GC31-MM_r1i1p1f3_1pctCO2_tas
+branch time (parent): 0.0
+parent time units: days since 1850-01-01
+parent exp: piControl
+parent source id: HadGEM3-GC31-MM
+parent variant label: r1i1p1f1
+
+MOHC_HadGEM3-GC31-MM_r1i1p1f3_abrupt-4xCO2_tas
+branch time (parent): 0.0
+parent time units: days since 1850-01-01
+parent exp: piControl
+parent source id: HadGEM3-GC31-MM
+parent variant label: r1i1p1f1
+
+MOHC_UKESM1-0-LL_r1i1p1f2_1pctCO2_tas
+branch time (parent): 39600.0
+parent time units: days since 1850-01-01-00-00-00
+parent exp: piControl
+parent source id: UKESM1-0-LL
+parent variant label: r1i1p1f2
+
+MOHC_UKESM1-0-LL_r2i1p1f2_1pctCO2_tas
+branch time (parent): 97200.0
+parent time units: days since 1850-01-01-00-00-00
+parent exp: piControl
+parent source id: UKESM1-0-LL
+parent variant label: r1i1p1f2
+
+MOHC_UKESM1-0-LL_r3i1p1f2_1pctCO2_tas
+branch time (parent): 156600.0
+parent time units: days since 1850-01-01-00-00-00
+parent exp: piControl
+parent source id: UKESM1-0-LL
+parent variant label: r1i1p1f2
+
+MOHC_UKESM1-0-LL_r4i1p1f2_1pctCO2_tas
+branch time (parent): 219600.0
+parent time units: days since 1850-01-01-00-00-00
+parent exp: piControl
+parent source id: UKESM1-0-LL
+parent variant label: r1i1p1f2
+
+MOHC_UKESM1-0-LL_r1i1p1f2_abrupt-4xCO2_tas
+branch time (parent): 39600.0
+parent time units: days since 1850-01-01-00-00-00
+parent exp: piControl
+parent source id: UKESM1-0-LL
+parent variant label: r1i1p1f2
+
+MPI-M_MPI-ESM1-2-HR_r1i1p1f1_1pctCO2_tas
+branch time (parent): 0.0
+parent time units: days since 1850-1-1 00:00:00
+parent exp: piControl
+parent source id: MPI-ESM1-2-HR
+parent variant label: r1i1p1f1
+
+MPI-M_MPI-ESM1-2-HR_r1i1p1f1_abrupt-4xCO2_tas
+branch time (parent): 0.0
+parent time units: days since 1850-1-1 00:00:00
+parent exp: piControl
+parent source id: MPI-ESM1-2-HR
+parent variant label: r1i1p1f1
+
+MPI-M_MPI-ESM1-2-LR_r1i1p1f1_1pctCO2_tas
+branch time (parent): 0.0
+parent time units: days since 1850-1-1 00:00:00
+parent exp: piControl
+parent source id: MPI-ESM1-2-LR
+parent variant label: r1i1p1f1
+
+MPI-M_MPI-ESM1-2-LR_r1i1p1f1_abrupt-4xCO2_tas
+branch time (parent): 0.0
+parent time units: days since 1850-1-1 00:00:00
+parent exp: piControl
+parent source id: MPI-ESM1-2-LR
+parent variant label: r1i1p1f1
+
+MRI_MRI-ESM2-0_r1i1p1f1_1pctCO2_tas
+branch time (parent): 0.0
+parent time units: days since 1850-01-01
+parent exp: piControl
+parent source id: MRI-ESM2-0
+parent variant label: r1i1p1f1
+
+MRI_MRI-ESM2-0_r1i2p1f1_1pctCO2_tas
+branch time (parent): 0.0
+parent time units: days since 1850-01-01
+parent exp: piControl
+parent source id: MRI-ESM2-0
+parent variant label: r1i2p1f1
+
+MRI_MRI-ESM2-0_r10i1p1f1_abrupt-4xCO2_tas
+branch time (parent): 273.0
+parent time units: days since 1850-01-01
+parent exp: piControl
+parent source id: MRI-ESM2-0
+parent variant label: r1i1p1f1
+
+MRI_MRI-ESM2-0_r11i1p1f1_abrupt-4xCO2_tas
+branch time (parent): 304.0
+parent time units: days since 1850-01-01
+parent exp: piControl
+parent source id: MRI-ESM2-0
+parent variant label: r1i1p1f1
+
+MRI_MRI-ESM2-0_r12i1p1f1_abrupt-4xCO2_tas
+branch time (parent): 334.0
+parent time units: days since 1850-01-01
+parent exp: piControl
+parent source id: MRI-ESM2-0
+parent variant label: r1i1p1f1
+
+MRI_MRI-ESM2-0_r13i1p1f1_abrupt-4xCO2_tas
+branch time (parent): 365.0
+parent time units: days since 1850-01-01
+parent exp: piControl
+parent source id: MRI-ESM2-0
+parent variant label: r1i1p1f1
+
+MRI_MRI-ESM2-0_r1i1p1f1_abrupt-4xCO2_tas
+branch time (parent): 0.0
+parent time units: days since 1850-01-01
+parent exp: piControl
+parent source id: MRI-ESM2-0
+parent variant label: r1i1p1f1
+
+MRI_MRI-ESM2-0_r1i2p1f1_abrupt-4xCO2_tas
+branch time (parent): 0.0
+parent time units: days since 1850-01-01
+parent exp: piControl
+parent source id: MRI-ESM2-0
+parent variant label: r1i2p1f1
+
+MRI_MRI-ESM2-0_r2i1p1f1_abrupt-4xCO2_tas
+branch time (parent): 31.0
+parent time units: days since 1850-01-01
+parent exp: piControl
+parent source id: MRI-ESM2-0
+parent variant label: r1i1p1f1
+
+MRI_MRI-ESM2-0_r3i1p1f1_abrupt-4xCO2_tas
+branch time (parent): 59.0
+parent time units: days since 1850-01-01
+parent exp: piControl
+parent source id: MRI-ESM2-0
+parent variant label: r1i1p1f1
+
+MRI_MRI-ESM2-0_r4i1p1f1_abrupt-4xCO2_tas
+branch time (parent): 90.0
+parent time units: days since 1850-01-01
+parent exp: piControl
+parent source id: MRI-ESM2-0
+parent variant label: r1i1p1f1
+
+MRI_MRI-ESM2-0_r5i1p1f1_abrupt-4xCO2_tas
+branch time (parent): 120.0
+parent time units: days since 1850-01-01
+parent exp: piControl
+parent source id: MRI-ESM2-0
+parent variant label: r1i1p1f1
+
+MRI_MRI-ESM2-0_r6i1p1f1_abrupt-4xCO2_tas
+branch time (parent): 151.0
+parent time units: days since 1850-01-01
+parent exp: piControl
+parent source id: MRI-ESM2-0
+parent variant label: r1i1p1f1
+
+MRI_MRI-ESM2-0_r7i1p1f1_abrupt-4xCO2_tas
+branch time (parent): 181.0
+parent time units: days since 1850-01-01
+parent exp: piControl
+parent source id: MRI-ESM2-0
+parent variant label: r1i1p1f1
+
+MRI_MRI-ESM2-0_r8i1p1f1_abrupt-4xCO2_tas
+branch time (parent): 212.0
+parent time units: days since 1850-01-01
+parent exp: piControl
+parent source id: MRI-ESM2-0
+parent variant label: r1i1p1f1
+
+MRI_MRI-ESM2-0_r9i1p1f1_abrupt-4xCO2_tas
+branch time (parent): 243.0
+parent time units: days since 1850-01-01
+parent exp: piControl
+parent source id: MRI-ESM2-0
+parent variant label: r1i1p1f1
+
+NASA-GISS_GISS-E2-1-G_r101i1p1f1_1pctCO2_tas
+branch time (parent): 0.0
+parent time units: days since 1850-1-1
+parent exp: piControl
+parent source id: GISS-E2-1-G
+parent variant label: r101i1p1f1
+comment: 1 percent per year increase in CO2 to 4xCO2
+
+NASA-GISS_GISS-E2-1-G_r102i1p1f1_1pctCO2_tas
+branch time (parent): 0.0
+parent time units: days since 1850-1-1
+parent exp: piControl
+parent source id: GISS-E2-1-G
+parent variant label: r102i1p1f1
+comment: 1 percent per year increase in CO2 to 4xCO2
+
+NASA-GISS_GISS-E2-1-G_r1i1p1f1_1pctCO2_tas
+branch time (parent): 0.0
+parent time units: days since 4150-1-1
+parent exp: piControl
+parent source id: GISS-E2-1-G
+parent variant label: r1i1p1f1
+comment: 1 percent per year increase in CO2 to 2xCO2
+
+NASA-GISS_GISS-E2-1-G_r1i1p3f1_1pctCO2_tas
+branch time (parent): 0.0
+parent time units: days since 2000-1-1
+parent exp: piControl
+parent source id: GISS-E2-1-G
+parent variant label: r1i1p3f1
+
+NASA-GISS_GISS-E2-1-G_r1i1p5f1_1pctCO2_tas
+branch time (parent): 0.0
+parent time units: days since 2000-1-1
+parent exp: piControl
+parent source id: GISS-E2-1-G
+parent variant label: r1i1p5f1
+
+NASA-GISS_GISS-E2-1-G_r102i1p1f1_abrupt-4xCO2_tas
+branch time (parent): 0.0
+parent time units: days since 1850-1-1
+parent exp: piControl
+parent source id: GISS-E2-1-G
+parent variant label: r102i1p1f1
+
+NASA-GISS_GISS-E2-1-G_r1i1p1f1_abrupt-4xCO2_tas
+branch time (parent): 0.0
+parent time units: days since 4150-1-1
+parent exp: piControl
+parent source id: GISS-E2-1-G
+parent variant label: r1i1p1f1
+
+NASA-GISS_GISS-E2-1-G_r1i1p1f3_abrupt-4xCO2_tas
+branch time (parent): 0.0
+parent time units: days since 2900-1-1
+parent exp: piControl
+parent source id: GISS-E2-1-G
+parent variant label: r1i1p1f3
+
+NASA-GISS_GISS-E2-1-G_r1i1p3f1_abrupt-4xCO2_tas
+branch time (parent): 0.0
+parent time units: days since 2000-1-1
+parent exp: piControl
+parent source id: GISS-E2-1-G
+parent variant label: r1i1p3f1
+
+NASA-GISS_GISS-E2-1-G_r1i1p5f1_abrupt-4xCO2_tas
+branch time (parent): 0.0
+parent time units: days since 2000-1-1
+parent exp: piControl
+parent source id: GISS-E2-1-G
+parent variant label: r1i1p5f1
+
+NASA-GISS_GISS-E2-1-H_r1i1p1f1_1pctCO2_tas
+branch time (parent): 0.0
+parent time units: days since 3180-1-1
+parent exp: piControl
+parent source id: GISS-E2-1-H
+parent variant label: r1i1p1f1
+
+NASA-GISS_GISS-E2-1-H_r1i1p1f1_abrupt-4xCO2_tas
+branch time (parent): 0.0
+parent time units: days since 3180-1-1
+parent exp: piControl
+parent source id: GISS-E2-1-H
+parent variant label: r1i1p1f1
+
+NASA-GISS_GISS-E2-1-H_r1i1p3f1_abrupt-4xCO2_tas
+branch time (parent): 0.0
+parent time units: days since 2000-1-1
+parent exp: piControl
+parent source id: GISS-E2-1-H
+parent variant label: r1i1p3f1
+
+NASA-GISS_GISS-E2-2-G_r1i1p1f1_1pctCO2_tas
+branch time (parent): 0.0
+parent time units: days since 2000-1-1
+parent exp: piControl
+parent source id: GISS-E2-2-G
+parent variant label: r1i1p1f1
+
+NASA-GISS_GISS-E2-2-G_r1i1p1f1_abrupt-4xCO2_tas
+branch time (parent): 0.0
+parent time units: days since 2000-1-1
+parent exp: piControl
+parent source id: GISS-E2-2-G
+parent variant label: r1i1p1f1
+
+NCAR_CESM2-FV2_r1i1p1f1_1pctCO2_tas
+branch time (parent): 116800.0
+parent time units: days since 0001-01-01 00:00:00
+parent exp: piControl
+parent source id: CESM2-FV2
+parent variant label: r1i1p1f1
+
+NCAR_CESM2-FV2_r1i1p1f1_abrupt-4xCO2_tas
+branch time (parent): 116800.0
+parent time units: days since 0001-01-01 00:00:00
+parent exp: piControl
+parent source id: CESM2-FV2
+parent variant label: r1i1p1f1
+
+NCAR_CESM2-WACCM-FV2_r1i1p1f1_1pctCO2_tas
+branch time (parent): 109500.0
+parent time units: days since 0001-01-01 00:00:00
+parent exp: piControl
+parent source id: CESM2-WACCM-FV2
+parent variant label: r1i1p1f1
+
+NCAR_CESM2-WACCM-FV2_r1i1p1f1_abrupt-4xCO2_tas
+branch time (parent): 109500.0
+parent time units: days since 0001-01-01 00:00:00
+parent exp: piControl
+parent source id: CESM2-WACCM-FV2
+parent variant label: r1i1p1f1
+
+NCAR_CESM2-WACCM_r1i1p1f1_1pctCO2_tas
+branch time (parent): 25185.0
+parent time units: days since 0001-01-01 00:00:00
+parent exp: piControl
+parent source id: CESM2-WACCM
+parent variant label: r1i1p1f1
+
+NCAR_CESM2-WACCM_r1i1p1f1_abrupt-4xCO2_tas
+branch time (parent): 25185.0
+parent time units: days since 0001-01-01 00:00:00
+parent exp: piControl
+parent source id: CESM2-WACCM
+parent variant label: r1i1p1f1
+
+NCAR_CESM2_r1i1p1f1_1pctCO2_tas
+branch time (parent): 182500.0
+parent time units: days since 0001-01-01 00:00:00
+parent exp: piControl
+parent source id: CESM2
+parent variant label: r1i1p1f1
+
+NCAR_CESM2_r1i1p1f1_abrupt-4xCO2_tas
+branch time (parent): 182865.0
+parent time units: days since 0001-01-01 00:00:00
+parent exp: piControl
+parent source id: CESM2
+parent variant label: r1i1p1f1
+
+NCC_NorCPM1_r1i1p1f1_1pctCO2_tas
+branch time (parent): 0.0
+parent time units: days since 0001-01-01
+parent exp: piControl
+parent source id: NorCPM1
+parent variant label: r1i1p1f1
+
+NCC_NorCPM1_r1i1p1f1_abrupt-4xCO2_tas
+branch time (parent): 0.0
+parent time units: days since 0001-01-01
+parent exp: piControl
+parent source id: NorCPM1
+parent variant label: r1i1p1f1
+
+NCC_NorESM2-LM_r1i1p1f1_1pctCO2_tas
+branch time (parent): 430335.0
+parent time units: days since 0421-01-01
+parent exp: piControl
+parent source id: NorESM2-LM
+parent variant label: r1i1p1f1
+
+NCC_NorESM2-LM_r1i1p1f1_abrupt-4xCO2_tas
+branch time (parent): 430335.0
+parent time units: days since 0421-01-01
+parent exp: piControl
+parent source id: NorESM2-LM
+parent variant label: r1i1p1f1
+
+NCC_NorESM2-MM_r1i1p1f1_1pctCO2_tas
+branch time (parent): 438000.0
+parent time units: days since 0001-01-01
+parent exp: piControl
+parent source id: NorESM2-MM
+parent variant label: r1i1p1f1
+
+NCC_NorESM2-MM_r1i1p1f1_abrupt-4xCO2_tas
+branch time (parent): 438000.0
+parent time units: days since 0001-01-01
+parent exp: piControl
+parent source id: NorESM2-MM
+parent variant label: r1i1p1f1
+
+NIMS-KMA_KACE-1-0-G_r1i1p1f1_1pctCO2_tas
+branch time (parent): 0.0
+parent time units: days since 1850-01-01
+parent exp: piControl
+parent source id: KACE-1-0-G
+parent variant label: r1i1p1f1
+
+NIMS-KMA_KACE-1-0-G_r1i1p1f1_abrupt-4xCO2_tas
+branch time (parent): 0.0
+parent time units: days since 1850-01-01
+parent exp: piControl
+parent source id: KACE-1-0-G
+parent variant label: r1i1p1f1
+
+NOAA-GFDL_GFDL-CM4_r1i1p1f1_1pctCO2_tas
+branch time (parent): 36500.0
+parent time units: days since 0001-1-1
+parent exp: piControl
+parent source id: GFDL-CM4
+parent variant label: r1i1p1f1
+comment: <null ref>
+
+NOAA-GFDL_GFDL-CM4_r1i1p1f1_abrupt-4xCO2_tas
+branch time (parent): 36500.0
+parent time units: days since 0001-1-1
+parent exp: piControl
+parent source id: GFDL-CM4
+parent variant label: r1i1p1f1
+comment: <null ref>
+
+NOAA-GFDL_GFDL-ESM4_r1i1p1f1_1pctCO2_tas
+branch time (parent): 36500.0
+parent time units: days since 0001-1-1
+parent exp: piControl
+parent source id: GFDL-ESM4
+parent variant label: r1i1p1f1
+comment: <null ref>
+
+NOAA-GFDL_GFDL-ESM4_r1i1p1f1_abrupt-4xCO2_tas
+branch time (parent): 36500.0
+parent time units: days since 0001-1-1
+parent exp: piControl
+parent source id: GFDL-ESM4
+parent variant label: r1i1p1f1
+comment: <null ref>
+
+NUIST_NESM3_r1i1p1f1_1pctCO2_tas
+branch time (parent): 54787.0
+parent time units: days since 1000-01-01 00:00:00
+parent exp: piControl
+parent source id: NESM3
+parent variant label: r1i1p1f1
+
+NUIST_NESM3_r1i1p1f1_abrupt-4xCO2_tas
+branch time (parent): 18262.0
+parent time units: days since 1000-01-01 00:00:00
+parent exp: piControl
+parent source id: NESM3
+parent variant label: r1i1p1f1
+
+SNU_SAM0-UNICON_r1i1p1f1_1pctCO2_tas
+branch time (parent): 99645.0
+parent time units: days since 0001-01-01
+parent exp: piControl
+parent source id: SAM0-UNICON
+parent variant label: r1i1p1f1
+
+SNU_SAM0-UNICON_r1i1p1f1_abrupt-4xCO2_tas
+branch time (parent): 99645.0
+parent time units: days since 0001-01-01
+parent exp: piControl
+parent source id: SAM0-UNICON
+parent variant label: r1i1p1f1
+
+THU_CIESM_r1i1p1f1_1pctCO2_tas
+branch time (parent): 219000.0
+parent time units: days since 0001-01-01
+parent exp: piControl
+parent source id: CIESM
+parent variant label: r2i1p1f1
+
+THU_CIESM_r1i1p1f1_abrupt-4xCO2_tas
+branch time (parent): 219000.0
+parent time units: days since 0001-01-01
+parent exp: piControl
+parent source id: CIESM
+parent variant label: r2i1p1f1
+
+UA_MCM-UA-1-0_r1i1p1f1_1pctCO2_tas
+branch time (parent): 0.0
+parent time units: days since 0001-01-01 (noleap)
+parent exp: piControl
+parent source id: MCM-UA-1-0
+parent variant label: r1i1p1f1
+comment:  Used lowest model level about 25m above surface (sigma=0.9967), Note no diurnal variation in model, simple diffusive PBL    
+
+UA_MCM-UA-1-0_r1i1p1f1_abrupt-4xCO2_tas
+branch time (parent): 0.0
+parent time units: days since 0001-01-01 (noleap)
+parent exp: piControl
+parent source id: MCM-UA-1-0
+parent variant label: r1i1p1f1
+comment:  Used lowest model level about 25m above surface (sigma=0.9967), Note no diurnal variation in model, simple diffusive PBL    
+
