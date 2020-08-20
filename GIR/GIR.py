@@ -244,15 +244,14 @@ def step_concentration(R_old,G_A_old,E,alpha,a,tau,PI_conc,emis2conc,dt=1):
 
     return C,R_new,G_A
 
-def unstep_concentration(R_old,G_A_old,C,alpha,a,tau,PI_conc,emis2conc,dt=1):
+def unstep_concentration(R_old,G_A,alpha,a,tau,PI_conc,emis2conc,dt=1):
     
     decay_rate = dt/(alpha*tau)
     decay_factor = np.exp( -decay_rate )
-    G_A = 2*(C - PI_conc)/emis2conc - G_A_old
     E = (( G_A - np.sum(R_old*decay_factor,axis=-1) ) / np.sum( a / decay_rate * ( 1. - decay_factor ) ,axis=-1 ))
     R_new = E[...,None] * a * 1/decay_rate * ( 1. - decay_factor ) + R_old * decay_factor
 
-    return E,R_new,G_A
+    return E,R_new
 
 def step_forcing(C,PI_conc,f):
     
@@ -419,13 +418,17 @@ def run_GIR( emissions_in = False , concentrations_in = False , forcing_in = Fal
         C[:] = concentrations_in.reindex(scen_names,axis=1,level=0).reindex(gas_names,axis=1,level=1).values.T.reshape(dim_scenario,1,1,n_gas,n_year)
         if not aer_concs_in is False:
             C[...,gas_aer_map,:] += PI_conc[...,gas_aer_map,:]
+        G_A = np.zeros_like(C)
+        G_A[...,:-1] = concentrations_in.reindex(scen_names,axis=1,level=0).reindex(gas_names,axis=1,level=1).rolling(2).mean().dropna().values.T.reshape(dim_scenario,1,1,n_gas,n_year-1)
+        G_A[...,-1] = G_A[...,-2] + (C[...,-1]-C[...,-2])
+        G_A = (G_A-PI_conc)/emis2conc
         RF[:] = step_forcing(C[...,gas_forc_map,:],PI_conc[...,gas_forc_map,:],f[...,np.newaxis,:])
-        diagnosed_emissions[...,0],R,G_A = unstep_concentration(R_old=0,G_A_old=0,C=C[...,0],alpha=alpha[...,0,np.newaxis],a=a,tau=tau,PI_conc=PI_conc[...,0],emis2conc=emis2conc[...,0],dt=timestep[0])
+        diagnosed_emissions[...,0],R = unstep_concentration(R_old=0,G_A=G_A[...,0],alpha=alpha[...,0,np.newaxis],a=a,tau=tau,PI_conc=PI_conc[...,0],emis2conc=emis2conc[...,0],dt=timestep[0])
         S,T[...,0] = step_temperature(S_old=0,F=np.sum(RF[...,0],axis=-1)[...,np.newaxis]+ext_forcing[...,0],q=q,d=d,dt=timestep[0])
         for t in tqdm(np.arange(1,n_year),unit=' timestep'):
             G = np.sum(diagnosed_emissions,axis=-1)
-            alpha[...,t] = calculate_alpha(G=G,G_A=G_A,T=np.sum(S,axis=-1)[...,np.newaxis],r=r,g0=g0,g1=g1)
-            diagnosed_emissions[...,t],R,G_A = unstep_concentration(R_old=R,G_A_old=G_A,C=C[...,t],alpha=alpha[...,t,np.newaxis],a=a,tau=tau,PI_conc=PI_conc[...,0],emis2conc=emis2conc[...,0],dt=timestep[t])
+            alpha[...,t] = calculate_alpha(G=G,G_A=G_A[...,t-1],T=np.sum(S,axis=-1)[...,np.newaxis],r=r,g0=g0,g1=g1)
+            diagnosed_emissions[...,t],R = unstep_concentration(R_old=R,G_A=G_A[...,t],alpha=alpha[...,t,np.newaxis],a=a,tau=tau,PI_conc=PI_conc[...,0],emis2conc=emis2conc[...,0],dt=timestep[t])
             S,T[...,t] = step_temperature(S_old=S,F=np.sum(RF[...,t],axis=-1)[...,np.newaxis]+ext_forcing[...,t],q=q,d=d,dt=timestep[t])
 
         C_out = concentrations_in
@@ -568,14 +571,15 @@ def invert_concentrations_prescribed_T( concentrations_in,  gas_parameters , T )
 
     diagnosed_emissions = np.zeros((dim_scenario,dim_gas_param,n_gas,n_year))
     C[:] = input_to_numpy(concentrations_in.reindex(scen_names,axis=1,level=0).reindex(gas_names,axis=1,level=1))[:,np.newaxis,...]
-    C_end = np.zeros(C.shape)
-    C_end[...,0] = C[...,0]*2 - PI_conc[...,0]
-    diagnosed_emissions[...,0],R,G_A = unstep_concentration(R_old=np.zeros(a.shape),C=C_end[...,0],alpha=alpha[...,0,np.newaxis],a=a,tau=tau,PI_conc=PI_conc[...,0],emis2conc=emis2conc[...,0],dt=timestep[0])
-    for t in np.arange(1,n_year):
+    G_A = np.zeros_like(C)
+    G_A[...,:-1] = concentrations_in.reindex(scen_names,axis=1,level=0).reindex(gas_names,axis=1,level=1).rolling(2).mean().dropna().values.T.reshape(dim_scenario,1,1,n_gas,n_year-1)
+    G_A[...,-1] = G_A[...,-2] + (C[...,-1]-C[...,-2])
+    G_A = (G_A-PI_conc)/emis2conc
+    diagnosed_emissions[...,0],R = unstep_concentration(R_old=0,G_A=G_A[...,0],alpha=alpha[...,0,np.newaxis],a=a,tau=tau,PI_conc=PI_conc[...,0],emis2conc=emis2conc[...,0],dt=timestep[0])
+    for t in tqdm(np.arange(1,n_year),unit=' timestep'):
         G = np.sum(diagnosed_emissions,axis=-1)
-        alpha[...,t] = calculate_alpha(G=G,G_A=G_A,T=T[...,t-1,np.newaxis],r=r,g0=g0,g1=g1)
-        C_end[...,t] = C[...,t]*2 - C_end[...,t-1]
-        diagnosed_emissions[...,t],R,G_A = unstep_concentration(R_old=R,C=C_end[...,t],alpha=alpha[...,t,np.newaxis],a=a,tau=tau,PI_conc=PI_conc[...,0],emis2conc=emis2conc[...,0],dt=timestep[t])
+        alpha[...,t] = calculate_alpha(G=G,G_A=G_A[...,t-1],T=T[...,t-1,np.newaxis],r=r,g0=g0,g1=g1)
+        diagnosed_emissions[...,t],R = unstep_concentration(R_old=R,G_A=G_A[...,t],alpha=alpha[...,t,np.newaxis],a=a,tau=tau,PI_conc=PI_conc[...,0],emis2conc=emis2conc[...,0],dt=timestep[t])
 
     C_out = concentrations_in
     E_out = pd.DataFrame(np.moveaxis(diagnosed_emissions,-1,0).reshape(diagnosed_emissions.shape[-1],-1),index = time_index,columns=pd.MultiIndex.from_product(names_list,names=names_titles))
@@ -600,13 +604,15 @@ def invert_carbon_cycle_prescribed_T(C,T,a,tau,r,PI_conc,emis2conc):
     
     diagnosed_emissions = np.zeros(C.size)
     alpha = np.zeros(C.size)
+    G_A = (np.array([np.mean(C[i:i+2]) for i in np.arange(C.size)])-PI_conc)/emis2conc
+    G_A[-1]=2*G_A[-1]-G_A[-2]
     
     alpha[0] = calculate_alpha(G=0,G_A=0,T=0,r=r,g0=g0,g1=g1)
-    diagnosed_emissions[0],R,G_A = unstep_concentration(R_old=0,G_A_old=0,C=C[0],alpha=alpha[0,np.newaxis],a=a,tau=tau,PI_conc=PI_conc,emis2conc=emis2conc)
+    diagnosed_emissions[0],R = unstep_concentration(R_old=0,G_A=G_A[0],alpha=alpha[0,np.newaxis],a=a,tau=tau,PI_conc=PI_conc,emis2conc=emis2conc)
     for t in np.arange(1,C.size):
         G = np.sum(diagnosed_emissions)
-        alpha[t] = calculate_alpha(G=G,G_A=G_A,T=T[t-1],r=r,g0=g0,g1=g1)
-        diagnosed_emissions[t],R,G_A = unstep_concentration(R_old=R,G_A_old=G_A,C=C[t],alpha=alpha[t,np.newaxis],a=a,tau=tau,PI_conc=PI_conc,emis2conc=emis2conc)
+        alpha[t] = calculate_alpha(G=G,G_A=G_A[t-1],T=T[t-1],r=r,g0=g0,g1=g1)
+        diagnosed_emissions[t],R = unstep_concentration(R_old=R,G_A=G_A[t],alpha=alpha[t,np.newaxis],a=a,tau=tau,PI_conc=PI_conc,emis2conc=emis2conc)
             
     return pd.Series(index=np.arange(C.size),data=diagnosed_emissions)
 
