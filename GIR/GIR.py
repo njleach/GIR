@@ -224,7 +224,7 @@ def calculate_alpha(G,G_A,T,r,g0,g1,iirf100_max = False):
     iirf100_val = ne.evaluate("abs(r0 + rU * (G-G_A) + rT * T + rA * G_A)",{'r0':r[...,0],'rU':r[...,1],'rT':r[...,2],'rA':r[...,3],'G':G,'G_A':G_A,'T':T})
     if iirf100_max:
         iirf100_val = ne.evaluate("where(iirf100_val>iirf100_max,iirf100_max,iirf100_val)")
-    alpha_val = ne.evaluate("g0 * sinh(iirf100_val / g1)")
+    alpha_val = ne.evaluate("g0 * exp(iirf100_val / g1)")
 
     return alpha_val
 
@@ -402,7 +402,7 @@ def run_GIR( emissions_in = False , concentrations_in = False , forcing_in = Fal
     # Dimensions : [scenario, gas params, thermal params, gas, time, (gas/thermal pools)]
 
     g1 = np.sum( a * tau * ( 1. - ( 1. + 100/tau ) * np.exp(-100/tau) ), axis=-1 )
-    g0 = ( np.sinh( np.sum( a * tau * ( 1. - np.exp(-100/tau) ) , axis=-1) / g1 ) )**(-1.)
+    g0 = np.exp( -1 * np.sum( a * tau * ( 1. - np.exp(-100/tau) ) , axis=-1) / g1 ) 
 
     # Create appropriate shape variable arrays / calculate RF if concentration driven
 
@@ -505,7 +505,7 @@ def prescribed_temps_gas_cycle(emissions_in , gas_parameters , T):
 	alpha = np.zeros((dim_scenario,dim_gas_param,n_gas,n_year))
 
 	g1 = np.sum( a * tau * ( 1. - ( 1. + 100/tau ) * np.exp(-100/tau) ), axis=-1 )
-	g0 = ( np.sinh( np.sum( a * tau * ( 1. - np.exp(-100/tau) ) , axis=-1) / g1 ) )**(-1.)
+	g0 = np.exp( -1 * np.sum( a * tau * ( 1. - np.exp(-100/tau) ) , axis=-1) / g1 ) 
 
 	alpha[...,0] = calculate_alpha(G=np.zeros(C[...,0].shape),G_A=np.zeros(C[...,0].shape),T=T[...,0,np.newaxis],r=r,g0=g0,g1=g1)
 	C[...,0],R,G_A = step_concentration(R = np.zeros(a.shape),alpha=alpha[...,0,np.newaxis],E=emissions[...,0,np.newaxis],\
@@ -560,7 +560,7 @@ def invert_concentrations_prescribed_T( concentrations_in,  gas_parameters , T )
     # Dimensions : [scenario, gas params, gas, time, (gas/thermal pools)]
 
     g1 = np.sum( a * tau * ( 1. - ( 1. + 100/tau ) * np.exp(-100/tau) ), axis=-1 )
-    g0 = ( np.sinh( np.sum( a * tau * ( 1. - np.exp(-100/tau) ) , axis=-1) / g1 ) )**(-1.)
+    g0 = np.exp( -1 * np.sum( a * tau * ( 1. - np.exp(-100/tau) ) , axis=-1) / g1 ) 
 
     # Create appropriate shape variable arrays / calculate RF if concentration driven
 
@@ -599,8 +599,8 @@ def invert_concentrations_prescribed_T( concentrations_in,  gas_parameters , T )
 
 def invert_carbon_cycle_prescribed_T(C,T,a,tau,r,PI_conc,emis2conc):
     
-    g1 = np.sum( a * tau * ( 1. - ( 1. + 100/tau ) * np.exp(-100/tau) ) )
-    g0 = ( np.sinh( np.sum( a * tau * ( 1. - np.exp(-100/tau) ) ) / g1 ) )**(-1.)
+    g1 = np.sum( a * tau * ( 1. - ( 1. + 100/tau ) * np.exp(-100/tau) ), axis=-1 )
+    g0 = np.exp( -1 * np.sum( a * tau * ( 1. - np.exp(-100/tau) ) , axis=-1) / g1 ) 
     
     diagnosed_emissions = np.zeros(C.size)
     alpha = np.zeros(C.size)
