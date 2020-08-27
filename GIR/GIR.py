@@ -44,46 +44,55 @@ def input_to_numpy(input_df):
     return input_df.values.T.reshape(input_df.columns.levels[0].size, input_df.columns.levels[1].size, input_df.index.size)
 
 
-def get_gas_parameter_defaults(choose_gases=['CO2','CH4','N2O'],CH4_forc_feedbacks=False, help=False):
+def get_gas_parameter_defaults(choose_gases=pd.read_csv(Path(__file__).parent / "./Parameter_Sets/Complete_gas_cycle_params.csv",header=[0,1],index_col=0).columns.levels[-1],CH4_forc_feedbacks=False, help=False):
     
     if help:
         print('This function returns the GIR default parameter set for a gas set of your choice. You can choose from the following gas species:')
-        possible_gases = list(pd.read_pickle(Path(__file__).parent / "./Parameter_Sets/Complete_parameter_set.p").columns.levels[-1])
+        possible_gases = list(pd.read_csv(Path(__file__).parent / "./Parameter_Sets/Complete_gas_cycle_params.csv",header=[0,1],index_col=0).columns.levels[-1])
         return possible_gases
     
-    CHOOSE_params = pd.read_pickle(Path(__file__).parent / "./Parameter_Sets/Complete_parameter_set.p").reindex(choose_gases,axis=1,level=1)
-    
-    if CH4_forc_feedbacks=='indirect':
-        
-        CHOOSE_params.loc['f2',('default','CH4')] += 0.000182 + 5.4e-05 # add on the indirect forcings
-        
-    elif CH4_forc_feedbacks=='ozone_parameterisation':
-        
-        CHOOSE_params.loc['f2',('default','CH4')] += 3.7e-04 + 6.9e-05 - 4.6e-05 # add on the indirect forcings
+    CHOOSE_params = pd.read_csv(Path(__file__).parent / "./Parameter_Sets/Complete_gas_cycle_params.csv",header=[0,1],index_col=0).reindex(choose_gases,axis=1,level=1)
         
     return CHOOSE_params
     
-def get_thermal_parameter_defaults(TCR_ECS=np.array([1.6,2.76]),F_2x=3.84):
+def get_thermal_parameter_defaults(TCR=1.77,RWF=0.55,F_2x=3.76):
     
-    thermal_parameter_list = ['d','q']
+#     thermal_parameter_list = ['d','q']
 
-    thermal_parameters = pd.DataFrame(columns=[1,2,3],index=thermal_parameter_list)
+#     thermal_parameters = pd.DataFrame(columns=[1,2,3],index=thermal_parameter_list)
     
-    d = np.array([283,9.88,0.85])
-    q = np.array([0,0,0.242])
-    k = 1-(d/70)*(1-np.exp(-70/d))
-    q[:2] = ((TCR_ECS[0]/F_2x - k[2]*q[2]) - np.roll(k[:2],axis=0,shift=1)*(TCR_ECS[1]/F_2x - q[2]))/(k[:2] - np.roll(k[:2],axis=0,shift=1))
+#     d = np.array([283,9.88,0.85])
+#     q = np.array([0,0,0.242])
+#     k = 1-(d/70)*(1-np.exp(-70/d))
+#     q[:2] = ((TCR_ECS[0]/F_2x - k[2]*q[2]) - np.roll(k[:2],axis=0,shift=1)*(TCR_ECS[1]/F_2x - q[2]))/(k[:2] - np.roll(k[:2],axis=0,shift=1))
     
-    thermal_parameters.loc['d'] = d
-    thermal_parameters.loc['q'] = q
+#     thermal_parameters.loc['d'] = d
+#     thermal_parameters.loc['q'] = q
 
-    thermal_parameters = pd.concat([thermal_parameters], keys = ['default'], axis = 1)
+#     thermal_parameters = pd.concat([thermal_parameters], keys = ['default'], axis = 1)
 
-    thermal_parameters.index = thermal_parameters.index.rename('param_name')
+#     thermal_parameters.index = thermal_parameters.index.rename('param_name')
 
-    thermal_parameters.columns = thermal_parameters.columns.rename(['Thermal_param_set','Box'])
+#     thermal_parameters.columns = thermal_parameters.columns.rename(['Thermal_param_set','Box'])
 
-    return thermal_parameters.apply(pd.to_numeric)
+    lnd1,lnd2,q1 = np.array([-0.20227299,  2.05243353,  0.20285564])    
+    ln_d3_mean = 5.76338587
+
+    d1 = np.exp(lnd1)
+    d2 = np.exp(lnd2)
+    d3 = np.exp(ln_d3_mean)
+    ECS = TCR/RWF
+
+    v1 = (1-(d1/69.66) * (1-np.exp(-69.66/d1)) )
+    v2 = (1-(d2/69.66) * (1-np.exp(-69.66/d2)) )
+    v3 = (1-(d3/69.66) * (1-np.exp(-69.66/d3)) )
+
+    q3 = (((TCR/F_2x) - q1*(v1-v2) - (ECS/F_2x)*v2) / (v3-v2))
+    q2 = (ECS/F_2x - q1 -  q3)
+
+    GIR_thermal_defaults = pd.DataFrame([[d1,d2,d3],[q1,q2,q3]],index=['d','q'],columns=pd.MultiIndex.from_product([['default'],[1,2,3]]))
+
+    return GIR_thermal_defaults.apply(pd.to_numeric)
 
 
 def get_more_gas_cycle_params(N,choose_gases=['CO2','CH4','N2O'],CH4_forc_feedbacks=False, help=False):
