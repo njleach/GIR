@@ -76,6 +76,7 @@ def get_GIR_to_RCMIP_map_forc():
     GIR_to_RCMIP_map_forc.loc['oc','RCMIP_forc_key'] = 'Effective Radiative Forcing|Anthropogenic|Aerosols|Aerosols-radiation Interactions|Fossil and Industrial|BC and OC|OC'
     GIR_to_RCMIP_map_forc.loc['nh3','RCMIP_forc_key'] = 'Effective Radiative Forcing|Anthropogenic|Aerosols|Aerosols-radiation Interactions|NH3|Fossil and Industrial'
     GIR_to_RCMIP_map_forc.loc['aci','RCMIP_forc_key'] = 'Effective Radiative Forcing|Anthropogenic|Aerosols|Aerosols-cloud Interactions'
+    GIR_to_RCMIP_map_forc.loc['ari','RCMIP_forc_key'] = 'Effective Radiative Forcing|Anthropogenic|Aerosols|Aerosols-radiation Interactions'
     GIR_to_RCMIP_map_forc.loc['trop_o3','RCMIP_forc_key'] = 'Effective Radiative Forcing|Anthropogenic|Tropospheric Ozone'
     GIR_to_RCMIP_map_forc.loc['strat_o3','RCMIP_forc_key'] = 'Effective Radiative Forcing|Anthropogenic|Stratospheric Ozone'
     GIR_to_RCMIP_map_forc.loc['bc_on_snow','RCMIP_forc_key'] = 'Effective Radiative Forcing|Anthropogenic|Other|BC on Snow'
@@ -83,6 +84,8 @@ def get_GIR_to_RCMIP_map_forc():
     GIR_to_RCMIP_map_forc.loc['so2','RCMIP_forc_key'] = 'Effective Radiative Forcing|Anthropogenic|Aerosols|Aerosols-radiation Interactions|Fossil and Industrial|Sulfate'
     GIR_to_RCMIP_map_forc.loc['contrails','RCMIP_forc_key'] = 'Effective Radiative Forcing|Anthropogenic|Other|Contrails and Contrail-induced Cirrus'
     GIR_to_RCMIP_map_forc.loc['Total','RCMIP_forc_key'] = 'Effective Radiative Forcing'
+    GIR_to_RCMIP_map_forc.loc['f_gases','RCMIP_forc_key'] = 'Effective Radiative Forcing|Anthropogenic|F-Gases'
+    GIR_to_RCMIP_map_forc.loc['montreal_gases','RCMIP_forc_key'] = 'Effective Radiative Forcing|Anthropogenic|Montreal Gases'
     GIR_to_RCMIP_map_forc.loc['External','RCMIP_forc_key'] = 'Effective Radiative Forcing|External'
     return GIR_to_RCMIP_map_forc
 

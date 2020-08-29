@@ -331,7 +331,7 @@ def run_GIR( emissions_in = False , concentrations_in = False , forcing_in = Fal
 
     if emissions_in is False: # check if concentration driven
         concentration_driven = True
-        emissions_in = return_empty_emissions(concentrations_in,gases_in=concentrations_in.columns.levels[1])
+        emissions_in = pd.DataFrame().reindex_like(concentrations_in)
         time_index = concentrations_in.index
     else: # otherwise emissions driven
         concentration_driven=False
