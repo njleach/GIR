@@ -247,7 +247,7 @@ def step_concentration(R_old,G_A_old,E,alpha,a,tau,PI_conc,emis2conc,dt=1):
 
     decay_rate = ne.evaluate("dt/(alpha*tau)")
     decay_factor = ne.evaluate("exp(-decay_rate)")
-    R_new = ne.evaluate("E * a / decay_rate * ( 1. - decay_factor ) + R_old * decay_factor")
+    R_new = ne.evaluate("E * a / decay_rate * ( 1. - decay_factor ) + R_old * decay_factor") # there shouldn't be a dt in the first decay rate
     G_A = ne.evaluate("sum(R_new,axis=4)")
     C = ne.evaluate("PI_conc + emis2conc * (G_A + G_A_old) / 2")
 
