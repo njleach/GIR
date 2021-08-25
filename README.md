@@ -1,4 +1,4 @@
-# GIR is not an active project and its use is depreciated. It was developed into the [FaIRv2.0.0 model](https://gmd.copernicus.org/articles/14/3007/2021/). Please use the development version of FaIRv2.0.0 for your projects [here](https://github.com/njleach/FAIR/tree/v2.0.0-alpha).
+# GIR is not an active project and its use is depreciated. It was developed into the [FaIRv2.0.0 model](https://gmd.copernicus.org/articles/14/3007/2021/). Please use the development version of FaIRv2.0.0 for your projects, found [here](https://github.com/njleach/FAIR/tree/v2.0.0-alpha).
 
 Begin old README:
 
